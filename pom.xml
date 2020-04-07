@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.5.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>springBoot</groupId>
+	<artifactId>SpringBoot_SetV2</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>SpringBoot_SetV2</name>
+	<description>springBoot Test</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-jersey</artifactId> ??????????????????????????????????????????????????????-->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+	        <groupId>org.mybatis.spring.boot</groupId>
+	        <artifactId>mybatis-spring-boot-starter</artifactId>
+	        <version>1.1.1</version>
+	    </dependency>
+
+		<!-- mariaDb -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.mariadb.jdbc</groupId>
+		    <artifactId>mariadb-java-client</artifactId>
+		</dependency>
+		<!-- mariaDb -->
+
+		<!-- spirng view -->
+		<dependency> 
+			<groupId>org.apache.tomcat.embed</groupId> 
+			<artifactId>tomcat-embed-jasper</artifactId> 
+			<scope>provided</scope> 
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<!-- spirng view -->
+		
+		<!-- swagger2 -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.9.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>2.9.2</version>
+		</dependency>
+		<!-- swagger2 -->
+		
+		<!-- jackson -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>com.fasterxml.jackson.core</groupId> -->
+<!-- 		    <artifactId>jackson-core</artifactId> -->
+<!-- 		    <version>2.10.2</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>com.fasterxml.jackson.core</groupId> -->
+<!-- 		    <artifactId>jackson-annotations</artifactId> -->
+<!-- 		    <version>2.10.2</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>com.fasterxml.jackson.core</groupId> -->
+<!-- 		    <artifactId>jackson-databind</artifactId> -->
+<!-- 		    <version>2.10.2</version> -->
+<!-- 		</dependency> -->
+		<!-- jackson -->
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.apache.commons</groupId> -->
+<!-- 		    <artifactId>commons-lang3</artifactId> -->
+<!-- 		    <version>3.4</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.navercorp.lucy</groupId> -->
+<!-- 			<artifactId>lucy-xss-servlet</artifactId> -->
+<!-- 			<version>2.0.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.commons</groupId> -->
+<!-- 			<artifactId>commons-text</artifactId> -->
+<!-- 			<version>1.6</version> -->
+<!-- 		</dependency> -->
+		
+		<!-- SpringSecurity -->
+<!-- 		<dependency> -->
+<!-- 		  <groupId>org.springframework.boot</groupId> -->
+<!-- 		  <artifactId>spring-boot-starter-security</artifactId> -->
+<!-- 		</dependency> -->
+		<!-- SpringSecurity -->
+		
+		
+		
+	</dependencies>
+
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+				  <includeSystemScope>true</includeSystemScope>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

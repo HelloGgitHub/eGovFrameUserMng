@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.com.user.dao.MemberDao">
+
+	<!-- Maria -->
+    <select id="selectDataMaria"  parameterType="Map" resultType="hashMap">
+		SELECT 
+		        ESNTL_ID               as "uniqId",
+		        'USR01'               as "userTy",
+		        MBER_ID               as "userId",
+		        MBER_NM               as "userNm",
+		        MBER_EMAIL_ADRES      as "emailAdres",
+		        AREA_NO               as "areaNo",
+		        MIDDLE_TELNO          as "middleTelno",
+		        END_TELNO             as "endTelno",
+		        MBTLNUM           as "moblphonNo",
+		        GROUP_ID              as "groupId",
+		        MBER_STTUS            as "sttus",
+		        SBSCRB_DE             as "sbscrbDe"
+		  FROM COMTNMBER
+    </select>
+    
+    <select id="selectMemberDetailMaria"  parameterType="Map" resultType="hashMap">
+		SELECT 
+		        ESNTL_ID               as "uniqId",
+		        'USR01'               as "userTy",
+		        MBER_ID               as "userId",
+		        MBER_NM               as "userNm",
+		        MBER_EMAIL_ADRES      as "emailAdres",
+		        AREA_NO               as "areaNo",
+		        MIDDLE_TELNO          as "middleTelno",
+		        END_TELNO             as "endTelno",
+		        MBTLNUM           as "moblphonNo",
+		        GROUP_ID              as "groupId",
+		        MBER_STTUS            as "sttus",
+		        SBSCRB_DE             as "sbscrbDe"
+		  FROM COMTNMBER
+		 WHERE MBER_ID = '${mberId}'
+    </select>
+
+    <insert id="insertMemberDetailMaria" parameterType="hashMap">
+		INSERT INTO COMTNMBER (
+		  MBER_ID
+		, PASSWORD
+		, PASSWORD_HINT
+		, PASSWORD_CNSR
+		, IHIDNUM
+		, MBER_NM
+		, ZIP
+		, ADRES
+		, AREA_NO
+		, MBER_STTUS
+		, DETAIL_ADRES
+		, END_TELNO
+		, MBTLNUM
+		, GROUP_ID
+		, MBER_FXNUM
+		, MBER_EMAIL_ADRES
+		, MIDDLE_TELNO
+		, SBSCRB_DE
+		, SEXDSTN_CODE
+		, ESNTL_ID
+		, LOCK_AT
+		, LOCK_CNT
+		, LOCK_LAST_PNTTM
+		) VALUES (
+		  #{MBER_ID}
+		, #{PASSWORD}
+		, #{PASSWORD_HINT}
+		, #{PASSWORD_CNSR}
+		, #{IHIDNUM}
+		, #{MBER_NM}
+		, #{ZIP}
+		, #{ADRES}
+		, #{AREA_NO}
+		, #{MBER_STTUS}
+		, #{DETAIL_ADRES}
+		, #{END_TELNO}
+		, #{MBTLNUM}
+		, #{GROUP_ID}
+		, #{MBER_FXNUM}
+		, #{MBER_EMAIL_ADRES}
+		, #{MIDDLE_TELNO}
+		, #{SBSCRB_DE}
+		, #{SEXDSTN_CODE}
+		, #{ESNTL_ID}
+		, #{LOCK_AT}
+		, #{LOCK_CNT}
+		, #{LOCK_LAST_PNTTM}
+		)
+    </insert>
+    <update id="updateMemberDetailMaria" parameterType="hashMap">
+		UPDATE COMTNMBER
+		   SET PASSWORD          = '${PASSWORD}'
+		     , PASSWORD_HINT     = '${PASSWORD_HINT}'
+		     , PASSWORD_CNSR     = '${PASSWORD_CNSR}'
+		     , IHIDNUM           = '${IHIDNUM}'
+		     , MBER_NM           = '${MBER_NM}'
+		     , ZIP               = '${ZIP}'
+		     , ADRES             = '${ADRES}'
+		     , AREA_NO           = '${AREA_NO}'
+		     , MBER_STTUS        = '${MBER_STTUS}'
+		     , DETAIL_ADRES      = '${DETAIL_ADRES}'
+		     , END_TELNO         = '${END_TELNO}'
+		     , MBTLNUM           = '${MBTLNUM}'
+		     , GROUP_ID          = '${GROUP_ID}'
+		     , MBER_FXNUM        = '${MBER_FXNUM}'
+		     , MBER_EMAIL_ADRES  = '${MBER_EMAIL_ADRES}'
+		     , MIDDLE_TELNO      = '${MIDDLE_TELNO}'
+		     , SBSCRB_DE         = SYSTIMESTAMP
+		     , SEXDSTN_CODE      = '${SEXDSTN_CODE}'
+		     , ESNTL_ID          = to_char(SYSTIMESTAMP, 'yyyymmddHH24missFF6' )
+		     , LOCK_AT           = '${LOCK_AT}'
+		     , LOCK_CNT          = ${LOCK_CNT}
+		 WHERE MBER_ID           = '${MBER_ID}'
+    </update>
+    
+    <delete id="deleteMemberMaria" parameterType="hashMap">
+		DELETE FROM COMTNMBER
+		 WHERE MBER_ID           = '${MBER_ID}'
+    </delete>
+    
+    <update id="updateMemberStateMaria" parameterType="hashMap">
+		UPDATE COMTNGNRLMBER
+		   SET MBER_STTUS = '${MBER_STTUS}'
+		 WHERE MBER_ID = '${MBER_ID}'
+    </update>
+    
+    <!-- Oracle -->
+    <select id="selectDataOracle"  parameterType="Map" resultType="hashMap">
+		SELECT 
+		        ESNTL_ID               as "uniqId",
+		        'USR01'               as "userTy",
+		        MBER_ID               as "userId",
+		        MBER_NM               as "userNm",
+		        MBER_EMAIL_ADRES      as "emailAdres",
+		        AREA_NO               as "areaNo",
+		        MIDDLE_TELNO          as "middleTelno",
+		        END_TELNO             as "endTelno",
+		        MBTLNUM           as "moblphonNo",
+		        GROUP_ID              as "groupId",
+		        MBER_STTUS            as "sttus",
+		        SBSCRB_DE             as "sbscrbDe"
+		  FROM COMTNGNRLMBER
+    </select>
+    
+    <select id="selectMemberDetailOracle"  parameterType="Map" resultType="hashMap">
+		SELECT 
+		        ESNTL_ID               as "uniqId",
+		        'USR01'               as "userTy",
+		        MBER_ID               as "userId",
+		        MBER_NM               as "userNm",
+		        MBER_EMAIL_ADRES      as "emailAdres",
+		        AREA_NO               as "areaNo",
+		        MIDDLE_TELNO          as "middleTelno",
+		        END_TELNO             as "endTelno",
+		        MBTLNUM           as "moblphonNo",
+		        GROUP_ID              as "groupId",
+		        MBER_STTUS            as "sttus",
+		        SBSCRB_DE             as "sbscrbDe"
+		  FROM COMTNGNRLMBER
+		 WHERE MBER_ID = '${mberId}'
+    </select>
+    
+    <insert id="insertMemberDetailOracle" parameterType="hashMap">
+		INSERT INTO COMTNGNRLMBER (
+		  MBER_ID
+		, PASSWORD
+		, PASSWORD_HINT
+		, PASSWORD_CNSR
+		, IHIDNUM
+		, MBER_NM
+		, ZIP
+		, ADRES
+		, AREA_NO
+		, MBER_STTUS
+		, DETAIL_ADRES
+		, END_TELNO
+		, MBTLNUM
+		, GROUP_ID
+		, MBER_FXNUM
+		, MBER_EMAIL_ADRES
+		, MIDDLE_TELNO
+		, SBSCRB_DE
+		, SEXDSTN_CODE
+		, ESNTL_ID
+		, LOCK_AT
+		, LOCK_CNT
+		) VALUES (
+		  '${MBER_ID}'
+		, '${PASSWORD}'
+		, '${PASSWORD_HINT}'
+		, '${PASSWORD_CNSR}'
+		, '${IHIDNUM}'
+		, '${MBER_NM}'
+		, '${ZIP}'
+		, '${ADRES}'
+		, '${AREA_NO}'
+		, '${MBER_STTUS}'
+		, '${DETAIL_ADRES}'
+		, '${END_TELNO}'
+		, '${MBTLNUM}'
+		, '${GROUP_ID}'
+		, '${MBER_FXNUM}'
+		, '${MBER_EMAIL_ADRES}'
+		, '${MIDDLE_TELNO}'
+		, SYSTIMESTAMP
+		, '${SEXDSTN_CODE}'
+		, to_char(SYSTIMESTAMP, 'yyyymmddHH24missFF6' )
+		, '${LOCK_AT}'
+		, ${LOCK_CNT}
+		)
+    </insert>
+    
+    <update id="updateMemberDetailOracle" parameterType="hashMap">
+		UPDATE COMTNGNRLMBER
+		   SET PASSWORD          = '${PASSWORD}'
+		     , PASSWORD_HINT     = '${PASSWORD_HINT}'
+		     , PASSWORD_CNSR     = '${PASSWORD_CNSR}'
+		     , IHIDNUM           = '${IHIDNUM}'
+		     , MBER_NM           = '${MBER_NM}'
+		     , ZIP               = '${ZIP}'
+		     , ADRES             = '${ADRES}'
+		     , AREA_NO           = '${AREA_NO}'
+		     , MBER_STTUS        = '${MBER_STTUS}'
+		     , DETAIL_ADRES      = '${DETAIL_ADRES}'
+		     , END_TELNO         = '${END_TELNO}'
+		     , MBTLNUM           = '${MBTLNUM}'
+		     , GROUP_ID          = '${GROUP_ID}'
+		     , MBER_FXNUM        = '${MBER_FXNUM}'
+		     , MBER_EMAIL_ADRES  = '${MBER_EMAIL_ADRES}'
+		     , MIDDLE_TELNO      = '${MIDDLE_TELNO}'
+		     , SBSCRB_DE         = SYSTIMESTAMP
+		     , SEXDSTN_CODE      = '${SEXDSTN_CODE}'
+		     , ESNTL_ID          = to_char(SYSTIMESTAMP, 'yyyymmddHH24missFF6' )
+		     , LOCK_AT           = '${LOCK_AT}'
+		     , LOCK_CNT          = ${LOCK_CNT}
+		 WHERE MBER_ID           = '${MBER_ID}'
+    </update>
+    
+    <delete id="deleteMemberOracle" parameterType="hashMap">
+		DELETE FROM COMTNGNRLMBER
+		 WHERE MBER_ID           = '${MBER_ID}'
+    </delete>
+    
+    <update id="updateMemberStateOracle" parameterType="hashMap">
+		UPDATE COMTNGNRLMBER
+		   SET MBER_STTUS = '${MBER_STTUS}'
+		 WHERE MBER_ID = '${MBER_ID}'
+    </update>
+    
+    <insert id="insertData" parameterType="hashMap">
+    <!-- 쿼리문 -->
+    </insert>   
+    
+    <insert id="updateData" parameterType="hashMap">
+    <!-- 쿼리문 -->
+    </insert>   
+
+    <insert id="deleteData" parameterType="hashMap">
+    <!-- 쿼리문 -->
+    </insert>   
+</mapper> 
