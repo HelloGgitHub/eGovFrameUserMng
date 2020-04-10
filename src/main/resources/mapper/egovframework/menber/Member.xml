@@ -62,7 +62,7 @@
 		, ESNTL_ID
 		, LOCK_AT
 		, LOCK_CNT
-		, LOCK_LAST_PNTTM
+<!-- 		, LOCK_LAST_PNTTM -->
 		) VALUES (
 		  #{MBER_ID}
 		, #{PASSWORD}
@@ -86,7 +86,7 @@
 		, #{ESNTL_ID}
 		, #{LOCK_AT}
 		, #{LOCK_CNT}
-		, #{LOCK_LAST_PNTTM}
+<!-- 		, #{LOCK_LAST_PNTTM} -->
 		)
     </insert>
     <update id="updateMemberDetailMaria" parameterType="hashMap">
