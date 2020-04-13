@@ -8,9 +8,13 @@ spring:
   output:
     ansi:
       enabled: always  # 콘솔 창에 출력되는 로깅 메세지를 색으로 구분해서 출력
+  jmx:
+    default-domain: egovTest
 ---
 logging:
-  path: c:\logs  # 로그 메세지가 저장되는 로그 디렉터리
+  file: 
+    path: ../logs/egovGrpMng.log  # 로그 메세지가 저장되는 로그 디렉터리
+    max-size: 10MB
   level:
     egovframework: DEBUG
 ---
@@ -22,29 +26,18 @@ mybatis:
     mapUnderscoreToCamelCase: true
 ---
 spring:
-  profiles: oracle
-  datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-#    url: jdbc:oracle:thin:@localhost:1521:orcl
-    url: jdbc:oracle:thin:@192.168.100.71:1521:orcl
-    username: EGOVTEST
-    password: Helloegovtest1
-server:
-  port: 9085
-  task:
-    fixedDelay: 1000
-    name: localTask
----
-spring:
   profiles: maria
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
 #    url: jdbc:mariadb://localhost:3306/egovuser
-    url: jdbc:mariadb://10.160.151.181:3306/egovuser
-    username: EGOV
-    password: Hellomaria1!
+#    url: jdbc:mariadb://10.160.151.181:3306/egovuser
+    url: jdbc:mariadb://192.168.33.20:3306/EGOVUSER
+    username: egovdev
+    password: Helloegov1!
 server:
-  port: 9081
+#  port: 9082
+  port: 9083
   task:
     fixedDelay: 1000
     name: mariaTask
+
