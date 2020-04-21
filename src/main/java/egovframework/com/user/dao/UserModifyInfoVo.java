@@ -7,11 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MemberVo {
+public class UserModifyInfoVo {
 
 	@Value("abcd")
-	private String memberId;
-	private String mberNm;
+	private String usrId;
+	private String usrNm;
 	
 	@Value("password1")
 	private String password;
@@ -21,25 +21,28 @@ public class MemberVo {
 	private String areaNo;
 	private String middleTelno;
 	private String endTelno;
-	private String mberFxnum;
+	private String usrFxnum;
 	private String moblphonNo;
-	private String mberEmailAdres;
+	private String usrEmailAdres;
 	private String zip;
 	private String adres;
 	private String detailAdres;
-	private String mberSttus;
+	private String usrSttus;
+	private String lockAt;
+	private String lockCnt;
+	private String lockLastPnttm;
 	
-	public String getMemberId() {
-		return memberId;
+	public String getUsrId() {
+		return usrId;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setUsrId(String usrId) {
+		this.usrId = usrId;
 	}
-	public String getMberNm() {
-		return mberNm;
+	public String getUsrNm() {
+		return usrNm;
 	}
-	public void setMberNm(String mberNm) {
-		this.mberNm = mberNm;
+	public void setUsrNm(String usrNm) {
+		this.usrNm = usrNm;
 	}
 	public String getPassword() {
 		return password;
@@ -83,11 +86,11 @@ public class MemberVo {
 	public void setEndTelno(String endTelno) {
 		this.endTelno = endTelno;
 	}
-	public String getMberFxnum() {
-		return mberFxnum;
+	public String getUsrFxnum() {
+		return usrFxnum;
 	}
-	public void setMberFxnum(String mberFxnum) {
-		this.mberFxnum = mberFxnum;
+	public void setUsrFxnum(String usrFxnum) {
+		this.usrFxnum = usrFxnum;
 	}
 	public String getMoblphonNo() {
 		return moblphonNo;
@@ -95,11 +98,11 @@ public class MemberVo {
 	public void setMoblphonNo(String moblphonNo) {
 		this.moblphonNo = moblphonNo;
 	}
-	public String getMberEmailAdres() {
-		return mberEmailAdres;
+	public String getUsrEmailAdres() {
+		return usrEmailAdres;
 	}
-	public void setMberEmailAdres(String mberEmailAdres) {
-		this.mberEmailAdres = mberEmailAdres;
+	public void setUsrEmailAdres(String usrEmailAdres) {
+		this.usrEmailAdres = usrEmailAdres;
 	}
 	public String getZip() {
 		return zip;
@@ -119,12 +122,31 @@ public class MemberVo {
 	public void setDetailAdres(String detailAdres) {
 		this.detailAdres = detailAdres;
 	}
-	public String getMberSttus() {
-		return mberSttus;
+	public String getUsrSttus() {
+		return usrSttus;
 	}
-	public void setMberSttus(String mberSttus) {
-		this.mberSttus = mberSttus;
+	public void setUsrSttus(String usrSttus) {
+		this.usrSttus = usrSttus;
 	}
+	public String getLockAt() {
+		return lockAt;
+	}
+	public void setLockAt(String lockAt) {
+		this.lockAt = lockAt;
+	}
+	public String getLockCnt() {
+		return lockCnt;
+	}
+	public void setLockCnt(String lockCnt) {
+		this.lockCnt = lockCnt;
+	}
+	public String getLockLastPnttm() {
+		return lockLastPnttm;
+	}
+	public void setLockLastPnttm(String lockLastPnttm) {
+		this.lockLastPnttm = lockLastPnttm;
+	}
+	
 	
 	
 	

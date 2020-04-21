@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller 
-public class MemberPageController {
+public class UserPageController {
 	
 	@RequestMapping("/MemberListPage") 
 	public String welcome(Model model) {

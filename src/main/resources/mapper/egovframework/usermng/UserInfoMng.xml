@@ -1,133 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="egovframework.com.user.dao.MemberDao">
+<mapper namespace="egovframework.com.user.dao.UserInfoDao">
 
 	<!-- Maria -->
-    <select id="selectDataMaria"  parameterType="Map" resultType="hashMap">
+    <select id="selectUserListMaria"  parameterType="Map" resultType="hashMap">
 		SELECT 
 		        ESNTL_ID               as "uniqId",
 		        'USR01'               as "userTy",
-		        MBER_ID               as "userId",
-		        MBER_NM               as "userNm",
-		        MBER_EMAIL_ADRES      as "emailAdres",
+		        USR_ID               as "userId",
+		        USR_NM               as "userNm",
+		        USR_EMAIL_ADRES      as "emailAdres",
 		        AREA_NO               as "areaNo",
 		        MIDDLE_TELNO          as "middleTelno",
 		        END_TELNO             as "endTelno",
 		        MBTLNUM           as "moblphonNo",
-		        GROUP_ID              as "groupId",
-		        MBER_STTUS            as "sttus",
+		     --   GROUP_ID              as "groupId",
+		        USR_STTUS            as "sttus",
 		        SBSCRB_DE             as "sbscrbDe"
-		  FROM COMTNMBER
+		  FROM USER_MNG
     </select>
     
-    <select id="selectMemberDetailMaria"  parameterType="Map" resultType="hashMap">
+    <select id="selectUserDetailMaria"  parameterType="Map" resultType="hashMap">
 		SELECT 
 		        ESNTL_ID               as "uniqId",
 		        'USR01'               as "userTy",
-		        MBER_ID               as "userId",
-		        MBER_NM               as "userNm",
-		        MBER_EMAIL_ADRES      as "emailAdres",
+		        USR_ID               as "userId",
+		        USR_NM               as "userNm",
+		        USR_EMAIL_ADRES      as "emailAdres",
 		        AREA_NO               as "areaNo",
 		        MIDDLE_TELNO          as "middleTelno",
 		        END_TELNO             as "endTelno",
 		        MBTLNUM           as "moblphonNo",
-		        GROUP_ID              as "groupId",
-		        MBER_STTUS            as "sttus",
+		       -- GROUP_ID              as "groupId",
+		        USR_STTUS            as "sttus",
 		        SBSCRB_DE             as "sbscrbDe"
-		  FROM COMTNMBER
-		 WHERE MBER_ID = '${mberId}'
+		  FROM USER_MNG
+		 WHERE USR_ID = '${mberId}'
     </select>
 
-    <insert id="insertMemberDetailMaria" parameterType="hashMap">
-		INSERT INTO COMTNMBER (
-		  MBER_ID
+    <insert id="insertUserDetailMaria" parameterType="hashMap">
+		INSERT INTO USER_MNG (
+		  USR_ID
 		, PASSWORD
 		, PASSWORD_HINT
 		, PASSWORD_CNSR
 		, IHIDNUM
-		, MBER_NM
+		, USR_NM
 		, ZIP
 		, ADRES
 		, AREA_NO
-		, MBER_STTUS
+		, USR_STTUS
 		, DETAIL_ADRES
 		, END_TELNO
 		, MBTLNUM
-		, GROUP_ID
-		, MBER_FXNUM
-		, MBER_EMAIL_ADRES
+		, USR_FXNUM
+		, USR_EMAIL_ADRES
 		, MIDDLE_TELNO
 		, SBSCRB_DE
 		, SEXDSTN_CODE
 		, ESNTL_ID
 		, LOCK_AT
 		, LOCK_CNT
-<!-- 		, LOCK_LAST_PNTTM -->
+		, CHANGE_DT
 		) VALUES (
-		  #{MBER_ID}
+		  #{USR_ID}
 		, #{PASSWORD}
 		, #{PASSWORD_HINT}
 		, #{PASSWORD_CNSR}
 		, #{IHIDNUM}
-		, #{MBER_NM}
+		, #{USR_NM}
 		, #{ZIP}
 		, #{ADRES}
 		, #{AREA_NO}
-		, #{MBER_STTUS}
+		, #{USR_STTUS}
 		, #{DETAIL_ADRES}
 		, #{END_TELNO}
 		, #{MBTLNUM}
-		, #{GROUP_ID}
-		, #{MBER_FXNUM}
-		, #{MBER_EMAIL_ADRES}
+		, #{USR_FXNUM}
+		, #{USR_EMAIL_ADRES}
 		, #{MIDDLE_TELNO}
 		, #{SBSCRB_DE}
 		, #{SEXDSTN_CODE}
 		, #{ESNTL_ID}
 		, #{LOCK_AT}
 		, #{LOCK_CNT}
-<!-- 		, #{LOCK_LAST_PNTTM} -->
+		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 		)
     </insert>
-    <update id="updateMemberDetailMaria" parameterType="hashMap">
-		UPDATE COMTNMBER
-		   SET PASSWORD          = '${PASSWORD}'
-		     , PASSWORD_HINT     = '${PASSWORD_HINT}'
-		     , PASSWORD_CNSR     = '${PASSWORD_CNSR}'
-		     , IHIDNUM           = '${IHIDNUM}'
-		     , MBER_NM           = '${MBER_NM}'
-		     , ZIP               = '${ZIP}'
-		     , ADRES             = '${ADRES}'
-		     , AREA_NO           = '${AREA_NO}'
-		     , MBER_STTUS        = '${MBER_STTUS}'
-		     , DETAIL_ADRES      = '${DETAIL_ADRES}'
-		     , END_TELNO         = '${END_TELNO}'
-		     , MBTLNUM           = '${MBTLNUM}'
-		     , GROUP_ID          = '${GROUP_ID}'
-		     , MBER_FXNUM        = '${MBER_FXNUM}'
-		     , MBER_EMAIL_ADRES  = '${MBER_EMAIL_ADRES}'
-		     , MIDDLE_TELNO      = '${MIDDLE_TELNO}'
-		     , SBSCRB_DE         = SYSTIMESTAMP
-		     , SEXDSTN_CODE      = '${SEXDSTN_CODE}'
-		     , ESNTL_ID          = to_char(SYSTIMESTAMP, 'yyyymmddHH24missFF6' )
-		     , LOCK_AT           = '${LOCK_AT}'
-		     , LOCK_CNT          = ${LOCK_CNT}
-		 WHERE MBER_ID           = '${MBER_ID}'
+    <update id="updateUserDetailMaria" parameterType="hashMap">
+		UPDATE USER_MNG
+		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+<!-- 		   <if test='PASSWORD != null  and(paraName1 eq "test".toString())'> -->
+			<if test='PASSWORD != null'> , PASSWORD          = '${PASSWORD}' </if>
+		    <if test='PASSWORD_HINT != null'> , PASSWORD_HINT     = '${PASSWORD_HINT}' </if>
+		    <if test='PASSWORD_CNSR != null'> , PASSWORD_CNSR     = '${PASSWORD_CNSR}' </if>
+		    <if test='IHIDNUM != null'> , IHIDNUM           = '${IHIDNUM}' </if>
+		    <if test='USR_NM != null'> , USR_NM           = '${USR_NM}' </if>
+		    <if test='ZIP != null'> , ZIP               = '${ZIP}' </if>
+		    <if test='ADRES != null'> , ADRES             = '${ADRES}' </if>
+		    <if test='AREA_NO != null'> , AREA_NO           = '${AREA_NO}' </if>
+		    <if test='USR_STTUS != null'> , USR_STTUS        = '${USR_STTUS}' </if>
+		    <if test='DETAIL_ADRES != null'> , DETAIL_ADRES      = '${DETAIL_ADRES}' </if>
+		    <if test='END_TELNO != null'> , END_TELNO         = '${END_TELNO}' </if>
+		    <if test='MBTLNUM != null'> , MBTLNUM           = '${MBTLNUM}' </if>
+		    <if test='USR_FXNUM != null'> , USR_FXNUM        = '${USR_FXNUM}' </if>
+		    <if test='USR_EMAIL_ADRES != null'> , USR_EMAIL_ADRES  = '${USR_EMAIL_ADRES}' </if>
+		    <if test='MIDDLE_TELNO != null'> , MIDDLE_TELNO      = '${MIDDLE_TELNO}' </if>
+		    <if test='SEXDSTN_CODE != null'> , SEXDSTN_CODE      = '${SEXDSTN_CODE}' </if>
+		    <if test='LOCK_AT != null'> , LOCK_AT           = '${LOCK_AT}' </if>
+		    <if test='LOCK_CNT != null'> , LOCK_CNT          = ${LOCK_CNT} </if>
+		 WHERE USR_ID           = '${USR_ID}'
     </update>
     
-    <delete id="deleteMemberMaria" parameterType="hashMap">
-		DELETE FROM COMTNMBER
-		 WHERE MBER_ID           = '${MBER_ID}'
+    <delete id="deleteUserMaria" parameterType="hashMap">
+		DELETE FROM USER_MNG
+		 WHERE USR_ID           = '${USR_ID}'
     </delete>
     
-    <update id="updateMemberStateMaria" parameterType="hashMap">
-		UPDATE COMTNGNRLMBER
-		   SET MBER_STTUS = '${MBER_STTUS}'
-		 WHERE MBER_ID = '${MBER_ID}'
+    <update id="updateUserStateMaria" parameterType="hashMap">
+		UPDATE USER_MNG
+		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		    <if test='USR_STTUS != null'> , USR_STTUS        = '${USR_STTUS}' </if>
+		 WHERE USR_ID = '${USR_ID}'
     </update>
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!-- Oracle -->
-    <select id="selectDataOracle"  parameterType="Map" resultType="hashMap">
+    <select id="selectUserListOracle"  parameterType="Map" resultType="hashMap">
 		SELECT 
 		        ESNTL_ID               as "uniqId",
 		        'USR01'               as "userTy",

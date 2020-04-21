@@ -1,0 +1,20 @@
+2020-04-14 17:18:56.091  INFO 11488 --- [main] egovframework.EgovUserApplication        : Starting EgovUserApplication on DESKTOP-FED7VUP with PID 11488 (C:\work\egov\eGovCloudContents\workspace\SpringBoot_SetV3\target\classes started by hello in C:\work\egov\eGovCloudContents\workspace\SpringBoot_SetV3)
+2020-04-14 17:18:56.099 DEBUG 11488 --- [main] egovframework.EgovUserApplication        : Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+2020-04-14 17:18:56.099  INFO 11488 --- [main] egovframework.EgovUserApplication        : The following profiles are active: maria
+2020-04-14 17:18:57.204  INFO 11488 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$5aaaa7c8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-14 17:18:57.249  INFO 11488 --- [main] .w.s.a.s.AnnotationActionEndpointMapping : Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2020-04-14 17:18:57.496  INFO 11488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9083 (http)
+2020-04-14 17:18:57.505  INFO 11488 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-14 17:18:57.506  INFO 11488 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-04-14 17:18:57.772  INFO 11488 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-04-14 17:18:57.777  INFO 11488 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-14 17:18:57.777  INFO 11488 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1618 ms
+2020-04-14 17:18:58.476  INFO 11488 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-04-14 17:18:58.567  INFO 11488 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-14 17:18:58.749  INFO 11488 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-04-14 17:18:58.764  INFO 11488 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-04-14 17:18:58.795  INFO 11488 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-04-14 17:18:58.995  INFO 11488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9083 (http) with context path ''
+2020-04-14 17:18:59.000  INFO 11488 --- [main] egovframework.EgovUserApplication        : Started EgovUserApplication in 3.344 seconds (JVM running for 4.34)
+2020-04-14 17:29:52.490  INFO 11488 --- [RMI TCP Connection(19)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-04-14 17:29:52.494  INFO 11488 --- [RMI TCP Connection(19)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
