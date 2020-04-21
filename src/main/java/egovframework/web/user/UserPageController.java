@@ -17,7 +17,7 @@ public class UserPageController {
 	@RequestMapping("/corsTest") 
 	public String crosTest(Model model) {
 		model.addAttribute("msg", "jstl");
-		System.out.println("++++++++++++++dddddddddddddddd++corsTest Page++++++++++++");
+		System.out.println("++++++++++++++ddddddddddddddddddd++corsTest Page++++++++++++");
 		return "corsTest"; 
 	} 
 	
