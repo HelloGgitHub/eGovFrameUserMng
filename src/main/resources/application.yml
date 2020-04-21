@@ -28,7 +28,7 @@ mybatis:
     mapUnderscoreToCamelCase: true
 ---
 spring:
-  profiles: maria
+  profiles: maria 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://192.168.33.20:3306/EGOVCLDDEV
