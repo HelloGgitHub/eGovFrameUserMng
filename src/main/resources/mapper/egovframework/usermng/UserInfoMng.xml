@@ -17,7 +17,7 @@
 		     --   GROUP_ID              as "groupId",
 		        USR_STTUS            as "sttus",
 		        SBSCRB_DE             as "sbscrbDe"
-		  FROM USER_MNG
+		  FROM COMTNUSERMNG
     </select>
     
     <select id="selectUserDetailMaria"  parameterType="Map" resultType="hashMap">
@@ -34,12 +34,12 @@
 		       -- GROUP_ID              as "groupId",
 		        USR_STTUS            as "sttus",
 		        SBSCRB_DE             as "sbscrbDe"
-		  FROM USER_MNG
+		  FROM COMTNUSERMNG
 		 WHERE USR_ID = '${mberId}'
     </select>
 
     <insert id="insertUserDetailMaria" parameterType="hashMap">
-		INSERT INTO USER_MNG (
+		INSERT INTO COMTNUSERMNG (
 		  USR_ID
 		, PASSWORD
 		, PASSWORD_HINT
@@ -88,7 +88,7 @@
 		)
     </insert>
     <update id="updateUserDetailMaria" parameterType="hashMap">
-		UPDATE USER_MNG
+		UPDATE COMTNUSERMNG
 		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 <!-- 		   <if test='PASSWORD != null  and(paraName1 eq "test".toString())'> -->
 			<if test='PASSWORD != null'> , PASSWORD          = '${PASSWORD}' </if>
@@ -113,12 +113,12 @@
     </update>
     
     <delete id="deleteUserMaria" parameterType="hashMap">
-		DELETE FROM USER_MNG
+		DELETE FROM COMTNUSERMNG
 		 WHERE USR_ID           = '${USR_ID}'
     </delete>
     
     <update id="updateUserStateMaria" parameterType="hashMap">
-		UPDATE USER_MNG
+		UPDATE COMTNUSERMNG
 		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 		    <if test='USR_STTUS != null'> , USR_STTUS        = '${USR_STTUS}' </if>
 		 WHERE USR_ID = '${USR_ID}'
