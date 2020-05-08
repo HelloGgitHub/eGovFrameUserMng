@@ -9,5 +9,4 @@ public class EgovUserApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EgovUserApplication.class, args);
 	}
-
 }
