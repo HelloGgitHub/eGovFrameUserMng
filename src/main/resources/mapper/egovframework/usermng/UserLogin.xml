@@ -24,7 +24,7 @@
 		       -- GROUP_ID              as "groupId",
 		        USR_STTUS            as "sttus",
 		        SBSCRB_DE             as "sbscrbDe"
-		  FROM USER_MNG
+		  FROM COMTNUSERMNG
 		 WHERE USR_ID = '${USRID}'
     </select>
     
