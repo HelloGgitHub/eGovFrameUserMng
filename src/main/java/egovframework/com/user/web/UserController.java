@@ -87,7 +87,7 @@ public class UserController {
 		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 		
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-		sqlInpt.put("mberId", URLDecoder.decode(userId		,"UTF-8"));
+		sqlInpt.put("USR_ID", URLDecoder.decode(userId		,"UTF-8"));
 		System.out.println("properties Test :: "+serverPort + "\t\t ServerState :: " + serverState);
 		
 		if("maria".equals(serverState)) {
@@ -148,15 +148,24 @@ public class UserController {
 		sqlInpt.put("LOCK_AT", "N");														//잠금여부.................................................................
 		sqlInpt.put("LOCK_CNT", 0);														//잠금회수.................................................................
 		sqlInpt.put("LOCK_LAST_PNTTM", "");											//잠금최종시점.................................................................
-		
+
+		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+		lst = userService.selectUserDetailMaria(sqlInpt);
+		int usrCnt = lst.size();
+
 		Map<Object, Object> rtnMap = new HashMap<Object, Object>();
-		int inputCnt = userService.insertUserDetailMaria(sqlInpt);
-		if(inputCnt > 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else {
+		if(usrCnt == 0) {
+			int inputCnt = userService.insertUserDetailMaria(sqlInpt);
+			if (inputCnt > 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+			} else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "사용자 정보 등록에 실패 하였습니다.");
+			}
+		}else{
 			rtnMap.put("RESULTCD", "1");
-			rtnMap.put("RESULTMSG", "사용자 정보 등록에 실패 하였습니다.");
+			rtnMap.put("RESULTMSG", "동일한 사용자가 존재 합니다.");
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);

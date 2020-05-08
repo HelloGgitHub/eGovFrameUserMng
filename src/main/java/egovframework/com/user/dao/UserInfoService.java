@@ -38,7 +38,7 @@ public class UserInfoService {
 	public int insertUserDetailOracle(Map<Object, Object> param) {
         return mapper.insertUserDetailOracle(param);
     }
-
+ 
 	//회원정보 변경
 	public int updateUserDetailMaria(Map<Object, Object> param) {
         return mapper.updateUserDetailMaria(param);

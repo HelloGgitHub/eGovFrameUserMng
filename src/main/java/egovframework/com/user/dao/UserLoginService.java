@@ -19,7 +19,7 @@ public class UserLoginService {
 	public HashMap<Object, Object> selectUserDetailMaria(Map<Object, Object> param) {
         return mapper.selectUserDetailMaria(param);
     }
-
+ 
 	//사용자 pw체크
 	public int selectUserPwCkMaria(Map<Object, Object> param) {
         return mapper.selectUserPwCkMaria(param);

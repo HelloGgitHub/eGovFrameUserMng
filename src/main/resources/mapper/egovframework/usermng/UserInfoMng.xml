@@ -35,7 +35,7 @@
 		        USR_STTUS            as "sttus",
 		        SBSCRB_DE             as "sbscrbDe"
 		  FROM COMTNUSERMNG
-		 WHERE USR_ID = '${mberId}'
+		 WHERE USR_ID = '${USR_ID}'
     </select>
 
     <insert id="insertUserDetailMaria" parameterType="hashMap">
