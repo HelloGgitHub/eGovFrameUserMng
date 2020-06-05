@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@Api(value = "UserController", description = "사용자 정보 관리 REST API")
+@Api(value = "UserController", description = "사용자 정보 관리 REST APddddddI")
 @RequestMapping("/user")
 public class UserController {
 	
