@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration {
     private String version;
     private String title;
-
+////////////
 	@Bean
     public Docket api() {
 	    version = "V1";
