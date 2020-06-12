@@ -8,6 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @title : 사용자 정보 관리 Service
+ * @package : egovframework.com.user.dao
+ * @filename : UserInfoService.java
+ * @author : "egov"
+ * @since : 2020. 6. 11.
+ * @version : 1.0
+ * @desc : 사용자 정보 관리에 필요한 기능 모음.
+ * 
+ *  ======= 변경이력 =======
+ * 
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 11.         "egov"           최초 생성(ver 1.0)
+ * 
+ */
 @Service
 @Transactional
 public class UserInfoService {
@@ -15,64 +31,75 @@ public class UserInfoService {
 	@Autowired
     private UserInfoDao mapper;
 	
-	//회원목록 조회
-	public List<HashMap<Object, Object>> selectDataMaria(Map<Object, Object> param) {
-        return mapper.selectUserListMaria(param);
-    }
-	public List<HashMap<Object, Object>> selectDataOracle(Map<Object, Object> param) {
-        return mapper.selectUserListOracle(param);
+	/**
+	 * @name : selectDataMaria(사용자목록 조회)
+	 * @date : 2020. 6. 11.
+	 * @author : "egov"
+	 * @return_type : List<HashMap<Object,Object>>
+	 */
+	public List<HashMap<Object, Object>> selectData(Map<Object, Object> param) {
+        return mapper.selectUserList(param);
     }
 	
-	//상세정보 조회
-	public List<HashMap<Object, Object>> selectUserDetailMaria(Map<Object, Object> param) {
-        return mapper.selectUserDetailMaria(param);
-    }
-	public List<HashMap<Object, Object>> selectUserDetailOracle(Map<Object, Object> param) {
-        return mapper.selectUserDetailOracle(param);
+	/**
+	 * @name : selectUserDetail(사용자 상세정보 조회)
+	 * @date : 2020. 6. 12.
+	 * @author : "egov"
+	 * @return_type : List<HashMap<Object,Object>>
+	 */
+	public List<HashMap<Object, Object>> selectUserDetail(Map<Object, Object> param) {
+        return mapper.selectUserDetail(param);
     }
 
-	//회원가입신청
-	public int insertUserDetailMaria(Map<Object, Object> param) {
-        return mapper.insertUserDetailMaria(param);
-    }
-	public int insertUserDetailOracle(Map<Object, Object> param) {
-        return mapper.insertUserDetailOracle(param);
+	/**
+	 * @name : insertUserDetail(사용자 등록)
+	 * @date : 2020. 6. 12.
+	 * @author : "egov"
+	 * @return_type : int
+	 */
+	public int insertUserDetail(Map<Object, Object> param) {
+        return mapper.insertUserDetail(param);
     }
  
-	//회원정보 변경
-	public int updateUserDetailMaria(Map<Object, Object> param) {
-        return mapper.updateUserDetailMaria(param);
-    }
-	public int updateUserDetailOracle(Map<Object, Object> param) {
-        return mapper.updateUserDetailOracle(param);
+	/**
+	 * @name : updateUserDetail(사용자 정보 변경)
+	 * @date : 2020. 6. 12.
+	 * @author : "egov"
+	 * @return_type : int
+	 */
+	public int updateUserDetail(Map<Object, Object> param) {
+        return mapper.updateUserDetail(param);
     }
 	
-	//회원정보 삭제
-	public int deleteUserMaria(Map<Object, Object> param) {
-        return mapper.deleteUserMaria(param);
-    }
-	public int deleteUserOracle(Map<Object, Object> param) {
-        return mapper.deleteUserOracle(param);
+	/**
+	 * @name : deleteUser(사용자 정보 삭제)
+	 * @date : 2020. 6. 12.
+	 * @author : "egov"
+	 * @return_type : int
+	 */
+	public int deleteUser(Map<Object, Object> param) {
+        return mapper.deleteUser(param);
     }
 
-	//회원가입 상태 변경
-	public int updateUserStateMaria(Map<Object, Object> param) {
-        return mapper.updateUserStateMaria(param);
+	/**
+	 * @name : updateUserState(사용자 가입 상태 변경)
+	 * @date : 2020. 6. 12.
+	 * @author : "egov"
+	 * @return_type : int
+	 */
+	public int updateUserState(Map<Object, Object> param) {
+        return mapper.updateUserState(param);
     }
-	public int updateUserStateOracle(Map<Object, Object> param) {
-        return mapper.updateUserStateOracle(param);
+
+	/**
+	 * @name : updateUserPassword(사용자 비밀번호 변경)
+	 * @date : 2020. 6. 12.
+	 * @author : "egov"
+	 * @return_type : int
+	 */
+	public int updateUserPassword(Map<Object, Object> param) {
+        return mapper.updateUserPassword(param);
     }
 
 	
-    public int deleteData(HashMap<Object, Object> param) throws Exception {
-        return mapper.deleteData(param);
-    }
-
-    public int insertData(HashMap<Object, Object> param) throws Exception {
-        return mapper.insertData(param);
-    }
-
-    public int updateData(HashMap<Object, Object> param) throws Exception {
-        return mapper.updateData(param);
-    }
 }

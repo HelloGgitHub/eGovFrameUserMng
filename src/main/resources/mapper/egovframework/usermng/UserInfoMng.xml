@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.com.user.dao.UserInfoDao">
 
-	<!-- Maria -->
-    <select id="selectUserListMaria"  parameterType="Map" resultType="hashMap">
+    <select id="selectUserList"  parameterType="Map" resultType="hashMap">
 		SELECT 
 		        ESNTL_ID               as "uniqId",
 		        'USR01'               as "userTy",
@@ -20,7 +19,7 @@
 		  FROM COMTNUSERMNG
     </select>
     
-    <select id="selectUserDetailMaria"  parameterType="Map" resultType="hashMap">
+    <select id="selectUserDetail"  parameterType="Map" resultType="hashMap">
 		SELECT 
 		        ESNTL_ID               as "uniqId",
 		        'USR01'               as "userTy",
@@ -38,56 +37,56 @@
 		 WHERE USR_ID = '${USR_ID}'
     </select>
 
-    <insert id="insertUserDetailMaria" parameterType="hashMap">
-		INSERT INTO COMTNUSERMNG (
-		  USR_ID
-		, PASSWORD
-		, PASSWORD_HINT
-		, PASSWORD_CNSR
-		, IHIDNUM
-		, USR_NM
-		, ZIP
-		, ADRES
-		, AREA_NO
-		, USR_STTUS
-		, DETAIL_ADRES
-		, END_TELNO
-		, MBTLNUM
-		, USR_FXNUM
-		, USR_EMAIL_ADRES
-		, MIDDLE_TELNO
-		, SBSCRB_DE
-		, SEXDSTN_CODE
-		, ESNTL_ID
-		, LOCK_AT
-		, LOCK_CNT
-		, CHANGE_DT
-		) VALUES (
-		  #{USR_ID}
-		, #{PASSWORD}
-		, #{PASSWORD_HINT}
-		, #{PASSWORD_CNSR}
-		, #{IHIDNUM}
-		, #{USR_NM}
-		, #{ZIP}
-		, #{ADRES}
-		, #{AREA_NO}
-		, #{USR_STTUS}
-		, #{DETAIL_ADRES}
-		, #{END_TELNO}
-		, #{MBTLNUM}
-		, #{USR_FXNUM}
-		, #{USR_EMAIL_ADRES}
-		, #{MIDDLE_TELNO}
-		, #{SBSCRB_DE}
-		, #{SEXDSTN_CODE}
-		, #{ESNTL_ID}
-		, #{LOCK_AT}
-		, #{LOCK_CNT}
-		, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
-		)
+    <insert id="insertUserDetail" parameterType="hashMap">
+			INSERT INTO COMTNUSERMNG (
+				  USR_ID
+				, PASSWORD
+				, PASSWORD_HINT
+				, PASSWORD_CNSR
+				, IHIDNUM
+				, USR_NM
+				, ZIP
+				, ADRES
+				, AREA_NO
+				, USR_STTUS
+				, DETAIL_ADRES
+				, END_TELNO
+				, MBTLNUM
+				, USR_FXNUM
+				, USR_EMAIL_ADRES
+				, MIDDLE_TELNO
+				, SBSCRB_DE
+				, SEXDSTN_CODE
+				, ESNTL_ID
+				, LOCK_AT
+				, LOCK_CNT
+				, CHANGE_DT
+			) VALUES (
+				  #{USR_ID}
+				, #{PASSWORD}
+				, #{PASSWORD_HINT}
+				, #{PASSWORD_CNSR}
+				, #{IHIDNUM}
+				, #{USR_NM}
+				, #{ZIP}
+				, #{ADRES}
+				, #{AREA_NO}
+				, #{USR_STTUS}
+				, #{DETAIL_ADRES}
+				, #{END_TELNO}
+				, #{MBTLNUM}
+				, #{USR_FXNUM}
+				, #{USR_EMAIL_ADRES}
+				, #{MIDDLE_TELNO}
+				, #{SBSCRB_DE}
+				, #{SEXDSTN_CODE}
+				, #{ESNTL_ID}
+				, #{LOCK_AT}
+				, #{LOCK_CNT}
+				, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+			)
     </insert>
-    <update id="updateUserDetailMaria" parameterType="hashMap">
+    <update id="updateUserDetail" parameterType="hashMap">
 		UPDATE COMTNUSERMNG
 		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 <!-- 		   <if test='PASSWORD != null  and(paraName1 eq "test".toString())'> -->
@@ -112,15 +111,22 @@
 		 WHERE USR_ID           = '${USR_ID}'
     </update>
     
-    <delete id="deleteUserMaria" parameterType="hashMap">
+    <delete id="deleteUser" parameterType="hashMap">
 		DELETE FROM COMTNUSERMNG
 		 WHERE USR_ID           = '${USR_ID}'
     </delete>
     
-    <update id="updateUserStateMaria" parameterType="hashMap">
+    <update id="updateUserState" parameterType="hashMap">
 		UPDATE COMTNUSERMNG
 		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
 		    <if test='USR_STTUS != null'> , USR_STTUS        = '${USR_STTUS}' </if>
+		 WHERE USR_ID = '${USR_ID}'
+    </update>
+
+    <update id="updateUserPassword" parameterType="hashMap">
+		UPDATE COMTNUSERMNG
+		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		    <if test='PASSWORD != null'> , PASSWORD        = '${PASSWORD}' </if>
 		 WHERE USR_ID = '${USR_ID}'
     </update>
 

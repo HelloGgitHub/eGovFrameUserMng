@@ -28,7 +28,6 @@ public class SwaggerConfiguration {
         		.useDefaultResponseMessages(false)
                 .groupName(version)
                 .select()
-//                .apis(RequestHandlerSelectors.any())
                 .apis(RequestHandlerSelectors.basePackage("egovframework.com"))
                 .paths(PathSelectors.any())
                 .build()
@@ -36,18 +35,6 @@ public class SwaggerConfiguration {
                .pathMapping("/");
     }
 	
-//    private ApiInfo apiInfo(String title, String version) {
-//        return new ApiInfo(
-//                title,
-//                "전자정보 클라우드 개발 환경[회원정보관리] API 테스트",
-//                version,
-//                "www.egovFrameCloud.com",
-//                new Contact("Contact Me", "www.egovFrameCloud.com", "egovCloud@example.com"),
-//                "Licenses",
-//                "www.egovFrameCloud.com",
-//                new ArrayList<>());
-//    }
-    
     private ApiInfo apiInfo(String title, String version) {
         return new ApiInfo(
                 title,

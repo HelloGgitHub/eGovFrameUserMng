@@ -3,14 +3,14 @@
 <mapper namespace="egovframework.com.user.dao.UserLoginDao">
 
 	<!-- Maria -->
-    <select id="selectUserPwCkMaria"  parameterType="Map" resultType="int">
+    <select id="selectUserPwCk"  parameterType="Map" resultType="int">
 		SELECT COUNT(*) CNT
 		  FROM COMTNUSERMNG
 		 WHERE USR_ID = '${USRID}'
 		   AND PASSWORD  = '${USRPW}'
     </select>
     
-    <select id="selectUserDetailMaria"  parameterType="Map" resultType="hashMap">
+    <select id="selectUserDetail"  parameterType="Map" resultType="hashMap">
 		SELECT 
 		        ESNTL_ID               as "uniqId",
 		        'USR01'               as "userTy",
