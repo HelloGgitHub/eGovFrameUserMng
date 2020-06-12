@@ -7,7 +7,7 @@ public class ComUtil {
 
 	public List<Object> listforPaging(Object pLst, int page, int pageSize){
 		List<Object> reLst = new ArrayList<Object>();
-		List<Object> pArrayList = (ArrayList<Object>)pLst;
+		List<Object> pArrayList = (ArrayList<Object>)pLst; 
 		
 		if((pArrayList.size()/pageSize)+1 < page) {
 			return reLst;
