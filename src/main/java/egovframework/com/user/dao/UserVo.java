@@ -1,19 +1,26 @@
 package egovframework.com.user.dao;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
+/**
+ * @title : 사용자 관리 입출력 Vo
+ * @package : egovframework.com.user.dao
+ * @filename : UserVo.java
+ * @author : "egov"
+ * @since : 2020. 6. 12.
+ * @version : 1.0
+ * @desc : 사용자 관리 입출력 항목
+ * 
+ *  ======= 변경이력 =======
+ * 
+ * 날자                       변경자                  설명
+ * ----------         -------           ------------------------------------
+ * 2020. 6. 12.         "egov"           최초 생성(ver 1.0)
+ * 
+ */
 public class UserVo {
 
-	@Value("abcd")
 	private String usrId;
 	private String usrNm;
 	
-	@Value("password1")
 	private String password;
 	private String passwordHint;
 	private String passwordCnsr;
@@ -126,8 +133,5 @@ public class UserVo {
 	public void setUsrSttus(String usrSttus) {
 		this.usrSttus = usrSttus;
 	}
-	
-	
-	
 	
 }
