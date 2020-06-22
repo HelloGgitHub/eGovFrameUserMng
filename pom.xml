@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>springBoot</groupId>
 	<artifactId>eGovFrameUserMng</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>eGovFrameUserMng</name>
 	<description>사용자 관리 / ID_PW로그인</description>
 
