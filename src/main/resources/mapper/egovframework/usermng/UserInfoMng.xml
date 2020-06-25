@@ -13,9 +13,9 @@
 		        MIDDLE_TELNO          as "middleTelno",
 		        END_TELNO             as "endTelno",
 		        MBTLNUM           as "moblphonNo",
-		     --   GROUP_ID              as "groupId",
 		        USR_STTUS            as "sttus",
-		        SBSCRB_DE             as "sbscrbDe"
+		        SBSCRB_DE             as "sbscrbDe",
+		        ADRES                  as "adres"
 		  FROM COMTNUSERMNG
     </select>
     
@@ -30,9 +30,9 @@
 		        MIDDLE_TELNO          as "middleTelno",
 		        END_TELNO             as "endTelno",
 		        MBTLNUM           as "moblphonNo",
-		       -- GROUP_ID              as "groupId",
 		        USR_STTUS            as "sttus",
-		        SBSCRB_DE             as "sbscrbDe"
+		        SBSCRB_DE             as "sbscrbDe",
+		        ADRES                  as "adres"
 		  FROM COMTNUSERMNG
 		 WHERE USR_ID = '${USR_ID}'
     </select>

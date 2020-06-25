@@ -38,5 +38,5 @@ public interface GrpInfoDao {
 	int selectGrpUsrCk(Map<Object, Object> param);
 	int selectUsrCk(Map<Object, Object> param);
 	int deleteGrpUsr(Map<Object, Object> param);
-
+	
 }

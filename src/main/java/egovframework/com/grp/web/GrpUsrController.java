@@ -109,7 +109,7 @@ public class GrpUsrController {
 		if(chkReUse > 0) {
 			rtnMap.put("RESULTCD", "9");
 			rtnMap.put("RESULTMSG", "이미 등록된 사용자 입니다.");
-		}else if(chkUsrAble > 0) {
+		}else if(chkUsrAble < 0) {
 			rtnMap.put("RESULTCD", "8");
 			rtnMap.put("RESULTMSG", "사용자 ID가 올바르지 않습니다.");
 		}else {
@@ -119,7 +119,7 @@ public class GrpUsrController {
 				rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
 			}else {
 				rtnMap.put("RESULTCD", "1");
-				rtnMap.put("RESULTMSG", "처리에 실패 하였습니다.");
+				rtnMap.put("RESULTMSG", "등록에 실패 하였습니다. 사용자ID 또는 그룹ID를 확인하세요.");
 			}
 		}
 		

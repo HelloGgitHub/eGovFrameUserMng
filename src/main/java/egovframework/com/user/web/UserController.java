@@ -65,12 +65,14 @@ public class UserController {
 	public String UserList() {
 		
 		String rtn = "";
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		Map<Object, Object> param = new HashMap<Object, Object>();
 		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+		ObjectMapper om = new ObjectMapper();
 		
 		lst = userService.selectData(param);
 		
-		ObjectMapper om = new ObjectMapper();
+		
 		try {
 			rtn = om.writeValueAsString(lst);
 		} catch (JsonProcessingException e) {
@@ -333,8 +335,8 @@ public class UserController {
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("USR_ID"		, pUserId);					//회원ID
 		if(null != pUsrPw && !"".equals(pUsrPw) && !"null".equals(pUsrPw)) {
-			String pw = SecuritySha.SHA256(pUsrPw);			//SHA-256 암호화
-			sqlInpt.put("USR_PW"	, pw);					//패스워드
+			String pw = SecuritySha.SHA256(pUsrPw);		//SHA-256 암호화
+			sqlInpt.put("PASSWORD"	, pw);					//패스워드
 		}		
 		
 		int inputCnt = userService.updateUserPassword(sqlInpt);

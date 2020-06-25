@@ -59,14 +59,17 @@
 
     <insert id="insertGrpUsr" parameterType="hashMap">
 			INSERT INTO COMTNGROUPUSR (
-			  GROUP_ID
-			, USR_ID
-			, ADD_DT
-			) VALUES (
-			  #{GRP_ID}
-			, #{USR_ID}
-			, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
-			)
+					  GROUP_ID
+					, USR_ID
+					, ADD_DT
+					) 
+					SELECT a.GROUP_ID 
+					     , b.USR_ID 
+					     , DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+					  FROM COMTNGROUPINFO a
+					     , COMTNUSERMNG b
+					 where a.GROUP_ID = '${GRP_ID}'
+					   and b.USR_ID = '${USR_ID}'
     </insert>
      <select id="selectGrpUsrCk" parameterType="Map" resultType="int">
 			SELECT COUNT(*) as cnt
