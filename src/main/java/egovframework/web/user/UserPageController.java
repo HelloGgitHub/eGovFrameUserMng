@@ -28,7 +28,7 @@ public class UserPageController {
 		return "EgovMberManage"; 
 	} 
 
-	@RequestMapping("/MemberInfo") 
+	@RequestMapping("/MemberInfo")  
 	public String MemberInfo(Model model) {
 		model.addAttribute("msg", "jstl");
 		System.out.println("++++++++++++++++MemberInfo Page++++++++++++");
