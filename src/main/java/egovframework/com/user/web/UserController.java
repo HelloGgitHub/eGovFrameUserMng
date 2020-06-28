@@ -58,12 +58,13 @@ public class UserController {
 	 * @name : UserList(사용자 목록조회)
 	 * @date : 2020. 6. 11.
 	 * @author : "egov"
+	 * @throws Exception 
 	 * @return_type : String
 	 * @desc : 사용자 목록을 조회한다.
 	 */
 	@ApiOperation(value = "사용자 목록조회")
 	@GetMapping(path = "/list")
-	public String UserList() {
+	public String UserList() throws Exception {
 		
 		String rtn = "";
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
@@ -71,16 +72,19 @@ public class UserController {
 		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 		ObjectMapper om = new ObjectMapper();
 		
-		lst = userService.selectData(param);
-		
-		
 		try {
-			rtn = om.writeValueAsString(lst);
-		} catch (JsonProcessingException e) {
-			rtn = "json Mapper Error.";
+			lst = userService.selectData(param);
+			rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+		}catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
 			e.printStackTrace();
 		}
-		
+
+		rtn = om.writeValueAsString(rtnMap);
 		return rtn;
 	}
 	

@@ -124,19 +124,39 @@
 			data:jsonData,
 			timeout:(1000*30),
 			success:function(returnData){
-// 				if(status == "success") {
-					console.log(returnData);
-					alert(returnData.RESULTMSG);
-					
-					alert("success");
+				console.log(returnData);
+				alert(returnData.RESULTMSG);
+				alert("success");
+
+				if(returnData.RESULTCD == 1){
+					movelogin();
+				}
+				
 // 					$('#loginTF').append(returnData);
-// 				}else{
-// 					 alert("ERROR!");return;
-// 				} 
+				
+	
+			},
+			error:function(data){
+				alert(data);
+				return;
 			}
 		});
 	}
 
+
+	function movelogin(){
+// 	  	var width = 850;
+// 	  	var height = 330;
+// 	  	var top = 0;
+// 	  	var left = 0;
+
+		location.href="http://localhost:9085/UserList";
+
+// 	  	var url = "<c:url value='http://localhost:9085/UserList' />";
+// 	  	var name = "LoginLogDetailPopup"
+// 	  	var openWindows = window.open(url,name, "width="+width+",height="+height+",top="+top+",left="+left+",toolbar=no,status=no,location=no,scrollbars=yes,menubar=no,resizable=yes");
+	}
+	
 // 	function callMemberList () {
 // 	    $.ajax({
 // 	    	crossOrigin: true,
@@ -195,7 +215,7 @@
 	</table>
 	<br>
 	<!-- 하단 버튼 --> 
-	<button title="로그인" onclick="fn_login();" >로그인</button>
+	<button title="로그인" onclick="fn_login()" >로그인</button>
 	
 	<div id="loginTF"></div>
 <!-- </form> -->

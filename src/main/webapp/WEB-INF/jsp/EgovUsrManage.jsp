@@ -11,21 +11,70 @@
 <script type="text/javaScript" language="javascript" defer="defer">
 
 $(document).ready(function(){
+
     $.ajax({
         type : "GET", //전송방식을 지정한다 (POST,GET)
-        url : "http://localhost:9085/MemberList",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+        url : "http://localhost:9085/user/list",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
         dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
         error : function(){    //error: whenError
             alert("통신실패!!!!");
         },
-        success : function(Parse_data){    //success: whenSuccess,
-            $("#Parse_Area").html(Parse_data); //div에 받아온 값을 넣는다.
-            
-            console.log(Parse_data);
-//             alert("통신 데이터 값 : " + Parse_data);
+        success : function(data){    //success: whenSuccess,
+        	console.log(data);
+        	
+        	const obj = JSON.parse(data)
+        	var arr = obj.list;
+
+         	var ihtml = '';
+         	ihtml = ihtml + '<table class="board_list" summary="일반회원관리의 내역에 대한 목록을 출력합니다.">';
+         	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 20%;"><col style="width: 13%;"><col style="width: 10%;"><col style="width: ;"></colgroup>';
+         	ihtml = ihtml + '<thead>';
+         	ihtml = ihtml + '<tr>';
+         	ihtml = ihtml + '<th>번호</th>';
+         	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
+         	ihtml = ihtml + '<th class="board_th_link">아이디</th>';
+         	ihtml = ihtml + '<th>사용자이름</th>';
+         	ihtml = ihtml + '<th>사용자이메일</th>';
+         	ihtml = ihtml + '<th>전화번호</th>';
+         	ihtml = ihtml + '<th>등록일</th>';
+         	ihtml = ihtml + '<th>가입상태</th>';
+         	ihtml = ihtml + '</tr>';
+         	ihtml = ihtml + '</thead>';
+         	ihtml = ihtml + '<tbody class="ov">';
+        	
+        	for(var i =0; arr.length > i; i++){
+        		console.log(i+"===" + arr[i].userId);	
+        	 	ihtml = ihtml + '<tr>';
+        	 	ihtml = ihtml + '<td>' + i + '</td>';
+        	 	ihtml = ihtml + '<td>';
+        	 	ihtml = ihtml + '<input name="checkField" title="checkField 1" type="checkbox"/>';
+        	 	ihtml = ihtml + '<input name="id" type="hidden" value="'+arr[i].userId+'"/>';
+        	 	ihtml = ihtml + '</td>';
+//         	 	ihtml = ihtml + '<td><a href="http://localhost:9085/login/idpw/'+arr[i].userId+'"  onclick="javascript:fnSelectUser('+arr[i].userId+'); return false;">'+arr[i].userId+'</a></td>';
+//         	 	ihtml = ihtml + '<td><button onclick="fn_SelectUser('+arr[i].userId+')">'+arr[i].userId+'</button></td>';
+        	 	ihtml = ihtml + '<td><button onclick="fn_SelectUser()">'+arr[i].userId+'</button></td>';
+        	 	
+        	 	ihtml = ihtml + '<td>'+arr[i].userNm+'</td>';
+        	 	ihtml = ihtml + '<td>'+arr[i].emailAdres+'</td>';
+        	 	ihtml = ihtml + '<td>'+arr[i].areaNo+')'+arr[i].middleTelno+'-'+arr[i].endTelno+'</td>';
+        	 	ihtml = ihtml + '<td>2020-03-05</td>';
+        	 	ihtml = ihtml + '<td>'+arr[i].sttus+'</td>';
+        	 	ihtml = ihtml + '</tr>';
+            }
+
+         	ihtml = ihtml + '</tbody>';
+         	ihtml = ihtml + '</table>';
+         	
+        	var grd = document.getElementById("grd");
+        	grd.innerHTML = "<b><font color='red'>"+Math.random()+"</font></b>" + ihtml;
         }
     });
 });
+
+function fn_SelectUser(userid){
+	alert(usrid);
+	location.href="http://localhost:9085/UserInfo";
+}
 
 </script>
 </head>
@@ -34,7 +83,7 @@ $(document).ready(function(){
 <!-- javascript warning tag  -->
 <noscript class="noScriptTitle">자바스크립트를 지원하지 않는 브라우저에서는 일부 기능을 사용하실 수 없습니다.</noscript>
 
-<form name="listForm" action="http://localhost:8081/MemberList" method="post"> 
+<form name="listForm"> 
 <div class="board">
 	<h1>일반회원관리 목록</h1>
 	
@@ -64,161 +113,20 @@ $(document).ready(function(){
 			</li>
 		</ul>
 	</div>
-
-<table class="board_list" summary="일반회원관리의 내역에 대한 목록을 출력합니다.">
-	<caption>일반회원관리 목록</caption>
-	<colgroup>
-		<col style="width: 5%;">
-		<col style="width: 3%;">
-		
-		<col style="width: 15%;">
-		<col style="width: 15%;">
-		<col style="width: 20%;">
-		<col style="width: 13%;">
-		<col style="width: 10%;">
-		<col style="width: ;">
-	</colgroup>
-	<thead>
-	<tr>
-		<th>번호</th><!-- 번호 -->
-		<th><input type="checkbox" name="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th><!-- 전체선택 -->
-		
-		<th class="board_th_link">아이디</th><!--아이디 -->
-		<th>사용자이름</th><!-- 사용자이름 -->
-		<th>사용자이메일</th><!-- 사용자이메일 -->
-		<th>전화번호</th><!-- 전화번호 -->
-		<th>등록일</th><!-- 등록일 -->
-		<th>가입상태</th><!-- 가입상태 -->
-
-	</tr>
-	</thead>
-	<tbody class="ov">
-	
-	
-	<tr>
-	    <td>1</td>
-	    <td>
-	        <input name="checkField" title="checkField 1" type="checkbox"/>
-	        <input name="checkId" type="hidden" value="USR01:USRCNFRM_00000000023"/>
-	    </td>
-	    <td><a href="/egovframework-all-in-one/uss/umt/EgovMberSelectUpdtView.do?selectedId=USRCNFRM_00000000023"  onclick="javascript:fnSelectUser('USR01:USRCNFRM_00000000023'); return false;">crossent</a></td>
-	    <td>크로센트</td>
-	    <td>crossent@crossent.co.kr</td>
-	    <td>02)115-1155</td>
-	    <td>2020-03-05</td>
-	    <td>
-	        
-	            
-	        
-	            회원 가입 승인 상태
-	        
-	            
-	        
-	    </td>
-	</tr>
-	
-	<tr>
-	    <td>2</td>
-	    <td>
-	        <input name="checkField" title="checkField 2" type="checkbox"/>
-	        <input name="checkId" type="hidden" value="USR01:USRCNFRM_00000000013"/>
-	    </td>
-	    <td><a href="/egovframework-all-in-one/uss/umt/EgovMberSelectUpdtView.do?selectedId=USRCNFRM_00000000013"  onclick="javascript:fnSelectUser('USR01:USRCNFRM_00000000013'); return false;">egov2</a></td>
-	    <td>egov2</td>
-	    <td>egov2</td>
-	    <td>1111)111-111</td>
-	    <td>2020-03-03</td>
-	    <td>
-	        
-	            회원 가입 신청 상태
-	        
-	            
-	        
-	            
-	        
-	    </td>
-	</tr>
-	
-	<tr>
-	    <td>3</td>
-	    <td>
-	        <input name="checkField" title="checkField 3" type="checkbox"/>
-	        <input name="checkId" type="hidden" value="USR01:USRCNFRM_00000000004"/>
-	    </td>
-	    <td><a href="/egovframework-all-in-one/uss/umt/EgovMberSelectUpdtView.do?selectedId=USRCNFRM_00000000004"  onclick="javascript:fnSelectUser('USR01:USRCNFRM_00000000004'); return false;">egov</a></td>
-	    <td>aaaa</td>
-	    <td>11111111111</td>
-	    <td>1111)1111-1111</td>
-	    <td>2020-02-26</td>
-	    <td>
-	        
-	            
-	        
-	            회원 가입 승인 상태
-	        
-	            
-	        
-	    </td>
-	</tr>
-	
-	<tr>
-	    <td>4</td>
-	    <td>
-	        <input name="checkField" title="checkField 4" type="checkbox"/>
-	        <input name="checkId" type="hidden" value="USR01:USRCNFRM_00000000003"/>
-	    </td>
-	    <td><a href="/egovframework-all-in-one/uss/umt/EgovMberSelectUpdtView.do?selectedId=USRCNFRM_00000000003"  onclick="javascript:fnSelectUser('USR01:USRCNFRM_00000000003'); return false;">egovtest</a></td>
-	    <td>aaaa</td>
-	    <td>11111111111</td>
-	    <td>1111)1111-1111</td>
-	    <td>2020-02-26</td>
-	    <td>
-	        
-	            회원 가입 신청 상태
-	        
-	            
-	        
-	            
-	        
-	    </td>
-	</tr>
-	
-	<tr>
-	    <td>5</td>
-	    <td>
-	        <input name="checkField" title="checkField 5" type="checkbox"/>
-	        <input name="checkId" type="hidden" value="USR01:USRCNFRM_00000000001"/>
-	    </td>
-	    <td><a href="/egovframework-all-in-one/uss/umt/EgovMberSelectUpdtView.do?selectedId=USRCNFRM_00000000001"  onclick="javascript:fnSelectUser('USR01:USRCNFRM_00000000001'); return false;">USER</a></td>
-	    <td>일반회원</td>
-	    <td>egovframesupport@gmail.com</td>
-	    <td>02)1566-2059</td>
-	    <td>2020-02-25</td>
-	    <td>
-	        
-	            
-	        
-	            회원 가입 승인 상태
-	        
-	            
-	        
-	    </td>
-	</tr>
-	
-	</tbody>
-	</table>
-	
+</form>
+<div id="grd"></div>
 	<!-- paging navigation -->
 	<div class="pagination">
-		<ul><li class="current"><a onClick="return false;">1</a></li>
-</ul>
+		<ul>
+			<li class="current"><a onClick="return false;">1</a></li>
+		</ul>
 	</div>
 
-<input name="selectedId" type="hidden" />
-<input name="checkedIdForDel" type="hidden" />
-<input name="pageIndex" type="hidden" value="1"/>
+	<input name="selectedId" type="hidden" />
+	<input name="checkedIdForDel" type="hidden" />
+	<input name="pageIndex" type="hidden" value="1"/>
 </div>
-</form>
+
 
 </body>
 </html>
