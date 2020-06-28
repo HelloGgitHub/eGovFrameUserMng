@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import egovframework.com.cmm.ComUtil;
 import egovframework.com.cmm.SecuritySha;
 import egovframework.com.user.dao.UserInfoService;
 import egovframework.com.user.dao.UserModifyInfoVo;
@@ -99,19 +100,23 @@ public class UserController {
 		String rtn = "";
 		ObjectMapper om = new ObjectMapper();
 		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-		
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("USR_ID", URLDecoder.decode(userId		,"UTF-8"));
-		
-		lst = userService.selectUserDetail(sqlInpt);
-		
+
 		try {
-			rtn = om.writeValueAsString(lst);
-		} catch (JsonProcessingException e) {
-			rtn = "json Mapper Error.";
+			lst = userService.selectUserDetail(sqlInpt);
+			rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+		}catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
 			e.printStackTrace();
 		}
 		
+		rtn = om.writeValueAsString(rtnMap);
 		return rtn;
 	}
 	
@@ -128,7 +133,7 @@ public class UserController {
 		String rtn = "";
 //		String data = URLDecoder.decode(rtn,"UTF-8");
 		ObjectMapper om = new ObjectMapper();
-		
+
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("USR_ID", param.getUsrId());
@@ -153,7 +158,8 @@ public class UserController {
 		sqlInpt.put("LOCK_AT", "N");
 		sqlInpt.put("LOCK_CNT", 0);
 		sqlInpt.put("LOCK_LAST_PNTTM", "");
-
+		sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
+		
 		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 		lst = userService.selectUserDetail(sqlInpt);
 		int usrCnt = lst.size();
@@ -216,6 +222,7 @@ public class UserController {
 		sqlInpt.put("LOCK_AT", param.getLockAt());
 		sqlInpt.put("LOCK_CNT", param.getLockCnt());
 		sqlInpt.put("LOCK_LAST_PNTTM", param.getLockLastPnttm());
+		sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
 		
 		int inputCnt = userService.updateUserDetail(sqlInpt);
 		if(inputCnt > 0) {
@@ -293,6 +300,7 @@ public class UserController {
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("USR_ID", pUserId);							//회원ID
 		sqlInpt.put("USR_STTUS", pUsrSttus);					//회원상태
+		sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
 		
 		int inputCnt = userService.updateUserState(sqlInpt);
 		if(inputCnt > 0) {
@@ -334,6 +342,7 @@ public class UserController {
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("USR_ID"		, pUserId);					//회원ID
+		sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
 		if(null != pUsrPw && !"".equals(pUsrPw) && !"null".equals(pUsrPw)) {
 			String pw = SecuritySha.SHA256(pUsrPw);		//SHA-256 암호화
 			sqlInpt.put("PASSWORD"	, pw);					//패스워드

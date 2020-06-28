@@ -83,12 +83,12 @@
 				, #{ESNTL_ID}
 				, #{LOCK_AT}
 				, #{LOCK_CNT}
-				, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+				, #{CHANGE_DT}
 			)
     </insert>
     <update id="updateUserDetail" parameterType="hashMap">
 		UPDATE COMTNUSERMNG
-		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		   SET CHANGE_DT = #{CHANGE_DT}
 <!-- 		   <if test='PASSWORD != null  and(paraName1 eq "test".toString())'> -->
 			<if test='PASSWORD != null'> , PASSWORD          = '${PASSWORD}' </if>
 		    <if test='PASSWORD_HINT != null'> , PASSWORD_HINT     = '${PASSWORD_HINT}' </if>
@@ -118,14 +118,14 @@
     
     <update id="updateUserState" parameterType="hashMap">
 		UPDATE COMTNUSERMNG
-		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		   SET CHANGE_DT = #{CHANGE_DT}
 		    <if test='USR_STTUS != null'> , USR_STTUS        = '${USR_STTUS}' </if>
 		 WHERE USR_ID = '${USR_ID}'
     </update>
 
     <update id="updateUserPassword" parameterType="hashMap">
 		UPDATE COMTNUSERMNG
-		   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+		   SET CHANGE_DT = #{CHANGE_DT}
 		    <if test='PASSWORD != null'> , PASSWORD        = '${PASSWORD}' </if>
 		 WHERE USR_ID = '${USR_ID}'
     </update>

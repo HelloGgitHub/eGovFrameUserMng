@@ -7,13 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller 
 public class UserPageController {
 	
-	@RequestMapping("/MemberListPage") 
-	public String welcome(Model model) {
-		model.addAttribute("msg", "jstl");
-		System.out.println("+++++++++++++++++MemberListPage Page++++++++++++");
-		return "MemberList"; 
-	} 
-	
 	@RequestMapping("/corsTest") 
 	public String crosTest(Model model) {
 		model.addAttribute("msg", "jstl");
@@ -21,23 +14,33 @@ public class UserPageController {
 		return "corsTest"; 
 	} 
 	
-	@RequestMapping("/MemberListPageA") 
+	
+	@RequestMapping("/UserListPageJson") 
+	public String welcome(Model model) {
+		model.addAttribute("msg", "jstl");
+		System.out.println("+++++++++++++++++MemberListPage Page++++++++++++");
+		return "UserList"; 
+	} 
+	
+	@RequestMapping("/UserList") 
 	public String welcomeA(Model model) {
 		model.addAttribute("msg", "jstl");
 		System.out.println("++++++++++++++++++MemberListPageA Page+++++++++++");
-		return "EgovMberManage"; 
+		return "EgovUsrManage"; 
 	} 
 
-	@RequestMapping("/MemberInfo")  
+	@RequestMapping("/UserInfo") 
 	public String MemberInfo(Model model) {
 		model.addAttribute("msg", "jstl");
 		System.out.println("++++++++++++++++MemberInfo Page++++++++++++");
-		return "MemberInfo"; 
+		return "UserInfo"; 
+	}
+
+	@RequestMapping("/Login") 
+	public String Login(Model model) {
+		model.addAttribute("msg", "jstl");
+		System.out.println("++++++++++++++++MemberInfo Page++++++++++++");
+		return "IDPWLogin"; 
 	}
 	
-	@RequestMapping("/EgovMemberInfo") 
-	public String EgovMemberInfo(Model model) {
-		System.out.println("++++++++++++++++EgovMemberInfo Page++++++++++++");
-		return "EgovMemberInfo"; 
-	} 
 }

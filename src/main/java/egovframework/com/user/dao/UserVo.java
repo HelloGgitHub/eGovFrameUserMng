@@ -36,7 +36,6 @@ public class UserVo {
 	private String detailAdres;
 	private String usrSttus;
 	
-	
 	public String getUsrId() {
 		return usrId;
 	}

@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import egovframework.com.cmm.SecuritySha;
 import egovframework.com.user.dao.UserLoginService;
+import egovframework.com.user.dao.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -59,14 +60,15 @@ public class UserLoginController {
     	,@ApiImplicitParam(name = "password"	, value = "패스워드"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
 	@PostMapping(path = "/idpw")
-	public String UserLogin(
-			@RequestParam(value = "userId") String userId,
-			@RequestParam(value = "password") String password) 
+	public String UserLogin(@RequestBody UserVo usr
+//			@RequestParam(value = "userId") String userId,
+//			@RequestParam(value = "password") String password
+			) 
 		throws UnsupportedEncodingException {
 		
 		String rtn = "";
-		String pUserId 			= URLDecoder.decode(userId		,"UTF-8");
-		String pPassWord 	= URLDecoder.decode(password	,"UTF-8");
+		String pUserId 			= URLDecoder.decode(usr.getUsrId()		,"UTF-8");
+		String pPassWord 	= URLDecoder.decode(usr.getPassword()	,"UTF-8");
 		
 		String pw = SecuritySha.SHA256(pPassWord);		//SHA-256 암호화
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
