@@ -135,148 +135,10 @@ function maxlength() {
 	}
 }
 	
-// 	function password1 () { 
-// 		this.aa = new Array("password", "비밀번호은(는) 8~20자 내에서 입력해야 합니다.", new Function ("varName", " return this[varName];"));
-// 	} 
-// 	function password2 () { 
-// 		this.aa = new Array("password", "비밀번호은(는) 한글,특수문자,띄어쓰기는 허용되지 않습니다.", new Function ("varName", " return this[varName];"));
-// 	}
-// 	function password3 () { 
-// 		this.aa = new Array("password", "비밀번호은(는) 순차적인 숫자를 4개이상 연속해서 사용할수 없습니다.", new Function ("varName", " return this[varName];"));
-// 	} 
-// 	function password4 () { 
-// 		this.aa = new Array("password", "비밀번호은(는) 반복되는 문자나 숫자를 4개이상 연속해서 사용할 수 없습니다.", new Function ("varName", " return this[varName];"));
-// 	}
-// 	function IntegerValidations () { 
-// 		this.aa = new Array("inAreaNo", "집지역번호은(는) integer 타입이어야 합니다.", new Function ("varName", "this.maxlength='4';  return this[varName];"));
-// 		this.ab = new Array("inMiddleTelno", "집중간전화번호은(는) integer 타입이어야 합니다.", new Function ("varName", "this.maxlength='4';  return this[varName];"));
-// 		this.ac = new Array("inEndTelno", "집마지막전화번호은(는) integer 타입이어야 합니다.", new Function ("varName", "this.maxlength='4';  return this[varName];"));
-// 	}
-// 	function email () { 
-// 		this.aa = new Array("inUserEmailAdres", "이메일주소은(는) 유효하지 않은 이메일 주소입니다.", new Function ("varName", "this.maxlength='50';  return this[varName];"));
-// 	} 
 
 
-/*********************************************************
- * 모달셋팅
- ******************************************************** */
-function fn_modal_setting(){
-	//버튼에 모달 연결
-	$("#btnUserId").egovModal( "egovModal" );
-	
-	//타이틀 설졍
-	$("#egovModal").setEgovModalTitle("아이디 중복 확인"); //아이디 중복 확인
-	var content = "";
-	content = content + "<div class='modal-alignL' style='margin:5px 0 0 0'>"+"사용할아이디 :"+"</div>"; //사용할아이디
-	content = content + "<div class='modal-alignL'>"+"<input type='text' id='checkIdModal' name='checkIdModal' value='' size='20' maxlength='20' />"+"</div>";	
-	content += "<div style='clear:both;'></div>";
-	content += "<div id='divModalResult' style='margin:10px 0 0 0'>결과 : 중복확인을 실행하십시오.</div>"; //결과 : 중복확인을 실행하십시오.
-	//모달 body 설정
-	$("#egovModal").setEgovModalBody(content);
-	var footer = "";
-	//footer += "<div class='modal-btn'><button class='btn_s2' id='btnModalOk' onclick='fn_id_checkOk()'>확인</button></div>";
-	//footer += "<div class='modal-btn'><button class='btn_s2' id='btnModalSelect' onclick='fn_id_check()'>조회</button></div>";
-	footer += "<span class='btn_style1 blue' id='btnModalOk' onclick='fn_id_checkOk()'><a href='#'>확인</a></span>&nbsp;";
-	footer += "<span class='btn_style1 blue' id='btnModalSelect' onclick='fn_id_check()'><a href='#'>조회</a></span>&nbsp;";
-	//모달 footer 설정
-	$("#egovModal").setEgovModalfooter(footer);
-	
-	//엔터이벤트처리
-	$("input[name=checkIdModal]").keydown(function (key) {
-		if(key.keyCode == 13){
-			fn_id_check();	
-		}
-	});
-	footer = null;
-	content = null;
-}
-/*********************************************************
- * 아이디 체크 AJAX
- ******************************************************** */
-function fn_id_check(){	
-	$.ajax({
-		type:"POST",
-		url:"/egovframework-all-in-one/uss/umt/EgovIdDplctCnfirmAjax.do",
-		data:{
-			"checkId": $("#checkIdModal").val()			
-		},
-		dataType:'json',
-		timeout:(1000*30),
-		success:function(returnData, status){
-			if(status == "success") {
-				
-				if(returnData.usedCnt > 0 ){
-					//사용할수 없는 아이디입니다.
-					$("#divModalResult").html("<font color='red'>결과 : ["+returnData.checkId+"]는 사용할수 없는 아이디입니다.</font>");
-				}else{
-					//사용가능한 아이디입니다.
-					$("#divModalResult").html("<font color='blue'>결과 : ["+returnData.checkId+"]는 사용가능한 아이디입니다.</font>");
-				}
-			}else{ alert("ERROR!");return;} 
-		}
-		});
-}
-/*********************************************************
- * 아이디 체크 확인
- ******************************************************** */
-function fn_id_checkOk(){
-	$.ajax({
-		type:"POST",
-		url:"/egovframework-all-in-one/uss/umt/EgovIdDplctCnfirmAjax.do",
-		data:{
-			"checkId": $("#checkIdModal").val()			
-		},
-		dataType:'json',
-		timeout:(1000*30),
-		success:function(returnData, status){
-			if(status == "success") {
-				if(returnData.usedCnt > 0 ){
-					alert("사용이 불가능한 아이디 입니다"); //사용이 불가능한 아이디 입니다.
-					return;
-				}else{
-					
-					$("input[name=inUserId]").val(returnData.checkId);
-					$("#egovModal").setEgovModalClose();
-				}
-			}else{ alert("ERROR!");return;} 
-		}
-		});
-}
-function fnIdCheck1(){
-    var retVal;
-    var url = "/egovframework-all-in-one/uss/umt/EgovIdDplctCnfirmView.do";
-    var varParam = new Object();
-    varParam.checkId = document.userManageVO.inUserId.value;
-    var openParam = "dialogWidth:303px;dialogHeight:250px;scroll:no;status:no;center:yes;resizable:yes;";
-        
-    return false;
-    retVal = window.showModalDialog(url, varParam, openParam);
-    if(retVal) {
-    	document.userManageVO.inUserId.value = retVal;
-    }
-}
-function showModalDialogCallback(retVal) {
-	if(retVal) {
-	    document.userManageVO.inUserId.value = retVal;
-	}
-}
-function fnListPage(){
-    document.userManageVO.action = "/egovframework-all-in-one/uss/umt/EgovMberManage.do";
-    document.userManageVO.submit();
-}
-function fnInsert(form){
-	
-	if(confirm("등록하시겠습니까?")){	
-		if(validateUserManageVO(form)){
-			if(form.inPassword.value != form.inPassword2.value){
-	            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-	            return false;
-	        }
-			form.submit();
-			return true;
-	    }
-	}
-}
+
+
 
 /*********************************************************
  * 회원정보 변경
@@ -368,25 +230,32 @@ function id_updateState(){
 
 
 
+
 /*********************************************************
  * 회원정보 삭제
  ******************************************************** */
 function id_delete(){
-	console.log(ckId.length + "===" +$("#inUserId").val() );
-    $.ajax({
-        type : "DELETE", //전송방식을 지정한다 (POST,GET)
-        url : "http://localhost:9085/user/deleteUsr?userId="+$("#inUserId").val(),//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
-        dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
-        error : function(){    //error: whenError
-            alert("통신실패!!!!");
-        },
-        success : function(data){    //success: whenSuccess,
-        	console.log("delete Data::"+data);
-        	location.href="http://localhost:9085/UserList";
-        }
-    });
+	var userData = new Object();
+		userData.inUserId				=	$("#inUserId").val();
+	var jsonData = JSON.stringify(userData);
+	console.log(jsonData);
+	
+	$.ajax({
+		type:"DELETE",
+		url:"http://192.168.56.1:8081/member/deleteMbrInfo",
+		contentType: 'application/json; charset=utf-8',
+		dataType:'json',
+		data:jsonData,
+		timeout:(1000*30),
+		success:function(returnData, status){
+			if(status == "success") {
+				alert("success");
+			}else{
+				alert("ERROR!");return;
+			} 
+		}
+	});
 }
-
 /*********************************************************
  * 회원등록 신청
  ******************************************************** */
