@@ -55,16 +55,8 @@ public class UserLoginController {
 	 *              로그인의 결과값은 사용자 정보를 출력한다.
 	 */
 	@ApiOperation(value = "사용자 로그인", notes = "사용자 ID/PW를 입력받아 사용자 정보를 반환합니다.")
-    @ApiImplicitParams({
-    	 @ApiImplicitParam(name = "userId"		, value = "사용자ID", required = true, dataType = "string", paramType = "query", defaultValue = "")
-    	,@ApiImplicitParam(name = "password"	, value = "패스워드"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
-    })
 	@PostMapping(path = "/idpw")
-	public String UserLogin(@RequestBody UserVo usr
-//			@RequestParam(value = "userId") String userId,
-//			@RequestParam(value = "password") String password
-			) 
-		throws UnsupportedEncodingException {
+	public String UserLogin(@RequestBody UserVo usr) throws UnsupportedEncodingException {
 		
 		String rtn = "";
 		String pUserId 			= URLDecoder.decode(usr.getUsrId()		,"UTF-8");

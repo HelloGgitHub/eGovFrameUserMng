@@ -1,71 +1,186 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ì‚¬ìš©ì ëª©ë¡ ì¡°íšŒ</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="EUC-KR" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>ÀÏ¹İÈ¸¿ø°ü¸® ¸ñ·Ï</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="/css/egovframework/com/com.css">
 
 <script src="/js/egovframework/com/cmm/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" language="javascript">
+<script type="text/javaScript" language="javascript" defer="defer">
 
-var responseData = "";
+var grdVal;
 
 $(document).ready(function(){
-	
+	fn_Select();
 });
 
-function callMemberList () {
+function fn_Select(){
+	
+	$("#grd").empty();
 	
     $.ajax({
-        type : "GET", 												//ì „ì†¡ë°©ì‹ì„ ì§€ì •í•œë‹¤ (POST,GET)
-        url : "http://localhost:9085/user/list",				//í˜¸ì¶œ URLì„ ì„¤ì •í•œë‹¤. GETë°©ì‹ì¼ê²½ìš° ë’¤ì— íŒŒë¼í‹°í„°ë¥¼ ë¶™ì—¬ì„œ ì‚¬ìš©í•´ë„ëœë‹¤.
-        contentType: 'application/json; charset=utf-8',
-        dataType : "json",										//í˜¸ì¶œí•œ í˜ì´ì§€ì˜ í˜•ì‹ì´ë‹¤. xml,json,html,textë“±ì˜ ì—¬ëŸ¬ ë°©ì‹ì„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.
-        error : function(){    									//error: whenError
-            alert("í†µì‹ ì‹¤íŒ¨!!!!");
+        type : "GET", //Àü¼Û¹æ½ÄÀ» ÁöÁ¤ÇÑ´Ù (POST,GET)
+        url : "http://localhost:9085/user/list",//È£Ãâ URLÀ» ¼³Á¤ÇÑ´Ù. GET¹æ½ÄÀÏ°æ¿ì µÚ¿¡ ÆÄ¶óÆ¼ÅÍ¸¦ ºÙ¿©¼­ »ç¿ëÇØµµµÈ´Ù.
+        dataType : "text",//È£ÃâÇÑ ÆäÀÌÁöÀÇ Çü½ÄÀÌ´Ù. xml,json,html,textµîÀÇ ¿©·¯ ¹æ½ÄÀ» »ç¿ëÇÒ ¼ö ÀÖ´Ù.
+        error : function(){    //error: whenError
+            alert("Åë½Å½ÇÆĞ!!!!");
         },
-        success : function(Parse_data){    			//success: whenSuccess,   function whenSuccess(resdata)
-            $("#ReturnData").append(Parse_data); 		//divì— ë°›ì•„ì˜¨ ê°’ì„ ë„£ëŠ”ë‹¤.
-            console.log(Parse_data);
+        success : function(data){    //success: whenSuccess,
+        	console.log(data);
+        	
+        	const obj = JSON.parse(data)
+        	var arr = obj.list;
+
+         	var ihtml = '';
+         	ihtml = ihtml + '<table class="board_list" summary="ÀÏ¹İÈ¸¿ø°ü¸®ÀÇ ³»¿ª¿¡ ´ëÇÑ ¸ñ·ÏÀ» Ãâ·ÂÇÕ´Ï´Ù.">';
+         	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 20%;"><col style="width: 13%;"><col style="width: 10%;"><col style="width: ;"></colgroup>';
+         	ihtml = ihtml + '<thead>';
+         	ihtml = ihtml + '<tr>';
+         	ihtml = ihtml + '<th>¹øÈ£</th>';
+         	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="ÀüÃ¼¼±ÅÃÃ¼Å©¹Ú½º"></th>';
+         	ihtml = ihtml + '<th class="board_th_link">¾ÆÀÌµğ</th>';
+         	ihtml = ihtml + '<th>»ç¿ëÀÚÀÌ¸§</th>';
+         	ihtml = ihtml + '<th>»ç¿ëÀÚÀÌ¸ŞÀÏ</th>';
+         	ihtml = ihtml + '<th>ÀüÈ­¹øÈ£</th>';
+         	ihtml = ihtml + '<th>µî·ÏÀÏ</th>';
+         	ihtml = ihtml + '<th>°¡ÀÔ»óÅÂ</th>';
+         	ihtml = ihtml + '</tr>';
+         	ihtml = ihtml + '</thead>';
+         	ihtml = ihtml + '<tbody class="ov">';
+        	
+        	for(var i =0; arr.length > i; i++){
+        		console.log(i+"===" + arr[i].userId + "***" + $("#sbscrbSttus").val() );
+        		if( $("#sbscrbSttus").val() == "0" || $("#sbscrbSttus").val() == arr[i].sttus){	
+	        	 	ihtml = ihtml + '<tr>';
+	        	 	ihtml = ihtml + '<td>' + (i+1) + '</td>';
+	        	 	ihtml = ihtml + '<td>';
+	        	 	ihtml = ihtml + '<input name="checkField" title="checkField" type="checkbox"/>';
+	        	 	ihtml = ihtml + '<input name="id" type="hidden" value="'+arr[i].userId+'"/>';
+	        	 	ihtml = ihtml + '</td>';
+	        	 	ihtml = ihtml + '<td><button onclick="fn_SelectUser(\''+arr[i].userId+'\')">'+arr[i].userId+'</button></td>';
+	        	 	ihtml = ihtml + '<td id="name">'+arr[i].userNm+'</td>';
+	        	 	ihtml = ihtml + '<td id="adres">'+arr[i].emailAdres+'</td>';
+	        	 	ihtml = ihtml + '<td id="telNo">'+arr[i].areaNo+')'+arr[i].middleTelno+'-'+arr[i].endTelno+'</td>';
+	        	 	ihtml = ihtml + '<td>2020-03-05</td>';
+
+	        	 	var sttus = "-";
+	        	 	if(arr[i].sttus == "A"){
+	        	 		sttus = "°¡ÀÔ½ÅÃ»";
+		        	}else if(arr[i].sttus == "D"){
+		        		sttus = "»èÁ¦";
+		        	}else if(arr[i].sttus == "P"){
+		        		sttus = "½ÂÀÎ";
+		        	}
+	        	 	ihtml = ihtml + '<td>'+sttus+'</td>';
+	        	 	ihtml = ihtml + '</tr>';
+        		}
+            }
+
+         	ihtml = ihtml + '</tbody>';
+         	ihtml = ihtml + '</table>';
+         	
+        	var grd = document.getElementById("grd");
+        	grd.innerHTML = ihtml;
         }
     });
 }
 
-function callMemberDetailInfo () {
-    $.ajax({
-        type : "POST", 												//ì „ì†¡ë°©ì‹ì„ ì§€ì •í•œë‹¤ (POST,GET)
-        url : "http://localhost:9085/user/detailInfo",			//í˜¸ì¶œ URLì„ ì„¤ì •í•œë‹¤. GETë°©ì‹ì¼ê²½ìš° ë’¤ì— íŒŒë¼í‹°í„°ë¥¼ ë¶™ì—¬ì„œ ì‚¬ìš©í•´ë„ëœë‹¤.
-        contentType: 'application/json; charset=utf-8',
-        dataType : "json",											//í˜¸ì¶œí•œ í˜ì´ì§€ì˜ í˜•ì‹ì´ë‹¤. xml,json,html,textë“±ì˜ ì—¬ëŸ¬ ë°©ì‹ì„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.
-        data : {"memberId":$("#memberId").val() },
-        error : function(){    										//error: whenError
-            alert("í†µì‹ ì‹¤íŒ¨!!!!");
-        },
-        success : function(Parse_data){    					//success: whenSuccess,   function whenSuccess(resdata)
-            $("#MemberDetailInfoData").html(Parse_data); 	//divì— ë°›ì•„ì˜¨ ê°’ì„ ë„£ëŠ”ë‹¤.
-            console.log(Parse_data);
-        }
-    });
+function fn_SelectUser(userId){
+	alert(userId);
+	location.href="http://localhost:9085/UserInfo?callType=r&userId="+userId;
 }
+
+
+function fn_DeleteUser(){
+	var ckId = new Array();
+	ckId = checkFieldck();
+	
+	for(var i=0; ckId.length > i; i++){
+		var userId = ckId[i];
+		console.log(ckId.length + "===" +ckId[i] );
+	    $.ajax({
+	        type : "DELETE", //Àü¼Û¹æ½ÄÀ» ÁöÁ¤ÇÑ´Ù (POST,GET)
+	        url : "http://localhost:9085/user/deleteUsr?userId="+userId,//È£Ãâ URLÀ» ¼³Á¤ÇÑ´Ù. GET¹æ½ÄÀÏ°æ¿ì µÚ¿¡ ÆÄ¶óÆ¼ÅÍ¸¦ ºÙ¿©¼­ »ç¿ëÇØµµµÈ´Ù.
+	        dataType : "text",//È£ÃâÇÑ ÆäÀÌÁöÀÇ Çü½ÄÀÌ´Ù. xml,json,html,textµîÀÇ ¿©·¯ ¹æ½ÄÀ» »ç¿ëÇÒ ¼ö ÀÖ´Ù.
+	        error : function(){    //error: whenError
+	            alert("Åë½Å½ÇÆĞ!!!!");
+	        },
+	        success : function(data){    //success: whenSuccess,
+	        	console.log("delete Data::"+data);
+	        	fn_Select();
+	        }
+	    });
+	}
+}
+
+function checkFieldck(){
+	var rowData = new Array();
+	var checkbox = $("input[name=checkField]:checked");
+	
+	checkbox.each(function(i) {
+		var tr = checkbox.parent().parent().eq(i);
+		var td = tr.children();
+		var id = td.eq(2).text();
+		rowData.push(id);
+	});
+	console.log("rowData : " + rowData);
+	
+	return rowData;
+}
+
+function fn_ArovUser(){
+	location.href="http://localhost:9085/UserInfo?callType=c&userId=";
+}
+
 </script>
- 
 </head>
 
 <body>
-	<table>MEMBERLIST PAGE(MemberList.jsp)</table>
-	<br>
-	<table>
-		<tr>
-			<button id = "MemberList" 	name="MemberList" onclick="callMemberList()">MemberList</button>
-		</tr>
-		<tr>
-	    	<div id="ReturnData" />
-	    </tr>
-	    <br><br>
-	    <tr>
-	    	<button id = "MemberDetailInfo" name = "MemberDetailInfo" onclick="callMemberDetailInfo()">MemberDetailInfo</button>
-	    	&nbsp;ì‚¬ìš©ìID&nbsp;:&nbsp;<input type="text" id="memberId" name="memberId" onKeypress="javascript:if(event.keyCode==13) {callMemberDetailInfo()}" style="width:100px" />
-		</tr>
-		<tr>
-			<div id="MemberDetailInfoData" />
-		</tr>
-	</table>
+<!-- javascript warning tag  -->
+<noscript class="noScriptTitle">ÀÚ¹Ù½ºÅ©¸³Æ®¸¦ Áö¿øÇÏÁö ¾Ê´Â ºê¶ó¿ìÀú¿¡¼­´Â ÀÏºÎ ±â´ÉÀ» »ç¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.</noscript>
+<div class="board">
+	<h1>È¸¿ø°ü¸® ¸ñ·Ï</h1>
+	<!-- °Ë»ö¿µ¿ª -->
+	<div class="search_box" title="ÀÌ ·¹ÀÌ¾Æ¿ôÀº ÇÏ´Ü Á¤º¸¸¦ ´ëÇÑ °Ë»ö Á¤º¸·Î ±¸¼ºµÇ¾î ÀÖ½À´Ï´Ù.">
+		<ul>
+			<li><!-- »óÅÂ-->
+                <select name="sbscrbSttus" id="sbscrbSttus" title="°¡ÀÔ»óÅÂÁ¶°Ç ¼±ÅÃ">
+                    <option value="0" selected="selected" >»óÅÂ(ÀüÃ¼)</option><!-- »óÅÂ(ÀüÃ¼) -->
+                    <option value="A"  >°¡ÀÔ½ÅÃ»</option><!-- °¡ÀÔ½ÅÃ» -->
+                    <option value="D"  >»èÁ¦</option><!-- »èÁ¦ -->
+                    <option value="P"  >½ÂÀÎ</option><!-- ½ÂÀÎ -->
+                </select>
+			</li>
+			<li><!-- Á¶°Ç -->
+                <select name="searchCondition" id="searchCondition" title="Á¶È¸Á¶°Ç ¼±ÅÃ"><!--  -->
+                    <option value="0"  >ID</option><!-- ID  -->
+                    <option value="1" selected="selected" >ÀÌ¸§</option><!-- Name -->
+                </select>
+			</li>
+			<!-- °Ë»öÅ°¿öµå ¹× Á¶È¸¹öÆ° -->
+			<li>
+				<input class="s_input" name="searchKeyword" type="text"  size="35" title="°Ë»ö¾î ÀÔ·Â" value=''  maxlength="255" >
+				<input type="button" class="s_btn" onClick="fn_Select();" value="Á¶È¸" title="Á¶È¸ ¹öÆ°" />
+				<input type="button" class="s_btn" onClick="fn_DeleteUser();" value="»èÁ¦" title="»èÁ¦ ¹öÆ°" />
+				<input type="button" class="s_btn" onClick="fn_ArovUser();" value="µî·Ï" title="µî·Ï ¹öÆ°" />
+<!-- 				<span class="btn_b"><a href="/egovframework-all-in-one/uss/umt/EgovMberInsertView.do" onClick="fnAddUserView(); return false;"  title="µî·Ï ¹öÆ°">µî·Ï</a></span> -->
+			</li>
+		</ul>
+	</div>
+
+	<div id="grd"></div>
+	<!-- paging navigation -->
+	<div class="pagination">
+		<ul>
+			<li class="current"><a onClick="return false;">1</a></li>
+		</ul>
+	</div>
+</div>
+<input name="selectedId" type="hidden" />
+<input name="checkedIdForDel" type="hidden" />
+<input name="pageIndex" type="hidden" value="1"/>
+
 </body>
 </html>

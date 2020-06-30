@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import egovframework.com.cmm.ComUtil;
@@ -85,6 +84,7 @@ public class UserController {
 		}
 
 		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 		return rtn;
 	}
 	
@@ -121,6 +121,7 @@ public class UserController {
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 		return rtn;
 	}
 	
@@ -137,7 +138,8 @@ public class UserController {
 		String rtn = "";
 //		String data = URLDecoder.decode(rtn,"UTF-8");
 		ObjectMapper om = new ObjectMapper();
-
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("USR_ID", param.getUsrId());
@@ -168,7 +170,7 @@ public class UserController {
 		lst = userService.selectUserDetail(sqlInpt);
 		int usrCnt = lst.size();
 
-		Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+		
 		if(usrCnt == 0) {
 			int inputCnt = userService.insertUserDetail(sqlInpt);
 			if (inputCnt > 0) {
@@ -184,6 +186,7 @@ public class UserController {
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 		return rtn;
 	}
 
@@ -200,8 +203,7 @@ public class UserController {
 	public String UserChangeInfo(@RequestBody UserModifyInfoVo param) throws Exception {
 		String rtn = "";
 		ObjectMapper om = new ObjectMapper();
-		Map<Object, Object> rtnMap = new HashMap<Object, Object>();
-		
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("USR_ID", param.getUsrId());
@@ -256,7 +258,7 @@ public class UserController {
 	public String UserDeleteInfo(@RequestParam(value = "userId") String usrId) throws Exception {
 		String rtn = "";
 		ObjectMapper om = new ObjectMapper();
-		Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		
 		String pUsrId = URLDecoder.decode(usrId,"UTF-8");
 		
@@ -295,7 +297,7 @@ public class UserController {
 			@RequestParam(value = "usrSttus") String usrSttus) throws Exception {
 		String rtn = "";
 		ObjectMapper om = new ObjectMapper();
-		Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		
 		String pUserId 		= URLDecoder.decode(usrId		,"UTF-8");
 		String pUsrSttus 		= URLDecoder.decode(usrSttus	,"UTF-8");
@@ -339,7 +341,7 @@ public class UserController {
 			@RequestParam(value = "usrPw") String usrPw) throws Exception {
 		String rtn = "";
 		ObjectMapper om = new ObjectMapper();
-		Map<Object, Object> rtnMap = new HashMap<Object, Object>();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		String pUserId 		= URLDecoder.decode(usrId	,"UTF-8");
 		String pUsrPw 		= URLDecoder.decode(usrPw	,"UTF-8");
 		

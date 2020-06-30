@@ -32,7 +32,13 @@
 		        MBTLNUM           as "moblphonNo",
 		        USR_STTUS            as "sttus",
 		        SBSCRB_DE             as "sbscrbDe",
-		        ADRES                  as "adres"
+		        ADRES                  as "adres",
+		        PASSWORD_HINT                  as "passwordHint",
+		        PASSWORD_CNSR                  as "passwordCnsr",
+		        SEXDSTN_CODE                  as "sexdstnCode",
+		        USR_FXNUM                  as "usrFxnum",
+		        DETAIL_ADRES                  as "detailAdres",
+		        ZIP                  as "zip"
 		  FROM COMTNUSERMNG
 		 WHERE USR_ID = '${USR_ID}'
     </select>
