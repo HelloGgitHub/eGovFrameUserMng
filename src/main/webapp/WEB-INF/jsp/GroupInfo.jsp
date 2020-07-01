@@ -429,159 +429,47 @@ function fn_movebak(){
 
 	<div class="wTableFrm">
 	<!-- 타이틀 -->
-	<h2 >일반회원관리 등록</h2>
+	<h2 >그룹관리 </h2>
 	<!-- 등록폼 -->
 	<table class="wTable" summary="일반회원관리의 내역에 대한 목록을 출력합니다.">
-	<caption>사용자관리 등록</caption>
+	<caption>그룹관리</caption>
 	<colgroup>
 		<col style="width: 22%;"><col style="width: ;">
 	</colgroup>
 	<tbody>
 		<!-- 입력/선택 -->
-		<!-- 일반회원아이디 -->
 		<tr>
-			<th><label for="inUserId">사용자아이디</label> <span class="pilsu">*</span></th>
+			<th><label for="inUserId">그룹아이디</label> <span class="pilsu">*</span></th>
 			<td class="left">
 				<input id="inUserId" name="inUserId" title="아이디 입력" onchange="idmodify()" style="width:80%;" type="text" value="" size="20" maxlength="20"/>
-				<button id="btnUserId" class="btn_s2" onClick="fn_UserCk()" title="중복 아이디 검색">중복아이디 검색</button>
+<!-- 				<button id="btnUserId" class="btn_s2" onClick="fn_UserCk()" title="중복 아이디 검색">중복아이디 검색</button> -->
 <!-- 				<button id="checkIdModal" name = "checkIdModal" class="btn_s2" onClick="fn_modal_setting()" title="중복 아이디 검색">중복아이디 검색</button> -->
 			</td>
 		</tr>
-		
-		<!-- 일반회원이름 -->
+		<!-- 그룹명 -->
 		<tr>
-			<th><label for="inUserNm">사용자명</label> <span class="pilsu">*</span></th>
+			<th><label for="inUserNm">그룹명</label> <span class="pilsu">*</span></th>
 			<td class="left">
 				<input id="inUserNm" name="inUserNm" title="일반회원이름 입력" type="text" value="" size="50" maxlength="50"/>
 			</td>
 		</tr>
-		<!-- 비밀번호 -->
+		<!-- 그룹 설명 -->
 		
 		<tr>
-			<th><label for="inPassword">비밀번호</label> <span class="pilsu">*</span></th>
+			<th><label for="inPassword">그룹 설명</label> <span class="pilsu">*</span></th>
 			<td class="left">
-				<input id="inPassword" name="inPassword" title="비밀번호 입력" type="password" value="" size="50" maxlength="20"/>
+<!-- 				<input id="grpdis" name="grpdis" title="비밀번호 입력" type=" value="" size="50" maxlength="20"/> -->
+				<textarea id="grpdis" name="grpdis" title="비밀번호 입력" type="" style="resize: none;"></textarea>
 			</td>
 		</tr>
-		<!-- 비밀번호확인 -->
-		
-		<tr>
-			<th><label for="inPassword2">비밀번호확인</label> <span class="pilsu">*</span></th>
-			<td class="left">
-				<input name="inPassword2" id="inPassword2" title="비밀번호확인 입력" type="password" size="50" maxlength="20" />
-			</td>
-		</tr>
-		<!-- 비밀번호힌트 -->
-		
-		<tr>
-			<th><label for="inPasswordHint">비밀번호힌트</label> <span class="pilsu">*</span></th>
-			<td class="left">
-				<select id="inPasswordHint" name="inPasswordHint" title="비밀번호힌트 선택">
-					<option value="" selected="selected">--선택하세요--</option>
-					<option value="P01">가장 기억에 남는 장소는?</option><option value="P02">나의 좌우명은?</option><option value="P03">나의 보물 제1호는?</option><option value="P04">가장 기억에 남는 선생님 성함은?</option><option value="P05">다른 사람은 모르는 나만의 신체비밀은?</option><option value="P06">오래도록 기억하고 싶은 날짜는?</option><option value="P07">받았던 선물 중 기억에 남는 독특한 선물은?</option><option value="P08">가장 생각나는 친구 이름은?</option><option value="P09">인상 깊게 읽은 책 이름은?</option><option value="P10">내가 존경하는 인물은?</option><option value="P11">나의 노래방 애창곡은?</option><option value="P12">가장 감명깊게 본 영화는?</option><option value="P13">좋아하는 스포츠팀 이름은?</option>
-				</select>
-			</td>
-		</tr>
-		<!-- 비밀번호정답 -->
-		
-		<tr>
-			<th><label for="inPasswordCnsr">비밀번호정답</label> <span class="pilsu">*</span></th>
-			<td class="left">
-				<input id="inPasswordCnsr" name="inPasswordCnsr" class="txaIpUmt" title="비밀번호정답 입력" type="text" value="" size="50" maxlength="100"/>
-			</td>
-		</tr>
-		<!-- 성별구분코드 -->
-		
-		<tr>
-			<th><label for="inSexdstnCode">성별구분코드</label></th>
-			<td class="left">
-				<select id="inSexdstnCode" name="inSexdstnCode" title="성별구분코드 선택">
-					<option value="" selected="selected">--선택하세요--</option>
-					<option value="M">남자</option><option value="F">여자</option>
-				</select>
-			</td>
-		</tr>
-		<!-- 전화번호 -->
-		
-		<tr>
-			<th><label for="inAreaNo">전화번호</label> <span class="pilsu">*</span></th>
-			<td class="left">
-                    <input id="inAreaNo" name="inAreaNo" class="txaIpUmt" title="전화번호" style="width:40px;" type="text" value="" size="5" maxlength="4"/>
-                    - <input id="inMiddleTelno" name="inMiddleTelno" class="txaIpUmt" style="width:40px;" type="text" value="" size="5" maxlength="4"/>
-                    - <input id="inEndTelno" name="inEndTelno" class="txaIpUmt" style="width:40px;" type="text" value="" size="5" maxlength="4"/>
-			</td>
-		</tr>
-		<!-- 팩스번호 -->
-		
-		<tr>
-			<th><label for="inUserFxnum">팩스번호</label></th>
-			<td class="left">
-                    <input id="inUserFxnum" name="inUserFxnum" class="txaIpUmt" title="팩스번호 입력" type="text" value="" size="20" maxlength="15"/>
-			</td>
-		</tr>
-		<!-- 헨드폰번호 -->
-		
-		<tr>
-			<th><label for="inMoblphonNo">핸드폰번호</label> <span class="pilsu">*</span></th>
-			<td class="left">
-                    <input id="inMoblphonNo" name="inMoblphonNo" class="txaIpUmt" title="핸드폰번호 입력" type="text" value="" size="20" maxlength="15"/>
-			</td>
-		</tr>
-		<!-- 이메일주소 -->
-		
-		<tr>
-			<th><label for="inUserEmailAdres">이메일주소</label> <span class="pilsu">*</span></th>
-			<td class="left">
-                    <input id="inUserEmailAdres" name="inUserEmailAdres" class="txaIpUmt" title="이메일주소 입력" type="text" value="" size="30" maxlength="50"/>
-			</td>
-		</tr>
-		<!-- 우번번호 -->
-		
-		<tr>
-			<th><label for="inZip">우편번호</label> <span class="pilsu">*</span></th>
-			<td class="left">
-                    <input name="inZip" id="inZip" title="우편번호 입력" type="text" size="20" value="" maxlength="6" style="width:60px;" />
-                    <!-- form:hidden path="inZip" id="inZip" --> 
-                    <!-- <button class="btn_s2" onClick="fn_egov_ZipSearch(document.mberManageVO, document.mberManageVO.zip, document.mberManageVO.zip_view, document.mberManageVO.adres);return false;" title="삭제 버튼">우번번호검색</button>  -->
-			</td>
-		</tr>
-		<!-- 주소 -->
-		
-		<tr>
-			<th><label for="inAdres">주소</label> <span class="pilsu">*</span></th>
-			<td class="left">
-                    <input id="inAdres" name="inAdres" class="txaIpUmt" title="주소 입력" type="text" value="" size="70" maxlength="100"/>
-			</td>
-		</tr>
-		<!-- 상세주소 -->
-		
-		<tr>
-			<th><label for="inDetailAdres">상세주소</label></th>
-			<td class="left">
-                    <input id="inDetailAdres" name="inDetailAdres" class="txaIpUmt" title="상세주소 입력" type="text" value="" size="70" maxlength="100"/>
-			</td>
-		</tr>
-		<tr>
-			<th><label for="inUserSttus">회원가입상태</label> <span class="pilsu">*</span></th>
-			<td class="left">
-				<select id="inUserSttus" name="inUserSttus" title="회원가입상태">
-					<option value="" selected="selected">--선택하세요--</option>
-					<option value="A">신청</option>
-					<option value="P">승인</option>
-					<option value="D">삭제</option>
-				</select>
-			</td>
-	</tr>
-<!-- 		<input type="hidden" name="inUserSttus" value="DEFAULT" /> -->
 	</tbody>
 	</table>
 	<br>
 	<!-- 하단 버튼 -->
 	<button title="뒤로가기" 		id="btn_movBak" onclick="fn_movebak();" >뒤로가기</button> 
-	<button title="회원가입신청" 	id="btn_Arov" 		onclick="id_insert();">회원등록</button>
-	<button title="회원정보변경" 	id="btn_Modify" 	onclick="id_update();">회원정보변경</button>
-	<button title="회원정보삭제" 	id="btn_Del" 		onclick="id_delete();">회원삭제</button>
-<!-- 	<button title="회원승인" id="btn_approval" onclick="id_updateState();" >회원승인</button> -->
+	<button title="회원가입신청" 	id="btn_Arov" 		onclick="id_insert();">등록</button>
+	<button title="회원정보변경" 	id="btn_Modify" 	onclick="id_update();">저장</button>
+	<button title="회원정보삭제" 	id="btn_Del" 		onclick="id_delete();">삭제</button>
 	<br>
 
 <!-- 비밀번호정답 -->

@@ -57,7 +57,7 @@
 				tUrl = baseUrl+"/"+cPath+"?"+p.substring(0,(p.length-1));
 				alert(tUrl);
 			}else{
-				tUrl = baseUrl+cPath
+				tUrl = baseUrl+cPath;
 			}
 			var jsonData = JSON.stringify(cParam);
 			
@@ -90,7 +90,28 @@
 		function fn_testhd (){
 			$('#myModal').show();
 		}
+
 		
+		function fn_modifyPassword(){
+			$.ajax({
+				type: "PUT",
+				url: baseUrl + "/user/updateUsrPw?userId="+ $("#layUserId").val() + "&usrPw="+ $("#layTobePwd").val(),
+				contentType: 'application/json; charset=utf-8',
+	 			dataType:'text',
+				async: false,
+				timeout:(1000*30),
+				success:function(data){
+					console.log("response Data : " + data);
+					const obj = JSON.parse(data);
+					alert(rval.RESULTMSG);
+					close_pop("");
+				},
+				error:function(data){
+					alert(data);
+					return;
+				}
+			});
+		}
 	</script>
 	</head>
 	
@@ -112,33 +133,34 @@
 				</table>
 				
 				<table class="wTable" >
+					<colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
 					<tr>
 						<th><p style="text-align: center; line-height: 1;">사용자ID</p></th>
 						<td style="padding: 5px 5px;">
-							<input type="text" id="layUserId" name="layUserId" value="TESTUSER" disabled="true">
+							<input type="text" id="layUserId" name="layUserId" value="" disabled="true">
 						</td>
 					</tr>
 					<tr>
 						<th><p style="text-align: center; line-height: 1;">기존패스워드</p></th>
 						<td style="padding: 5px 5px;">
-							<input type="password" id="layAsisPwd" name="layAsisPwd" value="1234" >
+							<input type="password" id="layAsisPwd" name="layAsisPwd" value="" >
 						</td>
 					</tr>
 					<tr>
 						<th><p style="text-align: center; heline-height: 1;">변경할 패스워드</p></th>
 						<td style="padding: 5px 5px;">
-							<input type="password" id="layTobePwd" name="layTobePwd" value="4444" >
+							<input type="password" id="layTobePwd" name="layTobePwd" value="" >
 						</td>
 					</tr>
 					<tr>
 						<th><p style="text-align: center; line-height: 1;">패스워드 확인</p></th>
 						<td style="padding: 5px 5px;">
-							<input type="password" id="layTobePwd2" name="layTobePwd2" value="5555" >
+							<input type="password" id="layTobePwd2" name="layTobePwd2" value="" >
 						</td>
 					</tr>
 				</table>
 				<tr>
-					<div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 3px;padding-top: 3px;margin-top:3px;" onClick="modifyPassword();">
+					<div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 3px;padding-top: 3px;margin-top:3px;" onClick="fn_modifyPassword();">
 						<b><span class="pop_bt" style="font-size: 12pt;">확  인</span></b>
 					</div>
 				</tr>

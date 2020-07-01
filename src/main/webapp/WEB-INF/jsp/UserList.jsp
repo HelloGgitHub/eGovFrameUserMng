@@ -49,7 +49,8 @@ function fn_Select(){
     	 	ihtml = ihtml + '<input name="checkField" title="checkField" type="checkbox"/>';
     	 	ihtml = ihtml + '<input name="id" type="hidden" value="'+arr[i].userId+'"/>';
     	 	ihtml = ihtml + '</td>';
-    	 	ihtml = ihtml + '<td><button onclick="fn_SelectUser(\''+arr[i].userId+'\')">'+arr[i].userId+'</button></td>';
+//     	 	ihtml = ihtml + '<td><button onclick="fn_SelectUser(\''+arr[i].userId+'\')">'+arr[i].userId+'</button></td>';
+    	 	ihtml = ihtml + '<td><a onclick="fn_SelectUser(\''+arr[i].userId+'\')">'+arr[i].userId+'</a></td>';
     	 	ihtml = ihtml + '<td id="name">'+arr[i].userNm+'</td>';
     	 	ihtml = ihtml + '<td id="adres">'+arr[i].emailAdres+'</td>';
     	 	ihtml = ihtml + '<td id="telNo">'+arr[i].areaNo+')'+arr[i].middleTelno+'-'+arr[i].endTelno+'</td>';
@@ -159,15 +160,15 @@ function fn_ArovUser(){
                     <option value="P"  >승인</option><!-- 승인 -->
                 </select>
 			</li>
-			<li><!-- 조건 -->
-                <select name="searchCondition" id="searchCondition" title="조회조건 선택"><!--  -->
-                    <option value="0"  >ID</option><!-- ID  -->
-                    <option value="1" selected="selected" >이름</option><!-- Name -->
-                </select>
-			</li>
+<!-- 			<li>조건 -->
+<!--                 <select name="searchCondition" id="searchCondition" title="조회조건 선택"> -->
+<!--                     <option value="0"  >ID</option>ID  -->
+<!--                     <option value="1" selected="selected" >이름</option>Name -->
+<!--                 </select> -->
+<!-- 			</li> -->
 			<!-- 검색키워드 및 조회버튼 -->
 			<li>
-				<input class="s_input" name="searchKeyword" type="text"  size="35" title="검색어 입력" value=''  maxlength="255" >
+<!-- 				<input class="s_input" name="searchKeyword" type="text"  size="35" title="검색어 입력" value=''  maxlength="255" > -->
 				<input type="button" class="s_btn" onClick="fn_Select();" value="조회" title="조회 버튼" />
 				<input type="button" class="s_btn" onClick="fn_DeleteUser();" value="삭제" title="삭제 버튼" />
 				<input type="button" class="s_btn" onClick="fn_ArovUser();" value="등록" title="등록 버튼" />

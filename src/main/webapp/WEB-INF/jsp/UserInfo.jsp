@@ -99,6 +99,31 @@ function inputCellSet(type) {
 		$("#inDetailAdres").attr("readonly",true);
 		$("#inUserSttus").attr("readonly",true);
 		fn_DetailUser();
+	}else if(type == "cr"){  //readOnly
+		$("#btn_Arov").attr("disabled",true);
+		$("#btn_Arov").css("display","none");
+		$("#btn_Modify").attr("disabled",true);
+		$("#btn_Modify").css("display","none"); 
+		$("#btn_Del").attr("disabled",true);
+		$("#btn_Del").css("display","none");
+		$("#inUserId").attr("readonly",true);
+		$("#btnUserId").attr("disabled",true);
+		$("#inUserNm").attr("readonly",true);
+		$("#inPassword").attr("readonly",true);
+		$("#inPassword2").attr("readonly",true);
+		$("#inPasswordHint").attr("readonly",true);
+		$("#inPasswordCnsr").attr("readonly",true);
+		$("#inSexdstnCode").attr("readonly",true);
+		$("#inAreaNo").attr("readonly",true);
+		$("#inMiddleTelno").attr("readonly",true);
+		$("#inEndTelno").attr("readonly",true);
+		$("#inUserFxnum").attr("readonly",true);
+		$("#inMoblphonNo").attr("readonly",true);
+		$("#inUserEmailAdres").attr("readonly",true);
+		$("#inZip").attr("readonly",true);
+		$("#inAdres").attr("readonly",true);
+		$("#inDetailAdres").attr("readonly",true);
+		$("#inUserSttus").attr("readonly",true);
 	}else if(type == "u"){ //modify
 		$("#btn_Arov").attr("disabled",true);
 		$("#inUserId").attr("readonly",true);
@@ -144,9 +169,9 @@ function maxlength() {
 		alert("비밀번호정답은(는) 100자 이상 입력할수 없습니다.");$("#inPassword").focus();return;
 	} else if($.trim($("#inAreaNo").val()).length >= 4){
 		alert("집지역번호은(는) 4자 이상 입력할수 없습니다.");$("#inAreaNo").focus();return;
-	} else if($.trim($("#inMiddleTelno").val()).length >= 4){
+	} else if($.trim($("#inMiddleTelno").val()).length >= 5){
 		alert("집중간전화번호은(는) 4자 이상 입력할수 없습니다.");$("#inMiddleTelno").focus();return;
-	} else if($.trim($("#inEndTelno").val()).length >= 4){
+	} else if($.trim($("#inEndTelno").val()).length >= 5){
 		alert("집마지막전화번호은(는) 4자 이상 입력할수 없습니다.");$("#inEndTelno").focus();return;
 	} else if($.trim($("#inUserFxnum").val()).length >= 15){
 		alert("팩스번호은(는) 15자 이상 입력할수 없습니다.");$("#inMoblphonNo").focus();return;
@@ -530,7 +555,7 @@ function id_insert(){
 		success:function(returnData){
 			console.log(returnData);
 			alert(returnData.RESULTMSG);
-			inputCellSet("r");
+			inputCellSet("cr");
 			return;
 		},
 		error:function(){
@@ -579,7 +604,6 @@ function fn_UserCk(){
  */
 function fn_DetailUser(){
 	var pUserId="";
-	alert(userId);
 	if(userId == null && userId == ""){
 		pUserId = $("#inUserId").val();
 	}else{
@@ -651,10 +675,10 @@ function fn_movebak(){
 
 	<div class="wTableFrm">
 	<!-- 타이틀 -->
-	<h2 >일반회원관리 등록</h2>
+	<h2 >사용자관리</h2>
 	<!-- 등록폼 -->
 	<table class="wTable" summary="일반회원관리의 내역에 대한 목록을 출력합니다.">
-	<caption>사용자관리 등록</caption>
+	<caption>사용자관리</caption>
 	<colgroup>
 		<col style="width: 22%;"><col style="width: ;">
 	</colgroup>
@@ -804,7 +828,7 @@ function fn_movebak(){
 	<button title="회원정보변경" 	id="btn_Modify" 	onclick="id_update();">회원정보변경</button>
 	<button title="회원정보삭제" 	id="btn_Del" 		onclick="id_delete();">회원삭제</button>
 <!-- 	<button title="회원승인" id="btn_approval" onclick="id_updateState();" >회원승인</button> -->
-	<button id="btnEmplyrId" class="btn_s2" onClick="dd();" title="">ddd</button>
+<!-- 	<button id="btnEmplyrId" class="btn_s2" onClick="dd();" title="">ddd</button> -->
 	<br>
 
 <!-- 비밀번호정답 -->

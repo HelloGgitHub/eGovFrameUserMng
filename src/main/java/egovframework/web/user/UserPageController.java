@@ -11,34 +11,47 @@ public class UserPageController {
 	@RequestMapping("/") 
 	public String Main(Model model) {
 		model.addAttribute("msg", "jstl");
-		System.out.println("++++++++++++++++Main Page++++++++++++");
+		System.out.println("++++++++++++++++Main++++++++++++");
 		return "MainPage"; 
+	}
+	
+	@RequestMapping("/2") 
+	public String Main2(Model model) {
+		model.addAttribute("msg", "jstl");
+		System.out.println("++++++++++++++++Main++++++++++++");
+		return "MainPage23"; 
+	}	
+	@RequestMapping("/FrameDown") 
+	public String Main3(Model model) {
+		model.addAttribute("msg", "jstl");
+		System.out.println("++++++++++++++++FrameDown++++++++++++");
+		return "FrameDown"; 
 	}
 
 	@RequestMapping("/FrameLeft") 
 	public String FrameLeft(Model model) {
 		model.addAttribute("msg", "jstl");
-		System.out.println("++++++++++++++++LeftMenu Page++++++++++++");
+		System.out.println("++++++++++++++++LeftMenu++++++++++++");
 		return "FrameLeft"; 
 	}
 	@RequestMapping("/FrameTop") 
 	public String FrameTop(Model model) {
 		model.addAttribute("msg", "jstl");
-		System.out.println("++++++++++++++++LeftTop Page++++++++++++");
+		System.out.println("++++++++++++++++LeftTop++++++++++++");
 		return "FrameTop"; 
 	}
 	
 	@RequestMapping("/Login") 
 	public String Login(Model model) {
 		model.addAttribute("msg", "jstl");
-		System.out.println("++++++++++++++++UserInfo Page++++++++++++");
+		System.out.println("++++++++++++++++UserInfo++++++++++++");
 		return "Login"; 
 	}
 
 	@RequestMapping("/UserList") 
 	public String welcomeA(Model model) {
 		model.addAttribute("msg", "jstl");
-		System.out.println("++++++++++++++++++UserList Page+++++++++++");
+		System.out.println("++++++++++++++++UserList++++++++++++");
 		return "UserList"; 
 	} 
 	
@@ -50,13 +63,19 @@ public class UserPageController {
 		model.addAttribute("callType", 	callType);
 		model.addAttribute("userId", 		userId);
 		
-		System.out.println("++++++++++++++++UserInfo Page++++++++++++userId::"+ userId + "===callType :: "+callType);
+		System.out.println("++++++++++++++++UserInfo++++++++++++userId::"+ userId + "===callType :: "+callType);
 		return "UserInfo"; 
+	}
+
+	@RequestMapping("/GroupInfo") 
+	public String GroupInfo(Model model) {
+		
+		System.out.println("++++++++++++++++GroupInfo++++++++++++");
+		return "GroupInfo"; 
 	}
 
 	
 	
-
 	
 	
 	
