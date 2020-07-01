@@ -3,11 +3,34 @@
 <html>
 <head>
 <title>사용자관리</title>
+<%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
 
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link type="text/css" rel="stylesheet" href="/css/egovframework/com/com.css">
-<script src="/js/egovframework/com/cmm/jquery-1.4.2.min.js"></script>
-<script src="/js/egovframework/com/cmm/jquery.js"></script>
+<style>
+       /* The Modal (background) */
+       .modal {
+           display: none; /* Hidden by default */
+           position: fixed; /* Stay in place */
+           z-index: 1; /* Sit on top */
+           left: 0;
+           top: 0;
+           width: 100%; /* Full width */
+           height: 100%; /* Full height */
+           overflow: auto; /* Enable scroll if needed */
+           background-color: rgb(0,0,0); /* Fallback color */
+           background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+       }
+   
+       /* Modal Content/Box */
+       .modal-content {
+           background-color: #fefefe;
+           margin: 15% auto; /* 15% from the top and centered */
+           padding: 10px;
+           border: 1px solid #888;
+           width: 30%; /* Could be more or less, depending on screen size */                          
+       }
+
+</style>
+
 <script type="text/javaScript" language="javascript" defer="defer">
 
 	var iddbck = false;
@@ -16,11 +39,12 @@
     var userId 		= "<%=request.getParameter("userId") %>";
 
 
- /*********************************************************
-  * 초기화
-  ******************************************************** */
+/*********************************************************
+ * 초기화
+ *********************************************************/
 $(document).ready(function(){
 	inputCellSet(caltype);
+// 	makedialog();
 });
 
 
@@ -156,7 +180,42 @@ function maxlength() {
 // 		this.aa = new Array("inUserEmailAdres", "이메일주소은(는) 유효하지 않은 이메일 주소입니다.", new Function ("varName", "this.maxlength='50';  return this[varName];"));
 // 	} 
 
+function makedialog(){
+	$( "#dialog" ).dialog({ //이벤트 발생했을때 보여주려면 autoOpen : false로 지정해줘야 한다. 
+		autoOpen: false, 
+		width: 400,	//레이어팝업 넓이  
+		modal: true,	//뒷배경을 disable 시키고싶다면 true 
+		//버튼종류 
+		buttons: [ 
+			{ 
+				text: "Ok",	//버튼텍스트  
+				//클릭이벤트발생시 동작 
+				click: function() {
+					 $( this ).dialog( "close" ); 
+				 } 
+			}, 
+			{ 
+				text: "Cancel",	//버튼텍스트 
+				//클릭이벤트발생시 동작 
+				click: function() {
+					 $( this ).dialog( "close" ); 
+				} 
+			} 
+		] 
+	});
+}
 
+function close_pop(flag) {
+    $('#myModal').hide();
+};
+
+function dd (){
+	$('#myModal').show();
+// 	jQuery(document).ready(function() {
+//         $('#myModal').show();
+// 	});
+	$("#button").click(function(){ $( "#dialog" ).dialog( "open" ); });
+}
 /*********************************************************
  * 모달셋팅
  ******************************************************** */
@@ -350,9 +409,43 @@ function id_updateState(){
 
 
 
+/*********************************************************
+ * 패스워드 변경
+ ******************************************************** */
+function modifyPassword(){
+	
+	if($("#layTobePwd").val() != $("#layTobePwd2").val()){
+		alert("변경할 패스워드 입력 확인 내용이 다릅니다.");
+		return;
+	}
 
+	var userData = new Object();
+	userData.usrId				=	$("#userId").val();
+	userData.password		=	$("#password").val();
+	var jsonData = JSON.stringify(userData);
+	console.log(jsonData);
+	$.ajax({
+		type:"POST",
+		url:"http://localhost:9085/login/idpw",
+		contentType: 'application/json; charset=utf-8',
+			dataType:'json',
+		data:jsonData,
+		timeout:(1000*30),
+		success:function(returnData){
+			console.log(returnData);
+			console.log(returnData.RESULTMSG);
 
-
+			if(returnData.RESULTCD != 0){
+				alert("기존 패스워드가 일치하지 않습니다.");
+				return;
+			}
+		},
+		error:function(data){
+			alert(data);
+			return;
+		}
+	});
+}
 
 
 
@@ -407,20 +500,20 @@ function id_insert(){
 	}
 	
 	var userData = new Object();
-	userData.usrId					=	$("#inUserId").val();//
+	userData.usrId					=	$("#inUserId").val();
 	userData.usrNm				=	$("#inUserNm").val();
-	userData.password			=	$("#inPassword").val(); //
-	userData.passwordHint		=	$("#inPasswordHint").val();  //
-	userData.passwordCnsr		=	$("#inPasswordCnsr").val(); //
+	userData.password			=	$("#inPassword").val();
+	userData.passwordHint		=	$("#inPasswordHint").val();
+	userData.passwordCnsr		=	$("#inPasswordCnsr").val();
 	userData.sexdstnCode		=	$("#inSexdstnCode").val();
-	userData.areaNo 				=	$("#inAreaNo").val();  //
+	userData.areaNo 				=	$("#inAreaNo").val();
 	userData.middleTelno			= 	$("#inMiddleTelno").val();
 	userData.endTelno			=	$("#inEndTelno").val();
 	userData.userFxnum			=	$("#inUserFxnum").val();
 	userData.moblphonNo		=	$("#inMoblphonNo").val();
 	userData.userEmailAdres	=	$("#inUserEmailAdres").val();
-	userData.zip					=	$("#inZip").val();  //
-	userData.adres				=	$("#inAdres").val(); //
+	userData.zip					=	$("#inZip").val();
+	userData.adres				=	$("#inAdres").val();
 	userData.detailAdres			=	$("#inDetailAdres").val();
 	userData.usrSttus			=	$("#inUserSttus").val();
 
@@ -488,12 +581,10 @@ function fn_DetailUser(){
 	var pUserId="";
 	alert(userId);
 	if(userId == null && userId == ""){
-		alert("여기타면 안되");
 		pUserId = $("#inUserId").val();
 	}else{
 		pUserId = userId;
 	}
-	
 	
 	console.log("detail param:===" + pUserId );
     $.ajax({
@@ -506,7 +597,7 @@ function fn_DetailUser(){
         success : function(data){    //success: whenSuccess,
         	console.log("detail>< Data::"+data);
 			var arrlist = new Array();
-        	const obj = JSON.parse(data)
+        	const obj = JSON.parse(data);
         	arrlist = obj.list;
         	const obj2 = arrlist[0]; 
         	
@@ -635,7 +726,7 @@ function fn_movebak(){
 		<!-- 전화번호 -->
 		
 		<tr>
-			<th><label for="inAreaNo">전화번호</label> <span class="pilsu">*</span></th>
+			<th><label for="inAreaNo">전화번호</label></th>
 			<td class="left">
                     <input id="inAreaNo" name="inAreaNo" class="txaIpUmt" title="전화번호" style="width:40px;" type="text" value="" size="5" maxlength="4"/>
                     - <input id="inMiddleTelno" name="inMiddleTelno" class="txaIpUmt" style="width:40px;" type="text" value="" size="5" maxlength="4"/>
@@ -653,7 +744,7 @@ function fn_movebak(){
 		<!-- 헨드폰번호 -->
 		
 		<tr>
-			<th><label for="inMoblphonNo">핸드폰번호</label> <span class="pilsu">*</span></th>
+			<th><label for="inMoblphonNo">핸드폰번호</label></th>
 			<td class="left">
                     <input id="inMoblphonNo" name="inMoblphonNo" class="txaIpUmt" title="핸드폰번호 입력" type="text" value="" size="20" maxlength="15"/>
 			</td>
@@ -661,7 +752,7 @@ function fn_movebak(){
 		<!-- 이메일주소 -->
 		
 		<tr>
-			<th><label for="inUserEmailAdres">이메일주소</label> <span class="pilsu">*</span></th>
+			<th><label for="inUserEmailAdres">이메일주소</label></th>
 			<td class="left">
                     <input id="inUserEmailAdres" name="inUserEmailAdres" class="txaIpUmt" title="이메일주소 입력" type="text" value="" size="30" maxlength="50"/>
 			</td>
@@ -669,7 +760,7 @@ function fn_movebak(){
 		<!-- 우번번호 -->
 		
 		<tr>
-			<th><label for="inZip">우편번호</label> <span class="pilsu">*</span></th>
+			<th><label for="inZip">우편번호</label></th>
 			<td class="left">
                     <input name="inZip" id="inZip" title="우편번호 입력" type="text" size="20" value="" maxlength="6" style="width:60px;" />
                     <!-- form:hidden path="inZip" id="inZip" --> 
@@ -713,6 +804,7 @@ function fn_movebak(){
 	<button title="회원정보변경" 	id="btn_Modify" 	onclick="id_update();">회원정보변경</button>
 	<button title="회원정보삭제" 	id="btn_Del" 		onclick="id_delete();">회원삭제</button>
 <!-- 	<button title="회원승인" id="btn_approval" onclick="id_updateState();" >회원승인</button> -->
+	<button id="btnEmplyrId" class="btn_s2" onClick="dd();" title="">ddd</button>
 	<br>
 
 <!-- 비밀번호정답 -->
@@ -721,6 +813,59 @@ function fn_movebak(){
 <!-- </form> -->
 
 <!-- Egov Modal include  -->
+<!-- <div id="dialog" title="레이어팝업 제목"> 해당부분은 레이어 팝업의 내용이다. br태그없이 알아서 자동 줄바꿈 처리가 되있음.... </div> -->
 
+<div id="myModal" class="modal">
+	<div class="modal-content">
+		<table>
+			<tr>
+				<td style="text-align: center;">
+					<b>
+						&nbsp;&nbsp;<span style="font-size: 13pt;">&nbsp;&nbsp;비밀번호변경</span>
+					</b>
+				</td>
+				<td style="align-items: center;text-align-last: end;">
+					<img src="/images/egovframework/com/cmm/btn/btn_del.png" border='0' align='close' onClick="close_pop();" alt='닫기' style="cursor:pointer;"  />
+				</td>
+			</tr>
+		</table>
+		
+		<table class="wTable" >
+			<tr>
+				<th><p style="text-align: center; line-height: 1;">사용자ID</p></th>
+				<td style="padding: 5px 5px;">
+					<input type="text" id="layUserId" name="layUserId" value="TESTUSER" disabled="true">
+				</td>
+			</tr>
+			<tr>
+				<th><p style="text-align: center; line-height: 1;">기존패스워드</p></th>
+				<td style="padding: 5px 5px;">
+					<input type="password" id="layAsisPwd" name="layAsisPwd" value="1234" >
+				</td>
+			</tr>
+			<tr>
+				<th><p style="text-align: center; heline-height: 1;">변경할 패스워드</p></th>
+				<td style="padding: 5px 5px;">
+					<input type="password" id="layTobePwd" name="layTobePwd" value="4444" >
+				</td>
+			</tr>
+			<tr>
+				<th><p style="text-align: center; line-height: 1;">패스워드 확인</p></th>
+				<td style="padding: 5px 5px;">
+					<input type="password" id="layTobePwd2" name="layTobePwd2" value="5555" >
+				</td>
+			</tr>
+		</table>
+		<tr>
+			<div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 3px;padding-top: 3px;margin-top:3px;" onClick="modifyPassword();">
+				<b><span class="pop_bt" style="font-size: 12pt;">확  인</span></b>
+			</div>
+		</tr>
+	</div>
+</div>
+
+
+
+<div name="egovModal" id="egovModal" />
 </body>
 </html>

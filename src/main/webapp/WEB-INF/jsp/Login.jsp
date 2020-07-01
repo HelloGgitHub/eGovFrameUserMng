@@ -1,15 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>일반회원관리 등록</title>
-	
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<link type="text/css" rel="stylesheet" href="/css/egovframework/com/com.css">
-	<script src="/js/egovframework/com/cmm/jquery.js"></script>
-	<script src="/js/egovframework/com/cmm/jquery-1.4.2.min.js"></script>
-	
+	<title>로그인</title>
+	<%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
 	<script type="text/javaScript" language="javascript" defer="defer">
 		/*********************************************************
 		 * 초기화
@@ -22,63 +16,59 @@
 		 * 로그인
 		 ******************************************************** */
 		function fn_login(){
+			var rtnData = new Object();
 			var userData = new Object();
 			userData.usrId				=	$("#userId").val();
 			userData.password		=	$("#password").val();
-			var jsonData = JSON.stringify(userData);
-			console.log(jsonData);
-			$.ajax({
-				type:"POST",
-				url:"http://localhost:9085/login/idpw",
-				contentType: 'application/json; charset=utf-8',
-	 			dataType:'json',
-				data:jsonData,
-				timeout:(1000*30),
-				success:function(returnData){
-					console.log(returnData);
-					console.log(returnData.RESULTMSG);
-	
-					if(returnData.RESULTCD == 0){
-						fn_movelogin();
-					}else{
-						alert(returnData.RESULTMSG);
-						return;
-					}
-				},
-				error:function(data){
-					alert(data);
-					return;
-				}
-			});
+
+			//API호출
+			rtnData = fn_calApi("POST", "/login/idpw", userData, false);
+			
+			if(rtnData.RESULTCD == 0){
+				fn_movelogin();
+			}else{
+				alert(rtnData.RESULTMSG);
+				return;
+			}
 		}
 	
 		function fn_movelogin(){
-			location.href="http://localhost:9085/UserList";
+			location.href=baseUrl+"/UserList";
 		}
 
 		function fn_arovRequest(){
-			location.href="http://localhost:9085/UserInfo?callType=c&userId=";
+			location.href=baseUrl+"/UserInfo?callType=c&userId=";
 		}
 
+
+
+
+
+
+
+
+
+		
 
 		function fn_test(){
+			var userData = new Object();
+			userData.usrId				=	$("#userId").val();
+			userData.password		=	$("#password").val();
 
-// 			opener.document.getElementById("usr").value="value1"; //dom 객체로 제어
-// 			console.log($("#top",opener.document).val("usr")); // jQuery 방식 1
-			console.log($("input[name=usr]", parent.document.top).val()); // 방식 2
-// 			console.log($(opener.document).find("#usr").val("value3")); //방식 3
-				 
-// 			- opener.location.href="javascript:fun();"; //일반적인 방법
-// 			$(opener.location).attr("href","javascript:fun();"); //jQuery 이용
-
-			alert($('#top').contents().find('#usr').html());
-// 			parent.top.document.getElementById("usr") = "dddddd";
-// 			parent.parent.top.document.getElementById("usr") = "dddddd";
-// 			parent.parent.parent.top.document.getElementById("usr") = "dddddd";
-// 			parent.parent.parent.parent.top.document.getElementById("usr") = "dddddd";
-// 			parent.parent.parent.parent.parent.top.document.getElementById("usr") = "dddddd";
-// 			parent.parent.parent.parent.parent.parent.top.document.getElementById("usr") = "dddddd";
+			var p="";
+			var tUrl="";
+			$.each(userData, function(key, value){
+			    p = p + key + "=" + value+"&";
+			});
+			tUrl = "?"+p.substring(0,(p.length-1))
+			alert(tUrl);
+			
+			for (const key in userData) {
+				 console.log(key);
+				 console.log(userData.key);
+			}
 		}
+
 	</script>
 	</head>
 <body>

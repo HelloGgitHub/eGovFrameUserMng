@@ -56,7 +56,7 @@ public class UserLoginController {
 	 */
 	@ApiOperation(value = "사용자 로그인", notes = "사용자 ID/PW를 입력받아 사용자 정보를 반환합니다.")
 	@PostMapping(path = "/idpw")
-	public String UserLogin(@RequestBody UserVo usr) throws UnsupportedEncodingException {
+	public String UserLogin(@RequestBody UserVo usr) throws Exception {
 		
 		String rtn = "";
 		String pUserId 			= URLDecoder.decode(usr.getUsrId()		,"UTF-8");
@@ -64,29 +64,30 @@ public class UserLoginController {
 		
 		String pw = SecuritySha.SHA256(pPassWord);		//SHA-256 암호화
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		sqlInpt.put("USRID", 		pUserId);
 		sqlInpt.put("USRPW", 	pw);
-
-		int pwck = 0;
-		pwck = userLoginService.selectUserPwCk(sqlInpt);
 		
-		Map<Object, Object> lst = new HashMap<Object, Object>();
-		if(pwck > 0) {
-			lst = userLoginService.selectUserDetail(sqlInpt);
-			lst.put("RESULTCD", "0");
-			lst.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else {
-			lst.put("RESULTCD", "1");
-			lst.put("RESULTMSG", "일치하는 사용자 정보가 없습니다.");
+		try {
+			int pwck = 0;
+			pwck = userLoginService.selectUserPwCk(sqlInpt);
+			Map<Object, Object> sqlRtn = new HashMap<Object, Object>();
+			if(pwck > 0) {
+				sqlRtn = userLoginService.selectUserDetail(sqlInpt);
+				rtnMap.put("list", sqlRtn);
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+			}else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "일치하는 사용자 정보가 없습니다.");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		ObjectMapper om = new ObjectMapper();
-		try {
-			rtn = om.writeValueAsString(lst);
-		} catch (JsonProcessingException e) {
-			rtn = "json Mapper Error.";
-			e.printStackTrace();
-		}
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 		
 		return rtn;
 	}
