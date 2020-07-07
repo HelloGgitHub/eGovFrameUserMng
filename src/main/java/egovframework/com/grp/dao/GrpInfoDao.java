@@ -34,6 +34,7 @@ public interface GrpInfoDao {
 	int deleteGrpInfo(Map<Object, Object> param);
 
 	List<HashMap<Object, Object>> selectGrpUsrList(Map<Object, Object> param);
+	List<HashMap<Object, Object>> selectUsrGrpList(Map<Object, Object> param);
 	int insertGrpUsr(Map<Object, Object> param);
 	int selectGrpUsrCk(Map<Object, Object> param);
 	int selectUsrCk(Map<Object, Object> param);

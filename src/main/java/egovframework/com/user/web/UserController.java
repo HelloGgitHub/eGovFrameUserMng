@@ -67,12 +67,11 @@ public class UserController {
 		
 		String rtn = "";
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		Map<Object, Object> param = new HashMap<Object, Object>();
 		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 		ObjectMapper om = new ObjectMapper();
 		
 		try {
-			lst = userService.selectData(param);
+			lst = userService.selectData();
 			rtnMap.put("list", lst);
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");

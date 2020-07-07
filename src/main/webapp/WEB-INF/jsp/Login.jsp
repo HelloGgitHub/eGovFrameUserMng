@@ -1,19 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>·Î±×ÀÎ</title>
+	<title>ë¡œê·¸ì¸</title>
 	<%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
 	<script type="text/javaScript" language="javascript" defer="defer">
 		/*********************************************************
-		 * ÃÊ±âÈ­
+		 * ì´ˆê¸°í™”
 		 ******************************************************** */
 		function fn_egov_init(){
 			
 		}
 		
 		/*********************************************************
-		 * ·Î±×ÀÎ
+		 * ë¡œê·¸ì¸
 		 ******************************************************** */
 		function fn_login(){
 			var rtnData = new Object();
@@ -22,7 +22,7 @@
 			userData.usrId				=	$("#userId").val();
 			userData.password		=	$("#password").val();
 
-			//APIÈ£Ãâ
+			//APIí˜¸ì¶œ
 			rtnData = fn_calApi("POST", "/login/idpw", userData, false);
 			
 			if(rtnData.RESULTCD == 0){
@@ -30,7 +30,7 @@
 // 				document.getElementById(tgtEl).style.visibility = "visible";
 				parent.parent.topFrame.document.all.infoImg.style.display = "block";
 				parent.parent.topFrame.document.all.lgnUserId.value= rtnData.list.userId;
-				parent.parent.topFrame.document.all.lgnMnt.value= rtnData.list.userNm+" ´Ô È¯¿µÇÕ´Ï´Ù.";
+				parent.parent.topFrame.document.all.lgnMnt.value= rtnData.list.userNm+" ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.";
 				fn_movelogin();
 			}else{
 				alert(rtnData.RESULTMSG);
@@ -86,8 +86,8 @@
 
 	<from name="login" id="login">
 		<div class="board">
-			<h1>·Î±×ÀÎ</h1>
-			<table class="wTable" summary="·Î±×ÀÎ">
+			<h1>ë¡œê·¸ì¸</h1>
+			<table class="wTable" summary="ë¡œê·¸ì¸">
 			<colgroup>
 				<col style="width: 22%; height:20px">
 				<col style="width: 78%; height:20px">
@@ -96,14 +96,14 @@
 				<tr style="height:30px">
 					<th><label for="userId">ID</label></th>
 					<td class="left">
-						<input id="userId" name="userId" title="»ç¿ëÀÚID" type="text" value="TESTUSER" size="50" maxlength="20" style="height:20px;width:100%;"/>
+						<input id="userId" name="userId" title="ì‚¬ìš©ìID" type="text" value="TESTUSER" size="50" maxlength="20" style="height:20px;width:100%;"/>
 					</td>
 				</tr>
-				<!-- ºñ¹Ğ¹øÈ£ -->
+				<!-- ë¹„ë°€ë²ˆí˜¸ -->
 				<tr style="height:30px">
 					<th><label for="password">PASSWORD</label></th>
 					<td class="left">
-					   <input id="password" name="password" title="ºñ¹Ğ¹øÈ£ ÀÔ·Â" type="password" value="string" size="50" maxlength="20" style="height:20px;width:100%;"/>
+					   <input id="password" name="password" title="ë¹„ë°€ë²ˆí˜¸ ì…ë ¥" type="password" value="string" size="50" maxlength="20" style="height:20px;width:100%;"/>
 					</td>
 				</tr>
 			</tbody>
@@ -113,8 +113,8 @@
 				<tr>
 					<td style="text-align: -webkit-center;">
 			<!-- 			<button title="test" onclick="fn_test()">test</button>  -->
-						<button title="·Î±×ÀÎ" onclick="fn_login()">·Î±×ÀÎ</button>
-						<button title="È¸¿ø°¡ÀÔ" onclick="fn_arovRequest()">È¸¿ø°¡ÀÔ</button>
+						<button title="ë¡œê·¸ì¸" onclick="fn_login()">ë¡œê·¸ì¸</button>
+						<button title="íšŒì›ê°€ì…" onclick="fn_arovRequest()">íšŒì›ê°€ì…</button>
 					
 					</td>
 				</tr>

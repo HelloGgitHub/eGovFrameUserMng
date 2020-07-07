@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import egovframework.com.cmm.ComUtil;
 import egovframework.com.grp.dao.GrpInfoService;
 import egovframework.com.grp.dao.GrpVo;
 import io.swagger.annotations.Api;
@@ -60,20 +61,26 @@ public class GrpController {
 	 */
 	@ApiOperation(value = "그룹목록 조회")
 	@GetMapping(path = "/list")
-	public String UserList() {
+	public String UserList() throws Exception {
 		
 		String rtn = "";
-		ObjectMapper om = new ObjectMapper();
-
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-		lst = grpService.selectGrpList();
+		ObjectMapper om = new ObjectMapper();
 		
 		try {
-			rtn = om.writeValueAsString(lst);
-		} catch (JsonProcessingException e) {
-			rtn = "json Mapper Error.";
+			lst = grpService.selectGrpList();
+			rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+		}catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
 			e.printStackTrace();
 		}
+		
+		rtn = om.writeValueAsString(rtnMap);
 		
 		return rtn;
 	}
@@ -92,21 +99,28 @@ public class GrpController {
     })
 	@GetMapping(path = "/detailInfo/{groupId}")
 	public String GrpDetailInfo(@PathVariable("groupId") String grpId) throws Exception {
+		
 		String rtn = "";
 		ObjectMapper om = new ObjectMapper();
 		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-		
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("GRPID", URLDecoder.decode(grpId		,"UTF-8"));
 		
-		lst = grpService.selectGrpDetail(sqlInpt);
-		
 		try {
-			rtn = om.writeValueAsString(lst);
-		} catch (JsonProcessingException e) {
-			rtn = "json Mapper Error.";
+			lst = grpService.selectGrpDetail(sqlInpt);
+			rtnMap.put("list", lst);
+			rtnMap.put("RESULTCD", "0");
+			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+		}catch (Exception e) {
+			e.getStackTrace();
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
 			e.printStackTrace();
 		}
+		
+		rtn = om.writeValueAsString(rtnMap);
+		System.out.println(rtn);
 		
 		return rtn;
 	}
@@ -131,6 +145,7 @@ public class GrpController {
 		sqlInpt.put("GROUP_ID"	, param.getGrpId());
 		sqlInpt.put("GROUP_NM"	, param.getGrpNm());
 		sqlInpt.put("GROUP_DC"	, param.getGrpDc());
+		sqlInpt.put("DT", ComUtil.getTime("yyyyMMddHHmmss"));
 		
 		Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 		int inputCnt = grpService.insertGrpInfo(sqlInpt);
@@ -166,6 +181,7 @@ public class GrpController {
 		sqlInpt.put("GROUP_ID"	, param.getGrpId());
 		sqlInpt.put("GROUP_NM"	, param.getGrpNm());
 		sqlInpt.put("GROUP_DC"	, param.getGrpDc());
+		sqlInpt.put("DT", ComUtil.getTime("yyyyMMddHHmmss"));
 		
 		int inputCnt = grpService.updateGrpInfo(sqlInpt);
 		if(inputCnt > 0) {

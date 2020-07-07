@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>ÀÏ¹İÈ¸¿ø°ü¸® ¸ñ·Ï</title>
+<title>ì¼ë°˜íšŒì›ê´€ë¦¬ ëª©ë¡</title>
 <%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
 
 
@@ -18,24 +18,24 @@ $(document).ready(function(){
 function fn_Select(){
 	
 	$("#grd").empty();
-	//APIÈ£Ãâ
+	//APIí˜¸ì¶œ
 	var rtnData = new Object();
 	rtnData = fn_calApi("GET", "/user/list", null, false);
 	var arr = rtnData.list;
 	
  	var ihtml = '';
- 	ihtml = ihtml + '<table class="board_list" summary="ÀÏ¹İÈ¸¿ø°ü¸®ÀÇ ³»¿ª¿¡ ´ëÇÑ ¸ñ·ÏÀ» Ãâ·ÂÇÕ´Ï´Ù.">';
+ 	ihtml = ihtml + '<table class="board_list" summary="ì¼ë°˜íšŒì›ê´€ë¦¬ì˜ ë‚´ì—­ì— ëŒ€í•œ ëª©ë¡ì„ ì¶œë ¥í•©ë‹ˆë‹¤.">';
  	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 20%;"><col style="width: 13%;"><col style="width: 10%;"><col style="width: ;"></colgroup>';
  	ihtml = ihtml + '<thead>';
  	ihtml = ihtml + '<tr>';
- 	ihtml = ihtml + '<th>¹øÈ£</th>';
- 	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="ÀüÃ¼¼±ÅÃÃ¼Å©¹Ú½º"></th>';
- 	ihtml = ihtml + '<th class="board_th_link">¾ÆÀÌµğ</th>';
- 	ihtml = ihtml + '<th>»ç¿ëÀÚÀÌ¸§</th>';
- 	ihtml = ihtml + '<th>»ç¿ëÀÚÀÌ¸ŞÀÏ</th>';
- 	ihtml = ihtml + '<th>ÀüÈ­¹øÈ£</th>';
- 	ihtml = ihtml + '<th>µî·ÏÀÏ</th>';
- 	ihtml = ihtml + '<th>°¡ÀÔ»óÅÂ</th>';
+ 	ihtml = ihtml + '<th>ë²ˆí˜¸</th>';
+ 	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="ì „ì²´ì„ íƒì²´í¬ë°•ìŠ¤"></th>';
+ 	ihtml = ihtml + '<th class="board_th_link">ì•„ì´ë””</th>';
+ 	ihtml = ihtml + '<th>ì‚¬ìš©ìì´ë¦„</th>';
+ 	ihtml = ihtml + '<th>ì‚¬ìš©ìì´ë©”ì¼</th>';
+ 	ihtml = ihtml + '<th>ì „í™”ë²ˆí˜¸</th>';
+ 	ihtml = ihtml + '<th>ë“±ë¡ì¼</th>';
+ 	ihtml = ihtml + '<th>ê°€ì…ìƒíƒœ</th>';
  	ihtml = ihtml + '</tr>';
  	ihtml = ihtml + '</thead>';
  	ihtml = ihtml + '<tbody class="ov">';
@@ -58,11 +58,11 @@ function fn_Select(){
 
     	 	var sttus = "-";
     	 	if(arr[i].sttus == "A"){
-    	 		sttus = "°¡ÀÔ½ÅÃ»";
+    	 		sttus = "ê°€ì…ì‹ ì²­";
         	}else if(arr[i].sttus == "D"){
-        		sttus = "»èÁ¦";
+        		sttus = "ì‚­ì œ";
         	}else if(arr[i].sttus == "P"){
-        		sttus = "½ÂÀÎ";
+        		sttus = "ìŠ¹ì¸";
         	}
     	 	ihtml = ihtml + '<td>'+sttus+'</td>';
     	 	ihtml = ihtml + '</tr>';
@@ -94,7 +94,7 @@ function fn_DeleteUser(){
 		var paramData = new Object();
 		paramData.userId = userId;
 
-		//APIÈ£Ãâ
+		//APIí˜¸ì¶œ
 		rtnData = fn_calApi("DELETE", "/user/deleteUsr", paramData, false);
 // 		alert(rtnData.RESULTCD);
 	}
@@ -108,11 +108,11 @@ function fn_DeleteUser(){
 // 		var userId = ckId[i];
 // 		console.log(ckId.length + "===" +ckId[i] );
 // 	    $.ajax({
-// 	        type : "DELETE", //Àü¼Û¹æ½ÄÀ» ÁöÁ¤ÇÑ´Ù (POST,GET)
-// 	        url : "http://localhost:9085/user/deleteUsr?userId="+userId,//È£Ãâ URLÀ» ¼³Á¤ÇÑ´Ù. GET¹æ½ÄÀÏ°æ¿ì µÚ¿¡ ÆÄ¶óÆ¼ÅÍ¸¦ ºÙ¿©¼­ »ç¿ëÇØµµµÈ´Ù.
-// 	        dataType : "text",//È£ÃâÇÑ ÆäÀÌÁöÀÇ Çü½ÄÀÌ´Ù. xml,json,html,textµîÀÇ ¿©·¯ ¹æ½ÄÀ» »ç¿ëÇÒ ¼ö ÀÖ´Ù.
+// 	        type : "DELETE", //ì „ì†¡ë°©ì‹ì„ ì§€ì •í•œë‹¤ (POST,GET)
+// 	        url : "http://localhost:9085/user/deleteUsr?userId="+userId,//í˜¸ì¶œ URLì„ ì„¤ì •í•œë‹¤. GETë°©ì‹ì¼ê²½ìš° ë’¤ì— íŒŒë¼í‹°í„°ë¥¼ ë¶™ì—¬ì„œ ì‚¬ìš©í•´ë„ëœë‹¤.
+// 	        dataType : "text",//í˜¸ì¶œí•œ í˜ì´ì§€ì˜ í˜•ì‹ì´ë‹¤. xml,json,html,textë“±ì˜ ì—¬ëŸ¬ ë°©ì‹ì„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.
 // 	        error : function(){    //error: whenError
-// 	            alert("Åë½Å½ÇÆĞ!!!!");
+// 	            alert("í†µì‹ ì‹¤íŒ¨!!!!");
 // 	        },
 // 	        success : function(data){    //success: whenSuccess,
 // 	        	console.log("delete Data::"+data);
@@ -127,9 +127,11 @@ function checkFieldck(){
 	var checkbox = $("input[name=checkField]:checked");
 	
 	checkbox.each(function(i) {
+		
 		var tr = checkbox.parent().parent().eq(i);
 		var td = tr.children();
 		var id = td.eq(2).text();
+		console.log(">>>>" + id);
 		rowData.push(id);
 	});
 	console.log("rowData : " + rowData);
@@ -146,33 +148,33 @@ function fn_ArovUser(){
 
 <body>
 <!-- javascript warning tag  -->
-<noscript class="noScriptTitle">ÀÚ¹Ù½ºÅ©¸³Æ®¸¦ Áö¿øÇÏÁö ¾Ê´Â ºê¶ó¿ìÀú¿¡¼­´Â ÀÏºÎ ±â´ÉÀ» »ç¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.</noscript>
+<noscript class="noScriptTitle">ìë°”ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì§€ì›í•˜ì§€ ì•ŠëŠ” ë¸Œë¼ìš°ì €ì—ì„œëŠ” ì¼ë¶€ ê¸°ëŠ¥ì„ ì‚¬ìš©í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</noscript>
 <div class="board">
-	<h1>È¸¿ø°ü¸® ¸ñ·Ï</h1>
-	<!-- °Ë»ö¿µ¿ª -->
-	<div class="search_box" title="ÀÌ ·¹ÀÌ¾Æ¿ôÀº ÇÏ´Ü Á¤º¸¸¦ ´ëÇÑ °Ë»ö Á¤º¸·Î ±¸¼ºµÇ¾î ÀÖ½À´Ï´Ù.">
+	<h1>íšŒì›ê´€ë¦¬ ëª©ë¡</h1>
+	<!-- ê²€ìƒ‰ì˜ì—­ -->
+	<div class="search_box" title="ì´ ë ˆì´ì•„ì›ƒì€ í•˜ë‹¨ ì •ë³´ë¥¼ ëŒ€í•œ ê²€ìƒ‰ ì •ë³´ë¡œ êµ¬ì„±ë˜ì–´ ìˆìŠµë‹ˆë‹¤.">
 		<ul>
-			<li><!-- »óÅÂ-->
-                <select name="sbscrbSttus" id="sbscrbSttus" title="°¡ÀÔ»óÅÂÁ¶°Ç ¼±ÅÃ">
-                    <option value="0" selected="selected" >»óÅÂ(ÀüÃ¼)</option><!-- »óÅÂ(ÀüÃ¼) -->
-                    <option value="A"  >°¡ÀÔ½ÅÃ»</option><!-- °¡ÀÔ½ÅÃ» -->
-                    <option value="D"  >»èÁ¦</option><!-- »èÁ¦ -->
-                    <option value="P"  >½ÂÀÎ</option><!-- ½ÂÀÎ -->
+			<li><!-- ìƒíƒœ-->
+                <select name="sbscrbSttus" id="sbscrbSttus" title="ê°€ì…ìƒíƒœì¡°ê±´ ì„ íƒ">
+                    <option value="0" selected="selected" >ìƒíƒœ(ì „ì²´)</option><!-- ìƒíƒœ(ì „ì²´) -->
+                    <option value="A"  >ê°€ì…ì‹ ì²­</option><!-- ê°€ì…ì‹ ì²­ -->
+                    <option value="D"  >ì‚­ì œ</option><!-- ì‚­ì œ -->
+                    <option value="P"  >ìŠ¹ì¸</option><!-- ìŠ¹ì¸ -->
                 </select>
 			</li>
-<!-- 			<li>Á¶°Ç -->
-<!--                 <select name="searchCondition" id="searchCondition" title="Á¶È¸Á¶°Ç ¼±ÅÃ"> -->
+<!-- 			<li>ì¡°ê±´ -->
+<!--                 <select name="searchCondition" id="searchCondition" title="ì¡°íšŒì¡°ê±´ ì„ íƒ"> -->
 <!--                     <option value="0"  >ID</option>ID  -->
-<!--                     <option value="1" selected="selected" >ÀÌ¸§</option>Name -->
+<!--                     <option value="1" selected="selected" >ì´ë¦„</option>Name -->
 <!--                 </select> -->
 <!-- 			</li> -->
-			<!-- °Ë»öÅ°¿öµå ¹× Á¶È¸¹öÆ° -->
+			<!-- ê²€ìƒ‰í‚¤ì›Œë“œ ë° ì¡°íšŒë²„íŠ¼ -->
 			<li>
-<!-- 				<input class="s_input" name="searchKeyword" type="text"  size="35" title="°Ë»ö¾î ÀÔ·Â" value=''  maxlength="255" > -->
-				<input type="button" class="s_btn" onClick="fn_Select();" value="Á¶È¸" title="Á¶È¸ ¹öÆ°" />
-				<input type="button" class="s_btn" onClick="fn_DeleteUser();" value="»èÁ¦" title="»èÁ¦ ¹öÆ°" />
-				<input type="button" class="s_btn" onClick="fn_ArovUser();" value="µî·Ï" title="µî·Ï ¹öÆ°" />
-<!-- 				<span class="btn_b"><a href="/egovframework-all-in-one/uss/umt/EgovMberInsertView.do" onClick="fnAddUserView(); return false;"  title="µî·Ï ¹öÆ°">µî·Ï</a></span> -->
+<!-- 				<input class="s_input" name="searchKeyword" type="text"  size="35" title="ê²€ìƒ‰ì–´ ì…ë ¥" value=''  maxlength="255" > -->
+				<input type="button" class="s_btn" onClick="fn_Select();" value="ì¡°íšŒ" title="ì¡°íšŒ ë²„íŠ¼" />
+				<input type="button" class="s_btn" onClick="fn_DeleteUser();" value="ì‚­ì œ" title="ì‚­ì œ ë²„íŠ¼" />
+				<input type="button" class="s_btn" onClick="fn_ArovUser();" value="ë“±ë¡" title="ë“±ë¡ ë²„íŠ¼" />
+<!-- 				<span class="btn_b"><a href="/egovframework-all-in-one/uss/umt/EgovMberInsertView.do" onClick="fnAddUserView(); return false;"  title="ë“±ë¡ ë²„íŠ¼">ë“±ë¡</a></span> -->
 			</li>
 		</ul>
 	</div>

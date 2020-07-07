@@ -52,11 +52,11 @@ public class UserPageController {
 	public String welcomeA(Model model) {
 		model.addAttribute("msg", "jstl");
 		System.out.println("++++++++++++++++UserList++++++++++++");
-		return "UserList"; 
+		return "/usr/UserList"; 
 	} 
 	
 	@RequestMapping("/UserInfo") 
-	public String MemberInfo(Model model
+	public String UserInfo(Model model
 			, @RequestParam(value = "callType") String callType
 			, @RequestParam(value = "userId") String userId) {
 		model.addAttribute("msg", "jstl");
@@ -64,38 +64,94 @@ public class UserPageController {
 		model.addAttribute("userId", 		userId);
 		
 		System.out.println("++++++++++++++++UserInfo++++++++++++userId::"+ userId + "===callType :: "+callType);
-		return "UserInfo"; 
+		return "/usr/UserInfo"; 
+	}
+
+	@RequestMapping("/GroupList") 
+	public String GroupList(Model model) {
+		System.out.println("++++++++++++++++GroupList.jsp++++++++++++");
+		return "/grp/GroupList"; 
 	}
 
 	@RequestMapping("/GroupInfo") 
-	public String GroupInfo(Model model) {
-		
-		System.out.println("++++++++++++++++GroupInfo++++++++++++");
-		return "GroupInfo"; 
+	public String GroupInfo(Model model
+			, @RequestParam(value = "callType") String callType
+			, @RequestParam(value = "groupId") String groupId) {
+
+		model.addAttribute("msg", "jstl");
+		model.addAttribute("callType", 	callType);
+		model.addAttribute("groupId", 	groupId);
+
+		System.out.println("++++++++++++++++GroupInfo.jsp++++++++++++");
+		return "/grp/GroupInfo"; 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@RequestMapping("/corsTest") 
-	public String crosTest(Model model) {
+	@RequestMapping("/GroupUserSet") 
+	public String GroupUserSet(Model model
+			, @RequestParam(value = "callType") String callType
+			, @RequestParam(value = "userId") String userId) {
 		model.addAttribute("msg", "jstl");
-		System.out.println("++++++++++++++ddddddddddddddddddd++corsTest Page++++++++++++");
-		return "corsTest"; 
-	} 
+		model.addAttribute("callType", 	callType);
+		model.addAttribute("userId", 		userId);
+		
+		System.out.println("++++++++++++++++GroupUserSet++++++++++++userId::"+ userId + "===callType :: "+callType);
+		return "/grp/GroupUserSet"; 
+	}
 	
-	@RequestMapping("/UserListPageJson") 
-	public String welcome(Model model) {
+	@RequestMapping("/UserGroupSet") 
+	public String UserGroupSet(Model model
+			, @RequestParam(value = "callType") String callType
+			, @RequestParam(value = "groupId") String groupId) {
 		model.addAttribute("msg", "jstl");
-		System.out.println("+++++++++++++++++UserListPage Page++++++++++++");
-		return "UserList"; 
-	} 
+		model.addAttribute("callType", 	callType);
+		model.addAttribute("groupId", 		groupId);
+		
+		System.out.println("++++++++++++++++UserGroupSet++++++++++++userId::"+ groupId + "===callType :: "+callType);
+		return "/grp/UserGroupSet"; 
+	}
+	
+	
+	
+	@RequestMapping("/DoroName") 
+	public String DoroName(Model model) {
+		model.addAttribute("msg", "jstl");
+		System.out.println("++++++++++++++++DoroName++++++++++++");
+		return "/cmm/DoroName"; 
+	}
+	
+
+	@RequestMapping("/jusoPopup") 
+	public String jusoPopup(Model model) {
+		model.addAttribute("msg", "jstl");
+		System.out.println("++++++++++++++++DoroName++++++++++++");
+		return "cmm/jusoPopup"; 
+	}
+
+	@RequestMapping("/doroSample") 
+	public String doroSample(Model model) {
+		model.addAttribute("msg", "jstl");
+		System.out.println("++++++++++++++++DoroName++++++++++++");
+		return "cmm/Sample"; 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

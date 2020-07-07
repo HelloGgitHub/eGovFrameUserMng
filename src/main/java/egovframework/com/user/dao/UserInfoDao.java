@@ -27,7 +27,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface UserInfoDao {
 	
-	List<HashMap<Object, Object>> selectUserList(Map<Object, Object> param);
+	List<HashMap<Object, Object>> selectUserList();
 	
 	List<HashMap<Object, Object>> selectUserDetail(Map<Object, Object> param);
 	

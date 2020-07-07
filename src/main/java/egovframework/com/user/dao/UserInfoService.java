@@ -37,8 +37,8 @@ public class UserInfoService {
 	 * @author : "egov"
 	 * @return_type : List<HashMap<Object,Object>>
 	 */
-	public List<HashMap<Object, Object>> selectData(Map<Object, Object> param) {
-        return mapper.selectUserList(param);
+	public List<HashMap<Object, Object>> selectData() {
+        return mapper.selectUserList();
     }
 	
 	/**

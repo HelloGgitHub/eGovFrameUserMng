@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -38,14 +38,16 @@
 	
 	<script type="text/javaScript" language="javascript" defer="defer">
 
+// 		var mnUserId = "";
 		var baseUrl="<%=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()%>";
 		var pageUrl= document.location.href;
 		/*********************************************************
-		 * Ajax È£Ãâ
+		 * Ajax í˜¸ì¶œ
 		 ******************************************************** */
 		function fn_calApi(cType, cPath, cParam, sync){
 			
 			console.log("Call Type::"+cType+"\nPath::"+cPath+"\nparam::"+cParam+"\nsync::"+sync);
+			var reqType = cType;
 			var rval = new Object();
 			var userData = new Object();
 			var tUrl = "";
@@ -54,15 +56,18 @@
 				$.each(cParam, function(key, value){
 				    p = p + key + "=" + value+"&";
 				});
-				tUrl = baseUrl+"/"+cPath+"?"+p.substring(0,(p.length-1));
-				alert(tUrl);
+				tUrl = baseUrl+cPath+"?"+p.substring(0,(p.length-1));
+			}else if((cType=="GETpath") && cParam == null){
+				reqType = "GET";
+				tUrl = baseUrl+cPath;
 			}else{
 				tUrl = baseUrl+cPath;
 			}
+			console.log("reqType >>"+reqType+"\ntarget Url :: " + tUrl);
 			var jsonData = JSON.stringify(cParam);
 			
 			$.ajax({
-				type: cType,
+				type: reqType,
 				url: tUrl,
 				contentType: 'application/json; charset=utf-8',
 	 			dataType:'text',
@@ -80,16 +85,25 @@
 					return;
 				}
 			});
+			
 			return rval;
 		}
 
+		
+		/*
+			ì‚¬ìš©ì íŒ¨ìŠ¤ì›Œë“œ ë³€ê²½ íŒì—… í˜¸ì¶œ
+		*/
+		function fn_testhd (){
+			$('#myModal').show();
+		}
+
+		/*
+			ì‚¬ìš©ì íŒ¨ìŠ¤ì›Œë“œ ë³€ê²½ íŒì—… ë‹«ê¸°
+		*/
 		function close_pop(flag) {
 		    $('#myModal').hide();
 		}
 
-		function fn_testhd (){
-			$('#myModal').show();
-		}
 
 		
 		function fn_modifyPassword(){
@@ -123,11 +137,11 @@
 					<tr>
 						<td style="text-align: center;">
 							<b>
-								&nbsp;&nbsp;<span style="font-size: 13pt;">&nbsp;&nbsp;ºñ¹Ğ¹øÈ£º¯°æ</span>
+								&nbsp;&nbsp;<span style="font-size: 13pt;">&nbsp;&nbsp;ë¹„ë°€ë²ˆí˜¸ë³€ê²½</span>
 							</b>
 						</td>
 						<td style="align-items: center;text-align-last: end;">
-							<img src="/images/egovframework/com/cmm/btn/btn_del.png" border='0' align='close' onClick="close_pop();" alt='´İ±â' style="cursor:pointer;"  />
+							<img src="/images/egovframework/com/cmm/btn/btn_del.png" border='0' align='close' onClick="close_pop();" alt='ë‹«ê¸°' style="cursor:pointer;"  />
 						</td>
 					</tr>
 				</table>
@@ -135,25 +149,25 @@
 				<table class="wTable" >
 					<colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
 					<tr>
-						<th><p style="text-align: center; line-height: 1;">»ç¿ëÀÚID</p></th>
+						<th><p style="text-align: center; line-height: 1;">ì‚¬ìš©ìID</p></th>
 						<td style="padding: 5px 5px;">
 							<input type="text" id="layUserId" name="layUserId" value="" disabled="true">
 						</td>
 					</tr>
 					<tr>
-						<th><p style="text-align: center; line-height: 1;">±âÁ¸ÆĞ½º¿öµå</p></th>
+						<th><p style="text-align: center; line-height: 1;">ê¸°ì¡´íŒ¨ìŠ¤ì›Œë“œ</p></th>
 						<td style="padding: 5px 5px;">
 							<input type="password" id="layAsisPwd" name="layAsisPwd" value="" >
 						</td>
 					</tr>
 					<tr>
-						<th><p style="text-align: center; heline-height: 1;">º¯°æÇÒ ÆĞ½º¿öµå</p></th>
+						<th><p style="text-align: center; heline-height: 1;">ë³€ê²½í•  íŒ¨ìŠ¤ì›Œë“œ</p></th>
 						<td style="padding: 5px 5px;">
 							<input type="password" id="layTobePwd" name="layTobePwd" value="" >
 						</td>
 					</tr>
 					<tr>
-						<th><p style="text-align: center; line-height: 1;">ÆĞ½º¿öµå È®ÀÎ</p></th>
+						<th><p style="text-align: center; line-height: 1;">íŒ¨ìŠ¤ì›Œë“œ í™•ì¸</p></th>
 						<td style="padding: 5px 5px;">
 							<input type="password" id="layTobePwd2" name="layTobePwd2" value="" >
 						</td>
@@ -161,7 +175,7 @@
 				</table>
 				<tr>
 					<div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 3px;padding-top: 3px;margin-top:3px;" onClick="fn_modifyPassword();">
-						<b><span class="pop_bt" style="font-size: 12pt;">È®  ÀÎ</span></b>
+						<b><span class="pop_bt" style="font-size: 12pt;">í™•  ì¸</span></b>
 					</div>
 				</tr>
 			</div>

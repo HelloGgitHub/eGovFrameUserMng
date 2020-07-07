@@ -98,6 +98,16 @@ public class GrpInfoService {
     }
 
 	/**
+	 * @name : selectUsrGrpList(사용자 그룹목록 조회)
+	 * @date : 2020. 6. 15.
+	 * @author : "egov"
+	 * @return_type : List<HashMap<Object,Object>>
+	 */
+	public List<HashMap<Object, Object>> selectUsrGrpList(Map<Object, Object> param) {
+        return mapper.selectUsrGrpList(param);
+    }
+
+	/**
 	 * @name : insertGrpUsr(그룹 사용자 추가)
 	 * @date : 2020. 6. 15.
 	 * @author : "egov"

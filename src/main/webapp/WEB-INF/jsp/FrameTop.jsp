@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>ÀüÀÚÁ¤ºÎ Å¬¶ó¿ìµå ÇÃ·§Æû</title>
+<meta charset="UTF-8">
+<title>ì „ìžì •ë¶€ í´ë¼ìš°ë“œ í”Œëž«í¼</title>
 <script src="/js/egovframework/com/cmm/jquery-1.4.2.min.js"></script>
 <script src="/js/egovframework/com/cmm/jquery.js"></script>
 <script src="/js/egovframework/com/cmm/jquery-ui_1.12.1.js"></script>
@@ -26,7 +26,7 @@
 				<img src="/images/title.jpg" border='0' align='absbottom' alt='' />
 			</td>
 			<td style="width:70%">
-				<h2>&nbsp;&nbsp;&nbsp; ÀüÀÚÁ¤ºÎ Å¬¶ó¿ìµå ÇÃ·§Æû </h2>
+				<h2>&nbsp;&nbsp;&nbsp; ì „ìžì •ë¶€ í´ë¼ìš°ë“œ í”Œëž«í¼ </h2>
 			</td>
 			<td style="display: inline-flex;">
 				<input type="text" id="lgnMnt" name="lgnMnt" value="" style="border: none;"/>

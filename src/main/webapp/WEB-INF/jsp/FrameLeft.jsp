@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>ë©”ë‰´</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<link type="text/css" rel="stylesheet" href="/css/egovframework/com/com.css">
 	<script src="/js/egovframework/com/cmm/jquery-1.4.2.min.js"></script>
@@ -22,25 +22,31 @@
 		} else if(cd == 3){
 			url="UserInfo?callType=c&userId=";
 		} else if(cd == 4){
-			url="GroupInfo";
+			url="GroupList";
+		} else if(cd == 5){
+			url="GroupInfo?callType=c&groupId=";
+		} else if(cd == 6){
+			url="GroupUserSet?callType=c&userId=";
+		} else if(cd == 7){
+			url="UserGroupSet?callType=c&groupId=";
 		}
 		
 		parent.body.location.href="http://localhost:9085/"+url;
-			
 	}
 
 </script>
 
 <body>
 	<input type="hidden" id="" name="lngCk" value="9"/>
-	<br>
-	<span class="btn_b"><a href="" onClick="fn_leftMenu(1);"  title="·Î±×ÀÎ" style="font-size: 15px;font-style: inherit;font-weight: bold;">- ·Î±×ÀÎ >></a></span>
-	<br>
-	<span class="btn_b"><a href="" onClick="fn_leftMenu(2);"  title="»ç¿ëÀÚ ¸ñ·Ï" style="font-size: 15px;font-style: inherit;font-weight: bold;">- »ç¿ëÀÚ ¸ñ·Ï >></a></span>
-	<br>
-	<span class="btn_b"><a href="" onClick="fn_leftMenu(3);"  title="»ç¿ëÀÚ »ó¼¼Á¤º¸" style="font-size: 15px;font-style: inherit;font-weight: bold;">- »ç¿ëÀÚ »ó¼¼Á¤º¸ >></a></span>
-	<br>
-	<span class="btn_b"><a href="" onClick="fn_leftMenu(4);"  title="±×·ì»ý¼º" style="font-size: 15px;font-style: inherit;font-weight: bold;">- »ç¿ëÀÚ ±×·ì»ý¼º >></a></span>
-<!-- 	<input type="text" id="usr" name="usr" value="left" style="text-align-last: end;media-volume-sliderthumb"/> -->
+	<br/><span class="btn_b"><a href="" onClick="fn_leftMenu(1);" title="ë¡œê·¸ì¸" style="font-size: 15px;font-style: inherit;font-weight: bold;">1- ë¡œê·¸ì¸ >></a></span>
+	<br/>
+	<br/><span class="btn_b"><a href="" onClick="fn_leftMenu(2);" title="ì‚¬ìš©ìž ëª©ë¡" style="font-size: 15px;font-style: inherit;font-weight: bold;">2- ì‚¬ìš©ìž ëª©ë¡ >></a></span>
+	<br/>&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(3);" title="ì‚¬ìš©ìž" style="font-size: 15px;font-style: inherit;font-weight: bold;">2-1 ì‚¬ìš©ìž ì •ë³´ >></a></span>
+	<br/>&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(6);" title="ì‚¬ìš©ìž ê·¸ë£¹ì§€ì •" style="font-size: 15px;font-style: inherit;font-weight: bold;">2-2 ì‚¬ìš©ìž ê·¸ë£¹ì§€ì • >></a></span>
+	<br/>
+	<br/><span class="btn_b"><a href="" onClick="fn_leftMenu(4);" title="ê·¸ë£¹ëª©ë¡" style="font-size: 15px;font-style: inherit;font-weight: bold;">3- ì‚¬ìš©ìž ê·¸ë£¹ëª©ë¡ >></a></span>
+	<br/>&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(5);" title="ì‚¬ìš©ìžê·¸ë£¹" style="font-size: 15px;font-style: inherit;font-weight: bold;">3-1 ì‚¬ìš©ìž ê·¸ë£¹ >></a></span>
+	<br/>&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(7);" title="ê·¸ë£¹ ì‚¬ìš©ìžì§€ì •" style="font-size: 15px;font-style: inherit;font-weight: bold;">3-2 ê·¸ë£¹ ì‚¬ìš©ìžì§€ì • >></a></span>
+	<!-- 	<input type="text" id="usr" name="usr" value="left" style="text-align-last: end;media-volume-sliderthumb"/> -->
 </body>
 </html>

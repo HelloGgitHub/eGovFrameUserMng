@@ -3,11 +3,18 @@
 <mapper namespace="egovframework.com.grp.dao.GrpInfoDao">
 
     <select id="selectGrpList"  parameterType="Map" resultType="hashMap">
-			SELECT GROUP_ID
-			     , GROUP_NM
-			     , GROUP_CREAT_DE
-			     , GROUP_DC
-			  FROM COMTNGROUPINFO
+			SELECT A.GROUP_ID
+			     , A.GROUP_NM
+			     , A.GROUP_CREAT_DE
+			     , A.GROUP_DC
+			     , IFNULL( B.CNT , 0 ) USRCNT
+			  FROM COMTNGROUPINFO A
+			     left outer join
+			       (SELECT GROUP_ID
+			             , COUNT(*) CNT 
+			          FROM COMTNGROUPUSR 
+			         GROUP BY GROUP_ID) B
+			  on A.GROUP_ID = B.GROUP_ID
     </select>
     
     <select id="selectGrpDetail"  parameterType="Map" resultType="hashMap">
@@ -29,15 +36,15 @@
 			) VALUES (
 			  #{GROUP_ID}
 			, #{GROUP_NM}
-			, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+			, #{DT}
 			, #{GROUP_DC}
-			, DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+			, #{DT}
 			)
     </insert>
     
     <update id="updateGrpInfo" parameterType="hashMap">
 			UPDATE COMTNGROUPINFO
-			   SET CHANGE_DT = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+			   SET CHANGE_DT = '${DT}'
 			    <if test='GROUP_NM != null'> 	, GROUP_NM	= '${GROUP_NM}' 	</if>
 			    <if test='GROUP_DC != null'> 	, GROUP_DC	= '${GROUP_DC}' 	</if>
 			 WHERE GROUP_ID           = '${GROUP_ID}'
@@ -50,11 +57,27 @@
     
     
     <select id="selectGrpUsrList" parameterType="Map" resultType="hashMap">
-			SELECT GROUP_ID
-			     , USR_ID
-			     , ADD_DT
-			  FROM COMTNGROUPUSR
-			 WHERE GROUP_ID = '${GRP_ID}'
+			SELECT A.GROUP_ID
+			     , A.USR_ID
+			     , A.ADD_DT
+			     , B.USR_NM
+			  FROM COMTNGROUPUSR A
+			  LEFT OUTER JOIN COMTNUSERMNG B
+			    ON (A.USR_ID = B.USR_ID)
+			 WHERE A.GROUP_ID = '${GRP_ID}'
+    </select>
+    
+    <select id="selectUsrGrpList" parameterType="Map" resultType="hashMap">
+			SELECT a.GROUP_ID
+			     , a.USR_ID
+			     , a.ADD_DT
+			     , b.GROUP_NM 
+			     , b.GROUP_DC 
+			  FROM COMTNGROUPUSR A
+			  left outer join 
+			       COMTNGROUPINFO B
+			    on A.GROUP_ID  = B.GROUP_ID 
+			 WHERE USR_ID = '${USR_ID}'
     </select>
 
     <insert id="insertGrpUsr" parameterType="hashMap">
@@ -65,7 +88,7 @@
 					) 
 					SELECT a.GROUP_ID 
 					     , b.USR_ID 
-					     , DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m%d%H%i%s')
+					     , '${DT}'
 					  FROM COMTNGROUPINFO a
 					     , COMTNUSERMNG b
 					 where a.GROUP_ID = '${GRP_ID}'

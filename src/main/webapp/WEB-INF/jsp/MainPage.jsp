@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Egov Framework</title>
 <frameset rows="80,*" frameborder="1" noresize>
 	<frame src="http://localhost:9085/FrameTop" name="topFrame" scrolling="no"/>
