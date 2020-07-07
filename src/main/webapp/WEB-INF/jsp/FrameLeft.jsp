@@ -31,7 +31,7 @@
 			url="UserGroupSet?callType=c&groupId=";
 		}
 		
-		parent.body.location.href="http://localhost:9085/"+url;
+		parent.body.location.href=url;
 	}
 
 </script>
@@ -41,12 +41,12 @@
 	<br/><span class="btn_b"><a href="" onClick="fn_leftMenu(1);" title="로그인" style="font-size: 15px;font-style: inherit;font-weight: bold;">1- 로그인 >></a></span>
 	<br/>
 	<br/><span class="btn_b"><a href="" onClick="fn_leftMenu(2);" title="사용자 목록" style="font-size: 15px;font-style: inherit;font-weight: bold;">2- 사용자 목록 >></a></span>
-	<br/>&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(3);" title="사용자" style="font-size: 15px;font-style: inherit;font-weight: bold;">2-1 사용자 정보 >></a></span>
-	<br/>&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(6);" title="사용자 그룹지정" style="font-size: 15px;font-style: inherit;font-weight: bold;">2-2 사용자 그룹지정 >></a></span>
+	<br/>&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(3);" title="사용자" style="font-size: 15px;font-style: inherit;font-weight: bold;">2-1 사용자 정보 >></a></span>
+	<br/>&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(6);" title="사용자 그룹지정" style="font-size: 15px;font-style: inherit;font-weight: bold;">2-2 사용자 그룹지정 >></a></span>
 	<br/>
 	<br/><span class="btn_b"><a href="" onClick="fn_leftMenu(4);" title="그룹목록" style="font-size: 15px;font-style: inherit;font-weight: bold;">3- 사용자 그룹목록 >></a></span>
-	<br/>&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(5);" title="사용자그룹" style="font-size: 15px;font-style: inherit;font-weight: bold;">3-1 사용자 그룹 >></a></span>
-	<br/>&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(7);" title="그룹 사용자지정" style="font-size: 15px;font-style: inherit;font-weight: bold;">3-2 그룹 사용자지정 >></a></span>
+	<br/>&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(5);" title="사용자그룹" style="font-size: 15px;font-style: inherit;font-weight: bold;">3-1 사용자 그룹 >></a></span>
+	<br/>&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(7);" title="그룹 사용자지정" style="font-size: 15px;font-style: inherit;font-weight: bold;">3-2 그룹 사용자지정 >></a></span>
 	<!-- 	<input type="text" id="usr" name="usr" value="left" style="text-align-last: end;media-volume-sliderthumb"/> -->
 </body>
 </html>

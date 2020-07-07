@@ -34,7 +34,7 @@
 	<script src="/js/egovframework/com/cmm/jquery.js"></script>
 	<script src="/js/egovframework/com/cmm/jquery-ui_1.12.1.js"></script>
 	<script src="/js/egovframework/com/cmm/showModalDialog.js"></script>
-	<script src="https://code.jquery.com/jquery-latest.js"></script>
+	<script src="/js/egovframework/com/cmm/jquery-latest.js"></script>
 	
 	<script type="text/javaScript" language="javascript" defer="defer">
 

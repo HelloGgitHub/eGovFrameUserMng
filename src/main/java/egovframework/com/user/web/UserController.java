@@ -83,7 +83,6 @@ public class UserController {
 		}
 
 		rtn = om.writeValueAsString(rtnMap);
-		System.out.println(rtn);
 		return rtn;
 	}
 	
@@ -120,7 +119,6 @@ public class UserController {
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
-		System.out.println(rtn);
 		return rtn;
 	}
 	
@@ -185,7 +183,6 @@ public class UserController {
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
-		System.out.println(rtn);
 		return rtn;
 	}
 

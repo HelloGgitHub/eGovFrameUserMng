@@ -7,9 +7,8 @@
 <meta charset="UTF-8">
 <title>Egov Framework</title>
 <frameset rows="80,*" frameborder="1" noresize>
-	<frame src="http://localhost:9085/FrameTop" name="topFrame" scrolling="no"/>
-	<frame src="http://localhost:9085/FrameDown" name="downFrame" />
-<!-- 	<frame src="http://localhost:9085/Login" name="down" /> -->
+	<frame src="FrameTop" name="topFrame" scrolling="no"/>
+	<frame src="FrameDown" name="downFrame" />
 	
 </frameset>
 <script type="text/javascript">
