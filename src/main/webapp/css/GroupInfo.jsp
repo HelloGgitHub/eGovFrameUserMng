@@ -190,7 +190,7 @@
  * 목록페이지로 돌아가기
  ******************/
 	function fn_moveGrpList(){
-		location.href="/GroupList";
+		location.href="http://localhost:9085/GroupList";
 	}
 
 /******************
@@ -244,7 +244,7 @@
 	</table>
 	<br>
 	<!-- 하단 버튼 -->
-<!-- 	<button title="뒤로가기" 		id="btn_movBak" 		onclick="fn_movebak();">뒤로가기</button>  -->
+	<button title="뒤로가기" 		id="btn_movBak" 		onclick="fn_movebak();">뒤로가기</button> 
 	<button title="등록" 			id="btn_Arov" 			onclick="fn_insert();">등록</button>
 	<button title="저장" 			id="btn_Modify" 		onclick="fn_update();">저장</button>
 	<button title="삭제" 			id="btn_Del" 			onclick="fn_delete();">삭제</button>

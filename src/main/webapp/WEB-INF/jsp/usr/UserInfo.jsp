@@ -669,7 +669,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	</table>
 	<br/>
 	<!-- 하단 버튼 -->
-	<button title="뒤로가기" 		id="btn_movBak" onclick="fn_movebak();" >뒤로가기</button> 
+<!-- 	<button title="뒤로가기" 		id="btn_movBak" onclick="fn_movebak();" >뒤로가기</button>  -->
 	<button title="회원가입신청" 	id="btn_Arov" 		onclick="id_insert();">등록</button>
 	<button title="회원정보변경" 	id="btn_Modify" 	onclick="id_update();">수정</button>
 	<button title="회원정보삭제" 	id="btn_Del" 		onclick="id_delete();">삭제</button>

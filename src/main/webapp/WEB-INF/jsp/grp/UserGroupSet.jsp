@@ -325,7 +325,7 @@ function fn_selectSetUserId(row){
 	<br>
 	
 	<!-- 하단 버튼 -->
-	<button title="뒤로가기" 	id="btn_movBak" onclick="fn_movebak();">뒤로가기</button> 
+<!-- 	<button title="뒤로가기" 	id="btn_movBak" onclick="fn_movebak();">뒤로가기</button>  -->
 	<button title="추가" 		id="btn_RowAdd" 	onclick="fn_RowAdd();">Row추가</button>
 	<button title="저장" 		id="btn_Arov" 		onclick="fn_AddUserGrp();">저장</button>
 	<button title="삭제" 		id="btn_Del" 		onclick="fn_DeleteGrp();">삭제</button>
