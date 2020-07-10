@@ -68,18 +68,24 @@ public class UserLoginController {
 		sqlInpt.put("USRID", 		pUserId);
 		sqlInpt.put("USRPW", 	pw);
 		
+		HashMap<String, Object> rtnSqlMap = new HashMap<String, Object>();
 		try {
-			int pwck = 0;
-			pwck = userLoginService.selectUserPwCk(sqlInpt);
+			rtnSqlMap = userLoginService.selectUserPwCk(sqlInpt);
 			Map<Object, Object> sqlRtn = new HashMap<Object, Object>();
-			if(pwck > 0) {
+			if(rtnSqlMap == null) {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "등록된 사용자가 없습니다.");
+			}else if (!pw.equals(rtnSqlMap.get("password"))) {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "패스워드가 올바르지 않습니다.");
+			}else if (pw.equals(rtnSqlMap.get("password"))) {
 				sqlRtn = userLoginService.selectUserDetail(sqlInpt);
 				rtnMap.put("list", sqlRtn);
 				rtnMap.put("RESULTCD", "0");
 				rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
 			}else {
 				rtnMap.put("RESULTCD", "1");
-				rtnMap.put("RESULTMSG", "일치하는 사용자 정보가 없습니다.");
+				rtnMap.put("RESULTMSG", "ID/PW가 올바르지 않습니다.");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

@@ -15,7 +15,8 @@
 		        MBTLNUM           as "moblphonNo",
 		        USR_STTUS            as "sttus",
 		        SBSCRB_DE             as "sbscrbDe",
-		        ADRES                  as "adres"
+		        ADRES                  as "adres",
+		        CHANGE_DT 		as "changedt"
 		  FROM COMTNUSERMNG
     </select>
     

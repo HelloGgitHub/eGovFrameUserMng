@@ -28,6 +28,6 @@ public interface UserLoginDao {
 	
 	HashMap<Object, Object> selectUserDetail(Map<Object, Object> param);
 	
-	int selectUserPwCk(Map<Object, Object> param);
+	HashMap<String, Object> selectUserPwCk(Map<Object, Object> param);
     
 }

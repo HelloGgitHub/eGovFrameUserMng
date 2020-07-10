@@ -2,14 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.com.user.dao.UserLoginDao">
 
-	<!-- Maria -->
-    <select id="selectUserPwCk"  parameterType="Map" resultType="int">
-		SELECT COUNT(*) CNT
-		  FROM COMTNUSERMNG
-		 WHERE USR_ID = '${USRID}'
-		   AND PASSWORD  = '${USRPW}'
+    <select id="selectUserPwCk"  parameterType="Map" resultType="hashMap">
+			SELECT PASSWORD
+			     , USR_ID
+			  FROM COMTNUSERMNG
+			 WHERE USR_ID = '${USRID}'
+<!-- 			   AND PASSWORD  = '${USRPW}' -->
     </select>
-    
     <select id="selectUserDetail"  parameterType="Map" resultType="hashMap">
 		SELECT 
 		        ESNTL_ID               as "uniqId",

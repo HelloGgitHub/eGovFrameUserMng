@@ -494,7 +494,7 @@ function fn_movebak(){
  * 그룹등록
  *************/
 function fn_addGrp(){
-	location.href=baseUrl + "/GroupUserSet?callType=r&userId="+userId;
+	location.href=baseUrl + "/GroupUserSet?callType=r&userId="+$("#inUserId").val();
 }
 
 /***********
@@ -670,9 +670,9 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	<br/>
 	<!-- 하단 버튼 -->
 	<button title="뒤로가기" 		id="btn_movBak" onclick="fn_movebak();" >뒤로가기</button> 
-	<button title="회원가입신청" 	id="btn_Arov" 		onclick="id_insert();">회원등록</button>
-	<button title="회원정보변경" 	id="btn_Modify" 	onclick="id_update();">회원정보변경</button>
-	<button title="회원정보삭제" 	id="btn_Del" 		onclick="id_delete();">회원삭제</button>
+	<button title="회원가입신청" 	id="btn_Arov" 		onclick="id_insert();">등록</button>
+	<button title="회원정보변경" 	id="btn_Modify" 	onclick="id_update();">수정</button>
+	<button title="회원정보삭제" 	id="btn_Del" 		onclick="id_delete();">삭제</button>
 <!-- 	<button title="회원승인" id="btn_approval" onclick="id_updateState();" >회원승인</button> -->
 <!-- 	<button id="btnEmplyrId" class="btn_s2" onClick="dd();" title="">ddd</button> -->
 	<button title="그룹등록" 	id="btn_AddGrp" 		onclick="fn_addGrp();">그룹등록</button>

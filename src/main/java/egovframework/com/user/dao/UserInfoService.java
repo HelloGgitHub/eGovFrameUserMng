@@ -1,5 +1,6 @@
 package egovframework.com.user.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import egovframework.com.cmm.ComUtil;
 
 /**
  * @title : 사용자 정보 관리 Service
@@ -38,7 +41,19 @@ public class UserInfoService {
 	 * @return_type : List<HashMap<Object,Object>>
 	 */
 	public List<HashMap<Object, Object>> selectData() {
-        return mapper.selectUserList();
+		
+		List<HashMap<Object, Object>> rtnLst = new ArrayList<HashMap<Object, Object>> ();
+		List<HashMap<Object, Object>> sqlLst = new ArrayList<HashMap<Object, Object>> ();
+		
+		sqlLst = mapper.selectUserList();
+		for(int i = 0; sqlLst.size() > i; i++) {
+			HashMap<Object, Object> rtnMap= new HashMap<Object, Object>();
+			rtnMap = sqlLst.get(i);
+			System.out.println(rtnMap.get("changedt").toString());
+			rtnMap.put("changedt", ComUtil.dbDatetoDataFrm(rtnMap.get("changedt").toString()));
+			rtnLst.add(rtnMap);
+		}
+        return rtnLst;
     }
 	
 	/**

@@ -54,7 +54,7 @@ function fn_Select(){
     	 	ihtml = ihtml + '<td id="name">'+arr[i].userNm+'</td>';
     	 	ihtml = ihtml + '<td id="adres">'+arr[i].emailAdres+'</td>';
     	 	ihtml = ihtml + '<td id="telNo">'+arr[i].areaNo+')'+arr[i].middleTelno+'-'+arr[i].endTelno+'</td>';
-    	 	ihtml = ihtml + '<td>2020-03-05</td>';
+    	 	ihtml = ihtml + '<td>'+arr[i].changedt+'</td>';
 
     	 	var sttus = "-";
     	 	if(arr[i].sttus == "A"){
@@ -181,11 +181,11 @@ function fn_ArovUser(){
 
 	<div id="grd"></div>
 	<!-- paging navigation -->
-	<div class="pagination">
-		<ul>
-			<li class="current"><a onClick="return false;">1</a></li>
-		</ul>
-	</div>
+<!-- 	<div class="pagination"> -->
+<!-- 		<ul> -->
+<!-- 			<li class="current"><a onClick="return false;">1</a></li> -->
+<!-- 		</ul> -->
+<!-- 	</div> -->
 </div>
 <input name="selectedId" type="hidden" />
 <input name="checkedIdForDel" type="hidden" />

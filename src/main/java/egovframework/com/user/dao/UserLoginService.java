@@ -43,7 +43,7 @@ public class UserLoginService {
     }
  
 	//사용자 pw체크
-	public int selectUserPwCk(Map<Object, Object> param) {
+	public HashMap<String, Object> selectUserPwCk(Map<Object, Object> param) {
         return mapper.selectUserPwCk(param);
     }
 }
