@@ -39,7 +39,8 @@ function fn_Select(){
  	ihtml = ihtml + '</tr>';
  	ihtml = ihtml + '</thead>';
  	ihtml = ihtml + '<tbody class="ov">';
-	
+
+	var cnt = 0;
 	for(var i =0; arr.length > i; i++){
 		console.log(i+"===" + arr[i].userId + "***" + $("#sbscrbSttus").val() );
 		if( $("#sbscrbSttus").val() == "0" || $("#sbscrbSttus").val() == arr[i].sttus){	
@@ -66,7 +67,15 @@ function fn_Select(){
         	}
     	 	ihtml = ihtml + '<td>'+sttus+'</td>';
     	 	ihtml = ihtml + '</tr>';
+
+    	 	cnt = cnt +1;
 		}
+    }
+
+    if(cnt == 0){
+    	ihtml = ihtml + '<tr>';
+	 	ihtml = ihtml + '<td colspan=8> 조회 결과가 없습니다</td>';
+	 	ihtml = ihtml + '</tr>';
     }
 
  	ihtml = ihtml + '</tbody>';
