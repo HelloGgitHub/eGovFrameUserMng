@@ -263,6 +263,7 @@ function fn_RowAdd(){
 	grd.insertAdjacentHTML('beforeend', ihtml);
 }
 
+
 /*****************
  * 사용자 그룹 제거
  ******************/
