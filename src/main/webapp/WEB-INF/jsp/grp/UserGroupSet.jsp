@@ -7,11 +7,11 @@
 
 <script type="text/javaScript" language="javascript" defer="defer">
 
-	var iddbck = false;
-    var bCancel = false;
-    var caltype 	= "<%=request.getParameter("callType") %>";
+	var iddbck 			= false;
+    var bCancel 		= false;
+    var caltype 		= "<%=request.getParameter("callType") %>";
     var groupId 		= "<%=request.getParameter("groupId") %>";
-	var grdRowCnt = 0;
+	var grdRowCnt 	= 0;
 	var userSelectboxList;
 	
 /*********************************************************
@@ -28,20 +28,10 @@ $(document).ready(function(){
 function inputCellSet(type) {
 	//호출타입에 따라 입력환경 설정
 	if(type == "c"){ //insert
-		//버튼
-// 		$("#btn_Del").attr("disabled",true);
-// 		$("#btn_Del").css("display","none");
-
 		//입력정보
 		$("#inGroup").attr("readonly",true);
 		$("#inGroupNm").attr("readonly",true);
 	}else if(type == "r"){  //readOnly
-		//버튼
-// 		$("#btn_Arov").attr("disabled",true);
-// 		$("#btn_Arov").css("display","none");
-// 		$("#btn_Del").attr("disabled",true);
-// 		$("#btn_Del").css("display","none");
-
 		//입력정보
 		$("#inGroup").attr("readonly",true);
 		$("#inGroupNm").attr("readonly",true);
