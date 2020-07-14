@@ -16,8 +16,6 @@
 		if(cd == 1){
 			url="Login";
 		} else if(cd == 2){
-			if(parent.top.document.getElementById("lngCk") == ""){
-			}
 			url="UserList";
 		} else if(cd == 3){
 			url="UserInfo?callType=c&userId=";

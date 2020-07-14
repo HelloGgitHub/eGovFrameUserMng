@@ -29,7 +29,7 @@ function fn_Select(){
  	ihtml = ihtml + '<thead>';
  	ihtml = ihtml + '<tr>';
  	ihtml = ihtml + '<th>번호</th>';
- 	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
+ 	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" id="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
  	ihtml = ihtml + '<th class="board_th_link">아이디</th>';
  	ihtml = ihtml + '<th>사용자이름</th>';
  	ihtml = ihtml + '<th>사용자이메일</th>';
@@ -121,6 +121,15 @@ function checkFieldck(){
 function fn_Insert(){
 	location.href=baseUrl+"/UserInfo?callType=c&userId=";
 }
+
+function fncCheckAll(){
+	if($("#checkAll").prop("checked")){
+        $("input[name=checkField]").prop("checked",true);
+    }else{
+        $("input[name=checkField]").prop("checked",false);
+    }
+}
+
 
 </script>
 </head>

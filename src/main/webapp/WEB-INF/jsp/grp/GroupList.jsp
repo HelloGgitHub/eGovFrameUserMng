@@ -32,7 +32,7 @@ function fn_Select(){
  	ihtml = ihtml + '<thead>';
  	ihtml = ihtml + '<tr>';
  	ihtml = ihtml + '<th>번호</th>';
- 	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
+ 	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" id="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
  	ihtml = ihtml + '<th class="board_th_link">그룹명</th>';
  	ihtml = ihtml + '<th>인원</th>';
  	ihtml = ihtml + '<th>등록일</th>';
@@ -116,12 +116,12 @@ function fn_Insert(){
 	location.href=baseUrl+"/GroupInfo?callType=c&groupId=";
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////체크박스 전체 선택!!! 더 개발해야함.
 function fncCheckAll(){
-	var rowData = new Array();
-	var checkbox = $("input[name=checkField]:checked");
-	console.log(">>>"+checkbox.parent().parent().eq(1).value);
-// 	checkbox.parent().parent().eq(i)
+	if($("#checkAll").prop("checked")){
+        $("input[name=checkField]").prop("checked",true);
+    }else{
+        $("input[name=checkField]").prop("checked",false);
+    }
 }
 
 </script>

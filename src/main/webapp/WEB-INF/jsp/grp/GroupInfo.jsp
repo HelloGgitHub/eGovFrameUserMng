@@ -194,9 +194,9 @@ function fn_Modify(){
 
 <body>
 	<div class="wTableFrm">
-	<h2 >그룹관리 </h2>
+	<h2 >그룹 정보 </h2>
 	<table class="wTable" summary="그룹관리의 그룹정보를 출력합니다.">
-	<caption>그룹관리</caption>
+	<caption>그룹 정보</caption>
 	<colgroup>
 		<col style="width: 22%;"><col style="width: ;">
 	</colgroup>
