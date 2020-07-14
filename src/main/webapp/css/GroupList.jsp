@@ -89,8 +89,6 @@ function fn_Delete(){
 	
 	for(var i=0; ckId.length > i; i++){
 		var ckNum = ckId[i];
-		console.log(ckId.length + "===" +ckId[i] );
-		
 		var rtnData = new Object();
 		var paramData = new Object();
 		paramData.groupId = $("#id_"+ckNum).val();
@@ -113,7 +111,6 @@ function checkFieldck(){
 		var id = td.eq(0).text();
 		rowData.push(id);
 	});
-	console.log("rowData : " + rowData);
 	
 	return rowData;
 }

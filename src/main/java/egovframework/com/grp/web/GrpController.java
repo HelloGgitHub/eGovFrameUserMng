@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import egovframework.com.cmm.ComUtil;
@@ -74,14 +73,12 @@ public class GrpController {
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
 		}catch (Exception e) {
-			e.getStackTrace();
 			rtnMap.put("RESULTCD", "1");
 			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
 			e.printStackTrace();
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
-		
 		return rtn;
 	}
 
@@ -113,15 +110,12 @@ public class GrpController {
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
 		}catch (Exception e) {
-			e.getStackTrace();
 			rtnMap.put("RESULTCD", "1");
 			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
 			e.printStackTrace();
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
-		System.out.println(rtn);
-		
 		return rtn;
 	}
 
@@ -139,22 +133,28 @@ public class GrpController {
 
 		String rtn = "";
 		ObjectMapper om = new ObjectMapper();
+		Map<Object, Object> rtnMap = new HashMap<Object, Object>();
 		
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-		sqlInpt.put("GROUP_ID"	, param.getGrpId());
+		sqlInpt.put("GROUP_ID"		, param.getGrpId());
 		sqlInpt.put("GROUP_NM"	, param.getGrpNm());
-		sqlInpt.put("GROUP_DC"	, param.getGrpDc());
-		sqlInpt.put("DT", ComUtil.getTime("yyyyMMddHHmmss"));
+		sqlInpt.put("GROUP_DC"		, param.getGrpDc());
+		sqlInpt.put("DT"				, ComUtil.getTime("yyyyMMddHHmmss"));
 		
-		Map<Object, Object> rtnMap = new HashMap<Object, Object>();
-		int inputCnt = grpService.insertGrpInfo(sqlInpt);
-		if(inputCnt > 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else {
+		try {
+			int inputCnt = grpService.insertGrpInfo(sqlInpt);
+			if(inputCnt > 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "등록 되었습니다.");
+			}else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "등록에 실패 하였습니다.");
+			}
+		}catch (Exception e) {
 			rtnMap.put("RESULTCD", "1");
 			rtnMap.put("RESULTMSG", "등록에 실패 하였습니다.");
+			e.printStackTrace();
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
@@ -183,14 +183,21 @@ public class GrpController {
 		sqlInpt.put("GROUP_DC"	, param.getGrpDc());
 		sqlInpt.put("DT", ComUtil.getTime("yyyyMMddHHmmss"));
 		
-		int inputCnt = grpService.updateGrpInfo(sqlInpt);
-		if(inputCnt > 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else {
+		try {
+			int inputCnt = grpService.updateGrpInfo(sqlInpt);
+			if(inputCnt > 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "저장 되었습니다.");
+			}else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "그룹 정보 변경에 실패 하였습니다.");
+			}
+		}catch (Exception e) {
 			rtnMap.put("RESULTCD", "1");
-			rtnMap.put("RESULTMSG", "사용자 정보 변경에 실패 하였습니다.");
+			rtnMap.put("RESULTMSG", "그룹 정보 변경에 실패 하였습니다.");
+			e.printStackTrace();
 		}
+		
 		rtn = om.writeValueAsString(rtnMap);
 		return rtn;
 	}
@@ -218,14 +225,19 @@ public class GrpController {
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("GROUP_ID"	, pGrpId);
-		
-		int inputCnt = grpService.deleteGrpInfo(sqlInpt);
-		if(inputCnt > 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else {
+		try {
+			int inputCnt = grpService.deleteGrpInfo(sqlInpt);
+			if(inputCnt > 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "삭제 되었습니다.");
+			}else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "삭제에 실패 하였습니다.");
+			}
+		}catch (Exception e) {
 			rtnMap.put("RESULTCD", "1");
 			rtnMap.put("RESULTMSG", "삭제에 실패 하였습니다.");
+			e.printStackTrace();
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);

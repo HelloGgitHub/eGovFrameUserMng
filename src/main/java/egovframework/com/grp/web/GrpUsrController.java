@@ -102,9 +102,9 @@ public class GrpUsrController {
 	public String userGrpList(
 			@RequestParam(value = "userId") 	String userId) throws Exception {
 		String rtn = "";
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		ObjectMapper om = new ObjectMapper();
-		String pUserId 		= URLDecoder.decode(userId		,"UTF-8");
+		Map<String, Object> rtnMap 	= new HashMap<String, Object>();
+		ObjectMapper om 				= new ObjectMapper();
+		String pUserId 						= URLDecoder.decode(userId		,"UTF-8");
 		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
 		
 		//입력값 파라미터 정의
@@ -153,26 +153,31 @@ public class GrpUsrController {
 		sqlInpt.put("USR_ID", pUsrId);
 		sqlInpt.put("GRP_ID", pGrpId);
 		sqlInpt.put("DT", ComUtil.getTime("yyyyMMddHHmmss"));
-
-		int chkReUse = grpService.selectGrpUsrCk(sqlInpt);
-		int chkUsrAble = grpService.selectUsrCk(sqlInpt);
-		if(chkReUse > 0) {
-			rtnMap.put("RESULTCD", "9");
-			rtnMap.put("RESULTMSG", "이미 등록된 사용자 입니다.");
-		}else if(chkUsrAble < 0) {
-			rtnMap.put("RESULTCD", "8");
-			rtnMap.put("RESULTMSG", "사용자 ID가 올바르지 않습니다.");
-		}else {
-			int inputCnt = grpService.insertGrpUsr(sqlInpt);
-			if(inputCnt > 0) {
-				rtnMap.put("RESULTCD", "0");
-				rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-			}else {
+		try {
+			int chkReUse = grpService.selectGrpUsrCk(sqlInpt);
+			int chkUsrAble = grpService.selectUsrCk(sqlInpt);
+			if(chkReUse > 0) {
 				rtnMap.put("RESULTCD", "1");
-				rtnMap.put("RESULTMSG", "등록에 실패 하였습니다. 사용자ID 또는 그룹ID를 확인하세요.");
+				rtnMap.put("RESULTMSG", "중복된 정보가 있습니다.");
+			}else if(chkUsrAble < 0) {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "사용자 ID가 올바르지 않습니다.");
+			}else {
+				int inputCnt = grpService.insertGrpUsr(sqlInpt);
+				if(inputCnt > 0) {
+					rtnMap.put("RESULTCD", "0");
+					rtnMap.put("RESULTMSG", "등록 되었습니다.");
+				}else {
+					rtnMap.put("RESULTCD", "1");
+					rtnMap.put("RESULTMSG", "등록에 실패 하였습니다. 사용자ID 또는 그룹ID를 확인하세요.");
+				}
 			}
+		}catch (Exception e) {
+			rtnMap.put("RESULTCD", "1");
+			rtnMap.put("RESULTMSG", "등록에 실패 하였습니다.");
+			e.printStackTrace();
 		}
-		
+			
 		rtn = om.writeValueAsString(rtnMap);
 		return rtn;
 	}
@@ -206,20 +211,25 @@ public class GrpUsrController {
 		sqlInpt.put("USR_ID", pUsrId);
 		sqlInpt.put("GRP_ID", pGrpId);
 		
-		int inputCnt = grpService.deleteGrpUsr(sqlInpt);
-		if(inputCnt > 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else if(inputCnt == 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "등록된 사용자가 아닙니다.");
-		}else {
+		try {
+			int inputCnt = grpService.deleteGrpUsr(sqlInpt);
+			if(inputCnt > 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "삭제 되었습니다.");
+			}else if(inputCnt == 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "등록된 사용자가 아닙니다.");
+			}else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "처리에 실패 하였습니다.");
+			}
+		}catch (Exception e) {
 			rtnMap.put("RESULTCD", "1");
 			rtnMap.put("RESULTMSG", "처리에 실패 하였습니다.");
+			e.printStackTrace();
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
 		return rtn;
 	}
-
 }

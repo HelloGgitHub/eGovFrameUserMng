@@ -76,7 +76,6 @@ public class UserController {
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
 		}catch (Exception e) {
-			e.getStackTrace();
 			rtnMap.put("RESULTCD", "1");
 			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
 			e.printStackTrace();
@@ -112,7 +111,6 @@ public class UserController {
 			rtnMap.put("RESULTCD", "0");
 			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
 		}catch (Exception e) {
-			e.getStackTrace();
 			rtnMap.put("RESULTCD", "1");
 			rtnMap.put("RESULTMSG", "조회에 실패하였습니다.");
 			e.printStackTrace();
@@ -139,47 +137,53 @@ public class UserController {
 		
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-		sqlInpt.put("USR_ID", param.getUsrId());
-		if(null != param.getPassword() && !"".equals(param.getPassword()) && !"null".equals(param.getPassword())) {
-			String pw = SecuritySha.SHA256(param.getPassword());			//SHA-256 암호화
-			sqlInpt.put("PASSWORD", pw);
-		}
-		sqlInpt.put("PASSWORD_HINT", param.getPasswordHint());
-		sqlInpt.put("PASSWORD_CNSR", param.getPasswordCnsr());
-		sqlInpt.put("USR_NM", param.getUsrNm());
-		sqlInpt.put("ZIP", param.getZip());
-		sqlInpt.put("ADRES", param.getAdres());
-		sqlInpt.put("AREA_NO", param.getAreaNo());
-		sqlInpt.put("USR_STTUS", param.getUsrSttus());
-		sqlInpt.put("DETAIL_ADRES", param.getDetailAdres());
-		sqlInpt.put("END_TELNO", param.getEndTelno());
-		sqlInpt.put("MBTLNUM", param.getMoblphonNo());
-		sqlInpt.put("USR_FXNUM", param.getUsrFxnum());
-		sqlInpt.put("USR_EMAIL_ADRES", param.getUsrEmailAdres());
-		sqlInpt.put("MIDDLE_TELNO", param.getMiddleTelno());
-		sqlInpt.put("SEXDSTN_CODE", param.getSexdstnCode());
-		sqlInpt.put("LOCK_AT", "N");
-		sqlInpt.put("LOCK_CNT", 0);
-		sqlInpt.put("LOCK_LAST_PNTTM", "");
-		sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
-		
-		List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
-		lst = userService.selectUserDetail(sqlInpt);
-		int usrCnt = lst.size();
-
-		
-		if(usrCnt == 0) {
-			int inputCnt = userService.insertUserDetail(sqlInpt);
-			if (inputCnt > 0) {
-				rtnMap.put("RESULTCD", "0");
-				rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-			} else {
-				rtnMap.put("RESULTCD", "1");
-				rtnMap.put("RESULTMSG", "사용자 정보 등록에 실패 하였습니다.");
+		try {
+			sqlInpt.put("USR_ID", param.getUsrId());
+			if(null != param.getPassword() && !"".equals(param.getPassword()) && !"null".equals(param.getPassword())) {
+				String pw = SecuritySha.SHA256(param.getPassword());			//SHA-256 암호화
+				sqlInpt.put("PASSWORD", pw);
 			}
-		}else{
+			sqlInpt.put("PASSWORD_HINT", param.getPasswordHint());
+			sqlInpt.put("PASSWORD_CNSR", param.getPasswordCnsr());
+			sqlInpt.put("USR_NM", param.getUsrNm());
+			sqlInpt.put("ZIP", param.getZip());
+			sqlInpt.put("ADRES", param.getAdres());
+			sqlInpt.put("AREA_NO", param.getAreaNo());
+			sqlInpt.put("USR_STTUS", param.getUsrSttus());
+			sqlInpt.put("DETAIL_ADRES", param.getDetailAdres());
+			sqlInpt.put("END_TELNO", param.getEndTelno());
+			sqlInpt.put("MBTLNUM", param.getMoblphonNo());
+			sqlInpt.put("USR_FXNUM", param.getUsrFxnum());
+			sqlInpt.put("USR_EMAIL_ADRES", param.getUsrEmailAdres());
+			sqlInpt.put("MIDDLE_TELNO", param.getMiddleTelno());
+			sqlInpt.put("SEXDSTN_CODE", param.getSexdstnCode());
+			sqlInpt.put("LOCK_AT", "N");
+			sqlInpt.put("LOCK_CNT", 0);
+			sqlInpt.put("LOCK_LAST_PNTTM", "");
+			sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
+			
+			List<HashMap<Object, Object>> lst = new ArrayList<HashMap<Object, Object>>();
+			lst = userService.selectUserDetail(sqlInpt);
+			int usrCnt = lst.size();
+	
+			
+			if(usrCnt == 0) {
+				int inputCnt = userService.insertUserDetail(sqlInpt);
+				if (inputCnt > 0) {
+					rtnMap.put("RESULTCD", "0");
+					rtnMap.put("RESULTMSG", "등록 되었습니다.");
+				} else {
+					rtnMap.put("RESULTCD", "1");
+					rtnMap.put("RESULTMSG", "사용자 정보 등록에 실패 하였습니다.");
+				}
+			}else{
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "동일한 사용자가 존재 합니다.");
+			}
+		}catch (Exception e) {
 			rtnMap.put("RESULTCD", "1");
-			rtnMap.put("RESULTMSG", "동일한 사용자가 존재 합니다.");
+			rtnMap.put("RESULTMSG", "등록에 실패하였습니다.");
+			e.printStackTrace();
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
@@ -202,37 +206,44 @@ public class UserController {
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-		sqlInpt.put("USR_ID", param.getUsrId());
 		
-		if(null != param.getPassword() && !"".equals(param.getPassword()) && !"null".equals(param.getPassword())) {
-			String pw = SecuritySha.SHA256(param.getPassword());			//SHA-256 암호화
-			sqlInpt.put("PASSWORD", pw);
-		}
-		sqlInpt.put("PASSWORD_HINT", param.getPasswordHint());
-		sqlInpt.put("PASSWORD_CNSR", param.getPasswordCnsr());
-		sqlInpt.put("USR_NM", param.getUsrNm());
-		sqlInpt.put("ZIP", param.getZip());
-		sqlInpt.put("ADRES", param.getAdres());
-		sqlInpt.put("AREA_NO", param.getAreaNo());
-		sqlInpt.put("DETAIL_ADRES", param.getDetailAdres());
-		sqlInpt.put("END_TELNO", param.getEndTelno());
-		sqlInpt.put("MBTLNUM", param.getMoblphonNo());
-		sqlInpt.put("USR_FXNUM", param.getUsrFxnum());
-		sqlInpt.put("USR_EMAIL_ADRES", param.getUsrEmailAdres());
-		sqlInpt.put("MIDDLE_TELNO", param.getMiddleTelno());
-		sqlInpt.put("SEXDSTN_CODE", param.getSexdstnCode());
-		sqlInpt.put("LOCK_AT", param.getLockAt());
-		sqlInpt.put("LOCK_CNT", param.getLockCnt());
-		sqlInpt.put("LOCK_LAST_PNTTM", param.getLockLastPnttm());
-		sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
-		
-		int inputCnt = userService.updateUserDetail(sqlInpt);
-		if(inputCnt > 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else {
+		try {
+			sqlInpt.put("USR_ID", param.getUsrId());
+			
+			if(null != param.getPassword() && !"".equals(param.getPassword()) && !"null".equals(param.getPassword())) {
+				String pw = SecuritySha.SHA256(param.getPassword());			//SHA-256 암호화
+				sqlInpt.put("PASSWORD", pw);
+			}
+			sqlInpt.put("PASSWORD_HINT", param.getPasswordHint());
+			sqlInpt.put("PASSWORD_CNSR", param.getPasswordCnsr());
+			sqlInpt.put("USR_NM", param.getUsrNm());
+			sqlInpt.put("ZIP", param.getZip());
+			sqlInpt.put("ADRES", param.getAdres());
+			sqlInpt.put("AREA_NO", param.getAreaNo());
+			sqlInpt.put("DETAIL_ADRES", param.getDetailAdres());
+			sqlInpt.put("END_TELNO", param.getEndTelno());
+			sqlInpt.put("MBTLNUM", param.getMoblphonNo());
+			sqlInpt.put("USR_FXNUM", param.getUsrFxnum());
+			sqlInpt.put("USR_EMAIL_ADRES", param.getUsrEmailAdres());
+			sqlInpt.put("MIDDLE_TELNO", param.getMiddleTelno());
+			sqlInpt.put("SEXDSTN_CODE", param.getSexdstnCode());
+			sqlInpt.put("LOCK_AT", param.getLockAt());
+			sqlInpt.put("LOCK_CNT", param.getLockCnt());
+			sqlInpt.put("LOCK_LAST_PNTTM", param.getLockLastPnttm());
+			sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
+			
+			int inputCnt = userService.updateUserDetail(sqlInpt);
+			if(inputCnt > 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "저장 되었습니다.");
+			}else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "사용자 정보 변경에 실패 하였습니다.");
+			}
+		}catch (Exception e) {
 			rtnMap.put("RESULTCD", "1");
-			rtnMap.put("RESULTMSG", "사용자 정보 변경에 실패 하였습니다.");
+			rtnMap.put("RESULTMSG", "사용자 정보 변경에 실패하였습니다.");
+			e.printStackTrace();
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
@@ -250,7 +261,7 @@ public class UserController {
     @ApiImplicitParams({
     	@ApiImplicitParam(name = "userId"	, value = "사용자ID"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
-	@DeleteMapping(path = "/deleteUsr")
+	@DeleteMapping(path = "/delete")
 	public String UserDeleteInfo(@RequestParam(value = "userId") String usrId) throws Exception {
 		String rtn = "";
 		ObjectMapper om = new ObjectMapper();
@@ -261,14 +272,19 @@ public class UserController {
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
 		sqlInpt.put("USR_ID", pUsrId);
-		
-		int inputCnt = userService.deleteUser(sqlInpt);
-		if(inputCnt > 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else {
+		try {
+			int inputCnt = userService.deleteUser(sqlInpt);
+			if(inputCnt > 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "삭제 되었습니다.");
+			}else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "삭제에 실패 하였습니다.");
+			}
+		}catch (Exception e) {
 			rtnMap.put("RESULTCD", "1");
-			rtnMap.put("RESULTMSG", "삭제에 실패 하였습니다.");
+			rtnMap.put("RESULTMSG", "삭제에 실패하였습니다.");
+			e.printStackTrace();
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);
@@ -303,16 +319,20 @@ public class UserController {
 		sqlInpt.put("USR_ID", pUserId);							//회원ID
 		sqlInpt.put("USR_STTUS", pUsrSttus);					//회원상태
 		sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
-		
-		int inputCnt = userService.updateUserState(sqlInpt);
-		if(inputCnt > 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else {
+		try {
+			int inputCnt = userService.updateUserState(sqlInpt);
+			if(inputCnt > 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+			}else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "사용자 상태변경에 실패 하였습니다.");
+			}
+		}catch (Exception e) {
 			rtnMap.put("RESULTCD", "1");
-			rtnMap.put("RESULTMSG", "사용자 상태변경에 실패 하였습니다.");
+			rtnMap.put("RESULTMSG", "사용자 상태변경에 실패하였습니다.");
+			e.printStackTrace();
 		}
-		
 		rtn = om.writeValueAsString(rtnMap);
 		return rtn;
 	}
@@ -343,20 +363,28 @@ public class UserController {
 		
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();
-		sqlInpt.put("USR_ID"		, pUserId);					//회원ID
-		sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
-		if(null != pUsrPw && !"".equals(pUsrPw) && !"null".equals(pUsrPw)) {
-			String pw = SecuritySha.SHA256(pUsrPw);		//SHA-256 암호화
-			sqlInpt.put("PASSWORD"	, pw);					//패스워드
-		}		
 		
-		int inputCnt = userService.updateUserPassword(sqlInpt);
-		if(inputCnt > 0) {
-			rtnMap.put("RESULTCD", "0");
-			rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
-		}else {
+		try {
+			sqlInpt.put("USR_ID"		, pUserId);					//회원ID
+			sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
+			
+			if(null != pUsrPw && !"".equals(pUsrPw) && !"null".equals(pUsrPw)) {
+				String pw = SecuritySha.SHA256(pUsrPw);		//SHA-256 암호화
+				sqlInpt.put("PASSWORD"	, pw);					//패스워드
+			}		
+			
+			int inputCnt = userService.updateUserPassword(sqlInpt);
+			if(inputCnt > 0) {
+				rtnMap.put("RESULTCD", "0");
+				rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+			}else {
+				rtnMap.put("RESULTCD", "1");
+				rtnMap.put("RESULTMSG", "사용자 상태변경에 실패 하였습니다.");
+			}
+		}catch (Exception e) {
 			rtnMap.put("RESULTCD", "1");
-			rtnMap.put("RESULTMSG", "사용자 상태변경에 실패 하였습니다.");
+			rtnMap.put("RESULTMSG", "사용자 상태변경에 실패하였습니다.");
+			e.printStackTrace();
 		}
 		
 		rtn = om.writeValueAsString(rtnMap);

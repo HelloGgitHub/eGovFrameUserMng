@@ -42,7 +42,6 @@ function fn_Select(){
 
 	var cnt = 0;
 	for(var i =0; arr.length > i; i++){
-		console.log(i+"===" + arr[i].userId + "***" + $("#sbscrbSttus").val() );
 		if( $("#sbscrbSttus").val() == "0" || $("#sbscrbSttus").val() == arr[i].sttus){	
     	 	ihtml = ihtml + '<tr>';
     	 	ihtml = ihtml + '<td>' + (i+1) + '</td>';
@@ -50,13 +49,11 @@ function fn_Select(){
     	 	ihtml = ihtml + '<input name="checkField" title="checkField" type="checkbox"/>';
     	 	ihtml = ihtml + '<input name="id" type="hidden" value="'+arr[i].userId+'"/>';
     	 	ihtml = ihtml + '</td>';
-//     	 	ihtml = ihtml + '<td><button onclick="fn_SelectUser(\''+arr[i].userId+'\')">'+arr[i].userId+'</button></td>';
     	 	ihtml = ihtml + '<td><a onclick="fn_SelectUser(\''+arr[i].userId+'\')">'+arr[i].userId+'</a></td>';
     	 	ihtml = ihtml + '<td id="name">'+arr[i].userNm+'</td>';
     	 	ihtml = ihtml + '<td id="adres">'+arr[i].emailAdres+'</td>';
     	 	ihtml = ihtml + '<td id="telNo">'+arr[i].areaNo+')'+arr[i].middleTelno+'-'+arr[i].endTelno+'</td>';
     	 	ihtml = ihtml + '<td>'+arr[i].changedt+'</td>';
-
     	 	var sttus = "-";
     	 	if(arr[i].sttus == "A"){
     	 		sttus = "가입신청";
@@ -68,7 +65,7 @@ function fn_Select(){
     	 	ihtml = ihtml + '<td>'+sttus+'</td>';
     	 	ihtml = ihtml + '</tr>';
 
-    	 	cnt = cnt +1;
+    	 	cnt++;
 		}
     }
 
@@ -91,64 +88,37 @@ function fn_SelectUser(userId){
 }
 
 
-function fn_DeleteUser(){
+function fn_Delete(){
 	var ckId = new Array();
 	ckId = checkFieldck();
 	
 	for(var i=0; ckId.length > i; i++){
 		var userId = ckId[i];
-		console.log(ckId.length + "===" +ckId[i] );
 		
 		var rtnData = new Object();
 		var paramData = new Object();
 		paramData.userId = userId;
 
 		//API호출
-		rtnData = fn_calApi("DELETE", "/user/deleteUsr", paramData, false);
-// 		alert(rtnData.RESULTCD);
-	}
+		rtnData = fn_calApi("DELETE", "/user/delete", paramData, false);
+ 		alert(rtnData.RESULTMSG);
+	} 
 	fn_Select();
-
-
-
-	return;
-	
-// 	for(var i=0; ckId.length > i; i++){
-// 		var userId = ckId[i];
-// 		console.log(ckId.length + "===" +ckId[i] );
-// 	    $.ajax({
-// 	        type : "DELETE", //전송방식을 지정한다 (POST,GET)
-// 	        url : "http://localhost:9085/user/deleteUsr?userId="+userId,//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
-// 	        dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
-// 	        error : function(){    //error: whenError
-// 	            alert("통신실패!!!!");
-// 	        },
-// 	        success : function(data){    //success: whenSuccess,
-// 	        	console.log("delete Data::"+data);
-// 	        	fn_Select();
-// 	        }
-// 	    });
-// 	}
 }
 
 function checkFieldck(){
 	var rowData = new Array();
 	var checkbox = $("input[name=checkField]:checked");
-	
 	checkbox.each(function(i) {
-		
 		var tr = checkbox.parent().parent().eq(i);
 		var td = tr.children();
 		var id = td.eq(2).text();
-		console.log(">>>>" + id);
 		rowData.push(id);
 	});
-	console.log("rowData : " + rowData);
-	
 	return rowData;
 }
 
-function fn_ArovUser(){
+function fn_Insert(){
 	location.href=baseUrl+"/UserInfo?callType=c&userId=";
 }
 
@@ -180,25 +150,14 @@ function fn_ArovUser(){
 			<!-- 검색키워드 및 조회버튼 -->
 			<li>
 <!-- 				<input class="s_input" name="searchKeyword" type="text"  size="35" title="검색어 입력" value=''  maxlength="255" > -->
-				<input type="button" class="s_btn" onClick="fn_Select();" value="조회" title="조회 버튼" />
-				<input type="button" class="s_btn" onClick="fn_DeleteUser();" value="삭제" title="삭제 버튼" />
-				<input type="button" class="s_btn" onClick="fn_ArovUser();" value="등록" title="등록 버튼" />
-<!-- 				<span class="btn_b"><a href="/egovframework-all-in-one/uss/umt/EgovMberInsertView.do" onClick="fnAddUserView(); return false;"  title="등록 버튼">등록</a></span> -->
+				<input type="button" class="s_btn" onClick="fn_Select();" 	value="조회" title="조회 버튼" />
+				<input type="button" class="s_btn" onClick="fn_Delete();" 	value="삭제" title="삭제 버튼" />
+				<input type="button" class="s_btn" onClick="fn_Insert();" 	value="등록" title="등록 버튼" />
 			</li>
 		</ul>
 	</div>
-
 	<div id="grd"></div>
-	<!-- paging navigation -->
-<!-- 	<div class="pagination"> -->
-<!-- 		<ul> -->
-<!-- 			<li class="current"><a onClick="return false;">1</a></li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
 </div>
-<input name="selectedId" type="hidden" />
-<input name="checkedIdForDel" type="hidden" />
-<input name="pageIndex" type="hidden" value="1"/>
 
 </body>
 </html>

@@ -131,7 +131,6 @@
 			pGroupId = groupId;
 		}
 		
-		console.log("detail param:===" + pGroupId );
 		var rtnData = new Object();
 		var arrlist = new Array();
 		rtnData = fn_calApi("GETpath", "/grp/detailInfo/"+pGroupId, null, false);

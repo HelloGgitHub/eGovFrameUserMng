@@ -1,6 +1,5 @@
 package egovframework.com.user.web;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,15 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import egovframework.com.cmm.SecuritySha;
 import egovframework.com.user.dao.UserLoginService;
 import egovframework.com.user.dao.UserVo;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -93,7 +89,6 @@ public class UserLoginController {
 		
 		ObjectMapper om = new ObjectMapper();
 		rtn = om.writeValueAsString(rtnMap);
-		System.out.println(rtn);
 		
 		return rtn;
 	}

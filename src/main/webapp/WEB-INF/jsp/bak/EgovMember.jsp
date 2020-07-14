@@ -236,11 +236,9 @@ function id_insert(){
 		memberData.zip					=	$("#zip").val();
 		memberData.adres				=	$("#adres").val();
 		memberData.detailAdres		=	$("#detailAdres").val();
-// 		memberData.mberSttus			=	$("#mberSttus").val();
 		memberData.mberSttus			=	"A";
 
 	var jsonData = JSON.stringify(memberData);
-	console.log(jsonData);
 	
 	$.ajax({
 		type:"POST",
@@ -284,7 +282,6 @@ function id_update(){
 		memberData.mberSttus			=	$("#mberSttus").val();
 
 	var jsonData = JSON.stringify(memberData);
-	console.log(jsonData);
 	
 	$.ajax({
 		type:"PUT",

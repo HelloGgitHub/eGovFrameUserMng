@@ -1,5 +1,6 @@
 package egovframework.com.grp.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import egovframework.com.cmm.ComUtil;
 
 /**
  * @title : 사용자 그룹관리 Service 
@@ -38,7 +41,18 @@ public class GrpInfoService {
 	 * @return_type : List<HashMap<Object,Object>>
 	 */
 	public List<HashMap<Object, Object>> selectGrpList() {
-        return mapper.selectGrpList();
+		
+		List<HashMap<Object, Object>> rtnLst = new ArrayList<HashMap<Object, Object>> ();
+		List<HashMap<Object, Object>> sqlLst = new ArrayList<HashMap<Object, Object>> ();
+		
+		sqlLst = mapper.selectGrpList();
+		for(int i = 0; sqlLst.size() > i; i++) {
+			HashMap<Object, Object> rtnMap= new HashMap<Object, Object>();
+			rtnMap = sqlLst.get(i);
+			rtnMap.put("group_creat_de", ComUtil.dbDatetoDataFrm(rtnMap.get("group_creat_de").toString()));
+			rtnLst.add(rtnMap);
+		}
+        return rtnLst;
     }
 
 	/**
@@ -94,7 +108,18 @@ public class GrpInfoService {
 	 * @return_type : List<HashMap<Object,Object>>
 	 */
 	public List<HashMap<Object, Object>> selectGrpUsrList(Map<Object, Object> param) {
-        return mapper.selectGrpUsrList(param);
+		
+		List<HashMap<Object, Object>> rtnLst = new ArrayList<HashMap<Object, Object>> ();
+		List<HashMap<Object, Object>> sqlLst = new ArrayList<HashMap<Object, Object>> ();
+		
+		sqlLst = mapper.selectGrpUsrList(param);
+		for(int i = 0; sqlLst.size() > i; i++) {
+			HashMap<Object, Object> rtnMap= new HashMap<Object, Object>();
+			rtnMap = sqlLst.get(i);
+			rtnMap.put("add_dt", ComUtil.dbDatetoDataFrm(rtnMap.get("add_dt").toString()));
+			rtnLst.add(rtnMap);
+		}
+        return rtnLst;
     }
 
 	/**

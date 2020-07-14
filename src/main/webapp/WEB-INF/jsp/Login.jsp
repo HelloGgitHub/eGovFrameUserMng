@@ -1,92 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-	<title>로그인</title>
-	<%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
+<head>
+<title>로그인</title>
+<%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
+
+<link type="text/css" rel="stylesheet" href="/css/egovframework/com/com.css">
+<link type="text/css" rel="stylesheet" href="/css/egovframework/com/uat/uia/login.css">
+
+
+<script type="text/javaScript" language="javascript" defer="defer">
+/*********************************************************
+ * 초기화
+ ******************************************************** */
+function fn_egov_init(){
 	
-	<link type="text/css" rel="stylesheet" href="/css/egovframework/com/com.css">
-	<link type="text/css" rel="stylesheet" href="/css/egovframework/com/uat/uia/login.css">
+}
 
+/*********************************************************
+ * 로그인
+ ******************************************************** */
+function fn_login(){
+	var rtnData = new Object();
+	var userData = new Object();
+	
+	userData.usrId				=	$("#userId").val();
+	userData.password		=	$("#password").val();
 
-	<script type="text/javaScript" language="javascript" defer="defer">
-		/*********************************************************
-		 * 초기화
-		 ******************************************************** */
-		function fn_egov_init(){
-			
-		}
-		
-		/*********************************************************
-		 * 로그인
-		 ******************************************************** */
-		function fn_login(){
-			var rtnData = new Object();
-			var userData = new Object();
-			
-			userData.usrId				=	$("#userId").val();
-			userData.password		=	$("#password").val();
-
-			//API호출
-			rtnData = fn_calApi("POST", "/login/idpw", userData, false);
-			
-			if(rtnData.RESULTCD == 0){
+	//API호출
+	rtnData = fn_calApi("POST", "/login/idpw", userData, false);
+	
+	if(rtnData.RESULTCD == 0){
 // 				alert(rtnData.list.userNm);
 // 				document.getElementById(tgtEl).style.visibility = "visible";
-				parent.parent.topFrame.document.all.infoImg.style.display = "block";
-				parent.parent.topFrame.document.all.lgnUserId.value= rtnData.list.userId;
-				parent.parent.topFrame.document.all.lgnMnt.value= rtnData.list.userNm+" 님 환영합니다.";
-				fn_movelogin();
-			}else{
-				alert(rtnData.RESULTMSG);
-				return;
-			}
-		}
-	
-		function fn_movelogin(){
-			location.href=baseUrl+"/UserList";
-		}
+		parent.parent.topFrame.document.all.infoImg.style.display = "block";
+		parent.parent.topFrame.document.all.lgnUserId.value= rtnData.list.userId;
+		parent.parent.topFrame.document.all.lgnMnt.value= rtnData.list.userNm+" 님 환영합니다.";
+		fn_movelogin();
+	}else{
+		alert(rtnData.RESULTMSG);
+		return;
+	}
+}
 
-		function fn_arovRequest(){
-			location.href=baseUrl+"/UserInfo?callType=c&userId=";
-		}
+function fn_movelogin(){
+	location.href=baseUrl+"/UserList";
+}
 
+function fn_arovRequest(){
+	location.href=baseUrl+"/UserInfo?callType=c&userId=";
+}
 
+function fn_test(){
+	window.parent.parent.frames["topFrame"].changePw();
+}
 
-
-
-
-
-
-
-		
-
-		function fn_test(){
-			
-			window.parent.parent.frames["topFrame"].changePw();
-
-// 			parent.parent.topFrame.document.all.lgnUserId.value= "userid";
-			
-// 			var userData = new Object();
-// 			userData.usrId				=	$("#userId").val();
-// 			userData.password		=	$("#password").val();
-
-// 			var p="";
-// 			var tUrl="";
-// 			$.each(userData, function(key, value){
-// 			    p = p + key + "=" + value+"&";
-// 			});
-// 			tUrl = "?"+p.substring(0,(p.length-1))
-// 			alert(tUrl);
-			
-// 			for (const key in userData) {
-// 				 console.log(key);
-// 				 console.log(userData.key);
-// 			}
-		}
-
-	</script>
-	</head>
+</script>
+</head>
 <body style="/* display: table-row; *//* max-width: min-content; */inline-size: max-content;">
 
 <!-- javascript warning tag  -->

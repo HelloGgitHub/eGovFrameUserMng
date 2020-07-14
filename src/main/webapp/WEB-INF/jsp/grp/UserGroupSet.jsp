@@ -2,17 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>사용자관리</title>
+<title>그룹 사용자 목록관리</title>
 <%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
 
 <script type="text/javaScript" language="javascript" defer="defer">
 
-	var iddbck 			= false;
-    var bCancel 		= false;
     var caltype 		= "<%=request.getParameter("callType") %>";
     var groupId 		= "<%=request.getParameter("groupId") %>";
 	var grdRowCnt 	= 0;
-	var userSelectboxList;
 	
 /*********************************************************
  * 초기화
@@ -28,17 +25,13 @@ $(document).ready(function(){
 function inputCellSet(type) {
 	//호출타입에 따라 입력환경 설정
 	if(type == "c"){ //insert
-		//입력정보
+		alert("해당 화면은 '그룹 목록'의 조회 내용을 통해 실행되어야 정상 동작합니다.");
 		$("#inGroup").attr("readonly",true);
 		$("#inGroupNm").attr("readonly",true);
 	}else if(type == "r"){  //readOnly
-		//입력정보
 		$("#inGroup").attr("readonly",true);
 		$("#inGroupNm").attr("readonly",true);
 		fn_DetailGroup();
-	}else if(type == "u"){ //modify
-		$("#btn_Arov").attr("disabled",true);
-		$("#inGroup").attr("readonly",true);
 	}
 
 	$("#inGroup").val(groupId);
@@ -48,21 +41,11 @@ function inputCellSet(type) {
 //입력 필수값 체크
 function required() {
 	if($.trim($("#inGroup").val()).length == 0){
-		alert("사용자아이디은(는) 필수 입력값입니다.");$("#inGroup").focus();return;
+		alert("그룹 아이디은(는) 필수 입력값입니다.");$("#inGroup").focus();return;
 	}
 }
 
-//입력값 길이 체크
-function maxlength() { 
-	if($.trim($("#inGroup").val()).length >= 20){
-		alert("사용자아이디은(는) 20자 이상 입력할수 없습니다.");$("#inGroup").focus();return false;
-	}
-}
 	
-
-
-
-
 
 
 /* input : groupId
@@ -75,8 +58,6 @@ function fn_DetailGroup(){
 	}else{
 		pGroupId = groupId;
 	}
-	
-	console.log("detail param:===" + pGroupId );
 	var rtnData = new Object();
 	var arrlist = new Array();
 	rtnData = fn_calApi("GETpath", "/grp/detailInfo/"+pGroupId, null, false);
@@ -133,13 +114,9 @@ function fn_Select(){
    	 	ihtml = ihtml + '<input id="checkField" name="checkField" title="checkField" type="checkbox"/>';
    	 	ihtml = ihtml + '<input id="id_'+(i+1)+'" name="id_'+(i+1)+'" type="hidden" value="'+arr[i].usr_id+'">';
    	 	ihtml = ihtml + '</td>';
-//    	 	ihtml = ihtml + '<td><input type="text" onclick="fn_SelectGrp(\''+arr[i].group_id+'\')" value='+arr[i].group_nm+'></td>';
-//    	 	ihtml = ihtml + '<td id="groupId_'+(i+1)+'" name="groupId_'+(i+1)+'">'+arr[i].group_id+'</td>';
    	 	ihtml = ihtml + '<td id="userId_'+(i+1)+'" name="userId_'+(i+1)+'">'+arr[i].usr_id+'</td>';
 	   	ihtml = ihtml + '<td id="userNm_'+(i+1)+'" name="userNm_'+(i+1)+'">'+arr[i].usr_nm+'</td>';
 	   	ihtml = ihtml + '<td id="addDt_'+(i+1)+'" name="addDt_'+(i+1)+'">'+arr[i].add_dt+'</td>';
- 	
-//  	 	ihtml = ihtml + '<td id="adres_'+(i+1)+'" name="adres_'+(i+1)+'">'+arr[i].group_creat_de+'</td>';
    	 	ihtml = ihtml + '</tr>';
     }
 	grdRowCnt=lopCnt;
@@ -161,7 +138,6 @@ function fn_RowAdd(){
 	var rtnData = new Object();
 	rtnData = fn_calApi("GET", "/user/list", null, false);
 	var arr = rtnData.list;
-	userSelectboxList = rtnData.list;
  	var ihtml = '';
 
 	var dopDonBox = "";
@@ -188,7 +164,6 @@ function fn_RowAdd(){
  	ihtml = ihtml + '</td>';
  	
  	ihtml = ihtml + '<td id="addDt_'+grdRowCnt+'" name="addDt_'+grdRowCnt+'">'+''+'</td>';
-//  	ihtml = ihtml + '<td id="adres_'+grdRowCnt+'" name="adres_'+grdRowCnt+'">'+''+'</td>';
  	ihtml = ihtml + '</tr>';
  	ihtml = ihtml + '</tbody>';
  	ihtml = ihtml + '</table>';
@@ -200,7 +175,7 @@ function fn_RowAdd(){
 /*****************
  * 사용자 그룹 제거
  ******************/
-function fn_DeleteGrp(){
+function fn_Delete(){
 	var ckId = new Array();
 	ckId = checkFieldck();
 	
@@ -224,7 +199,7 @@ function fn_DeleteGrp(){
 /*****************
  * 사용자 그룹 추가
  ******************/
-function fn_AddUserGrp(){
+function fn_Insert(){
 	var ckId = new Array();
 	ckId = checkFieldck();
 	
@@ -265,16 +240,7 @@ function checkFieldck(){
 function fn_selectSetUserId(row){
 	var usrID = $("#userNm_"+row).val();
 	var usrNm = "";
-	
-// 	for(var i = 0; userSelectboxList.length > i; i++){
-// 		if(userSelectboxList[i].userId == usrID){
-// 			usrNm = userSelectboxList[i].userNm;
-// 		}
-// 	}
-	console.log("----"+usrID + ">>>" + usrNm);
 	$("#userId_"+row).html(usrID);
-// 	$("#userNm_"+row).val(userSelectboxList[i].userId);
-	
 }
 
 </script>
@@ -313,12 +279,10 @@ function fn_selectSetUserId(row){
 	</div>
 	
 	<br>
-	
 	<!-- 하단 버튼 -->
-<!-- 	<button title="뒤로가기" 	id="btn_movBak" onclick="fn_movebak();">뒤로가기</button>  -->
-	<button title="추가" 		id="btn_RowAdd" 	onclick="fn_RowAdd();">Row추가</button>
-	<button title="저장" 		id="btn_Arov" 		onclick="fn_AddUserGrp();">저장</button>
-	<button title="삭제" 		id="btn_Del" 		onclick="fn_DeleteGrp();">삭제</button>
+	<button title="추가" 		id="btn_RowAdd" 		onclick="fn_RowAdd();">추가</button>
+	<button title="저장" 		id="btn_Insert" 		onclick="fn_Insert();">저장</button>
+	<button title="삭제" 		id="btn_Delete" 		onclick="fn_Delete();">삭제</button>
 	<br>
 	
 </body>
