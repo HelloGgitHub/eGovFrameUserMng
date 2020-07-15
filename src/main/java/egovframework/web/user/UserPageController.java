@@ -14,11 +14,6 @@ public class UserPageController {
 		return "MainPage"; 
 	}
 	
-	@RequestMapping("/2") 
-	public String Main2(Model model) {
-		model.addAttribute("msg", "jstl");
-		return "MainPage23"; 
-	}	
 	@RequestMapping("/FrameDown") 
 	public String Main3(Model model) {
 		model.addAttribute("msg", "jstl");
