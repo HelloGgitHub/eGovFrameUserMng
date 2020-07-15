@@ -84,7 +84,7 @@ function fn_Select(){
 
 
 function fn_SelectUser(userId){
-	location.href=baseUrl + "/UserInfo?callType=r&userId="+userId;
+	location.href="/UserInfo?callType=r&userId="+userId;
 }
 
 
@@ -119,7 +119,7 @@ function checkFieldck(){
 }
 
 function fn_Insert(){
-	location.href=baseUrl+"/UserInfo?callType=c&userId=";
+	location.href="/UserInfo?callType=c&userId=";
 }
 
 function fncCheckAll(){

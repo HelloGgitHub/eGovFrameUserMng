@@ -44,11 +44,11 @@ function fn_login(){
 }
 
 function fn_movelogin(){
-	location.href=baseUrl+"/UserList";
+	location.href="/UserList";
 }
 
 function fn_arovRequest(){
-	location.href=baseUrl+"/UserInfo?callType=c&userId=";
+	location.href="/UserInfo?callType=c&userId=";
 }
 
 function fn_test(){

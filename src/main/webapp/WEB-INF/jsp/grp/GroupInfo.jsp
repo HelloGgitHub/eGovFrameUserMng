@@ -179,7 +179,7 @@ function fn_moveGrpList(){
  * 사용자 목록페이지
  ******************/
 function fn_UserList(){
-	location.href=baseUrl+"/UserGroupSet?callType=c&groupId="+$("#inGroupId").val();
+	location.href="/UserGroupSet?callType=c&groupId="+$("#inGroupId").val();
 }
 
 /******************

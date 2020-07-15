@@ -71,12 +71,12 @@ function fn_Select(){
 
 function fn_SelectGrp(groupId){
 	var pageType= "r";
-	location.href=baseUrl + "/GroupInfo?callType="+pageType+"&groupId="+groupId;
+	location.href="/GroupInfo?callType="+pageType+"&groupId="+groupId;
 }
 
 function fn_SelectUserCnt(groupId){
 	var pageType= "r";
-	location.href=baseUrl + "/UserGroupSet?callType="+pageType+"&groupId="+groupId;
+	location.href="/UserGroupSet?callType="+pageType+"&groupId="+groupId;
 }
 
 
@@ -113,7 +113,7 @@ function checkFieldck(){
 
 
 function fn_Insert(){
-	location.href=baseUrl+"/GroupInfo?callType=c&groupId=";
+	location.href="/GroupInfo?callType=c&groupId=";
 }
 
 function fncCheckAll(){

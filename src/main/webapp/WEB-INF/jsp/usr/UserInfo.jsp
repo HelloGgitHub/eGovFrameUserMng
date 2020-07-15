@@ -362,7 +362,7 @@ function fn_movebak(){
  * 그룹등록
  *************/
 function fn_AddGrp(){
-	location.href=baseUrl + "/GroupUserSet?callType=r&userId="+$("#inUserId").val();
+	location.href="/GroupUserSet?callType=r&userId="+$("#inUserId").val();
 }
 
 /***********
@@ -370,7 +370,7 @@ function fn_AddGrp(){
  ************/
  //주소팝업창 호출
 function fn_JusoPopup(){
-	var pop = window.open(baseUrl+"/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes");
+	var pop = window.open("/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes");
 }
 //주소팝업창 입력값 리턴
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
