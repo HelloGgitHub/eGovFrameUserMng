@@ -44,7 +44,7 @@ function fn_Select(){
 	for(var i =0; arr.length > i; i++){
 		if( $("#sbscrbSttus").val() == "0" || $("#sbscrbSttus").val() == arr[i].sttus){	
     	 	ihtml = ihtml + '<tr>';
-    	 	ihtml = ihtml + '<td>' + (i+1) + '</td>';
+    	 	ihtml = ihtml + '<td>' + (cnt+1) + '</td>';
     	 	ihtml = ihtml + '<td>';
     	 	ihtml = ihtml + '<input name="checkField" title="checkField" type="checkbox"/>';
     	 	ihtml = ihtml + '<input name="id" type="hidden" value="'+arr[i].userId+'"/>';
