@@ -32,14 +32,15 @@ function fn_Select(){
  	ihtml = ihtml + '<thead>';
  	ihtml = ihtml + '<tr>';
  	ihtml = ihtml + '<th>번호</th>';
- 	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
+ 	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" id="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
  	ihtml = ihtml + '<th class="board_th_link">그룹명</th>';
  	ihtml = ihtml + '<th>인원</th>';
  	ihtml = ihtml + '<th>등록일</th>';
  	ihtml = ihtml + '</tr>';
  	ihtml = ihtml + '</thead>';
  	ihtml = ihtml + '<tbody class="ov">';
-	
+ 	
+ 	var cnt = 0;
 	for(var i =0; arr.length > i; i++){
    	 	ihtml = ihtml + '<tr>';
    	 	ihtml = ihtml + '<td>' + (i+1) + '</td>';
@@ -49,11 +50,17 @@ function fn_Select(){
    	 	ihtml = ihtml + '</td>';
    	 	ihtml = ihtml + '<td><a onclick="fn_SelectGrp(\''+arr[i].group_id+'\')">'+arr[i].group_nm+'</a></td>';
    		ihtml = ihtml + '<td id="userCnt_'+(i+1)+'" name="userCnt_'+(i+1)+'"><a onclick="fn_SelectUserCnt(\''+arr[i].group_id+'\')">'+arr[i].usrcnt+'</a></td>';
-// 	 	ihtml = ihtml + '<td id="name_'+(i+1)+'" name="name_'+(i+1)+'">'+arr[i].usrcnt+'</td>';
    	 	ihtml = ihtml + '<td id="adres_'+(i+1)+'" name="adres_'+(i+1)+'">'+arr[i].group_creat_de+'</td>';
    	 	ihtml = ihtml + '</tr>';
+   	 	cnt++;
     }
 
+    if(cnt == 0){
+    	ihtml = ihtml + '<tr>';
+	 	ihtml = ihtml + '<td colspan=5> 조회 결과가 없습니다</td>';
+	 	ihtml = ihtml + '</tr>';
+    }
+	
  	ihtml = ihtml + '</tbody>';
  	ihtml = ihtml + '</table>';
  	
@@ -63,23 +70,13 @@ function fn_Select(){
 
 
 function fn_SelectGrp(groupId){
-	//관리자일 경우 업데이트				//본인확인방법 로직 추가/////////////////////////////////////////////////////////////////
-	//그렇지 않은 경우 로드만
 	var pageType= "r";
-	if(groupId == ""){         ////////////////
-		pageType= "u";
-	}
-	location.href=baseUrl + "/GroupInfo?callType="+pageType+"&groupId="+groupId;
+	location.href="/GroupInfo?callType="+pageType+"&groupId="+groupId;
 }
 
 function fn_SelectUserCnt(groupId){
-	//관리자일 경우 업데이트				//본인확인방법 로직 추가/////////////////////////////////////////////////////////////////
-	//그렇지 않은 경우 로드만
 	var pageType= "r";
-	if(groupId == ""){         ////////////////
-		pageType= "u";
-	}
-	location.href=baseUrl + "/UserGroupSet?callType="+pageType+"&groupId="+groupId;
+	location.href="/UserGroupSet?callType="+pageType+"&groupId="+groupId;
 }
 
 
@@ -89,8 +86,6 @@ function fn_Delete(){
 	
 	for(var i=0; ckId.length > i; i++){
 		var ckNum = ckId[i];
-		console.log(ckId.length + "===" +ckId[i] );
-		
 		var rtnData = new Object();
 		var paramData = new Object();
 		paramData.groupId = $("#id_"+ckNum).val();
@@ -99,7 +94,6 @@ function fn_Delete(){
 		rtnData = fn_calApi("DELETE", "/grp/deleteGrp", paramData, false);
 	}
 	fn_Select();
-	return;
 }
 
 
@@ -113,22 +107,21 @@ function checkFieldck(){
 		var id = td.eq(0).text();
 		rowData.push(id);
 	});
-	console.log("rowData : " + rowData);
 	
 	return rowData;
 }
 
 
-function fn_ArovUser(){
-	location.href=baseUrl+"/GroupInfo?callType=c&groupId=";
+function fn_Insert(){
+	location.href="/GroupInfo?callType=c&groupId=";
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////체크박스 전체 선택!!! 더 개발해야함.
 function fncCheckAll(){
-	var rowData = new Array();
-	var checkbox = $("input[name=checkField]:checked");
-	console.log(">>>"+checkbox.parent().parent().eq(1).value);
-// 	checkbox.parent().parent().eq(i)
+	if($("#checkAll").prop("checked")){
+        $("input[name=checkField]").prop("checked",true);
+    }else{
+        $("input[name=checkField]").prop("checked",false);
+    }
 }
 
 </script>
@@ -151,24 +144,14 @@ function fncCheckAll(){
 			<!-- 검색키워드 및 조회버튼 -->
 			<li>
 <!-- 				<input class="s_input" name="searchKeyword" type="text"  size="35" title="검색어 입력" value=''  maxlength="255" > -->
-				<input type="button" class="s_btn" onClick="fn_Select();" 		value="조회" title="조회 버튼" />
-				<input type="button" class="s_btn" onClick="fn_Delete();" 		value="삭제" title="삭제 버튼" />
-				<input type="button" class="s_btn" onClick="fn_ArovUser();" 	value="등록" title="등록 버튼" />
+				<input type="button" class="s_btn" onClick="fn_Select();" 	value="조회" title="조회 버튼" />
+				<input type="button" class="s_btn" onClick="fn_Delete();"	value="삭제" title="삭제 버튼" />
+				<input type="button" class="s_btn" onClick="fn_Insert();" 	value="등록" title="등록 버튼" />
 			</li>
 		</ul>
 	</div>
-
 	<div id="grd"></div>
-	<!-- paging navigation -->
-<!-- 	<div class="pagination"> -->
-<!-- 		<ul> -->
-<!-- 			<li class="current"><a onClick="return false;">1</a></li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
 </div>
-<input name="selectedId" type="hidden" />
-<input name="checkedIdForDel" type="hidden" />
-<input name="pageIndex" type="hidden" value="1"/>
 
 </body>
 </html>

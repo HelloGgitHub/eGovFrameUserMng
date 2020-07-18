@@ -49,7 +49,6 @@ public class UserInfoService {
 		for(int i = 0; sqlLst.size() > i; i++) {
 			HashMap<Object, Object> rtnMap= new HashMap<Object, Object>();
 			rtnMap = sqlLst.get(i);
-			System.out.println(rtnMap.get("changedt").toString());
 			rtnMap.put("changedt", ComUtil.dbDatetoDataFrm(rtnMap.get("changedt").toString()));
 			rtnLst.add(rtnMap);
 		}

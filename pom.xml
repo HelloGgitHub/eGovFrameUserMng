@@ -11,6 +11,7 @@
 	<groupId>springBoot</groupId>
 	<artifactId>eGovFrameUserMng</artifactId>
 	<version>1.0</version>
+	<packaging>war</packaging>
 	<name>eGovFrameUserMng</name>
 	<description>사용자 관리 / ID_PW로그인</description>
 
@@ -96,8 +97,6 @@
 		    <artifactId>h2</artifactId>
 		    <scope>runtime</scope>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>
@@ -113,5 +112,4 @@
 		</plugins>
 	</build>
 
-	<packaging>war</packaging>
 </project>
