@@ -119,12 +119,12 @@ function required() {
 		alert("비밀번호힌트은(는) 필수 입력값입니다.");$("#inPasswordHint").focus();return false;
 	} else if($.trim($("#inPasswordCnsr").val()).length == 0){
 		alert("비밀번호정답은(는) 필수 입력값입니다.");$("#inPasswordCnsr").focus();return false;
-	} else if($.trim($("#inZip").val()).length == 0){
-		alert("우편번호은(는) 필수 입력값입니다.");$("#inZip").focus();return false;
-	} else if($.trim($("#inAdres").val()).length == 0){
-		alert("주소은(는) 필수 입력값입니다.");$("#inAdres").focus();return false;
-	} else if($.trim($("#inUserSttus").val()).length == 0){
-		alert("사용자상태코드은(는) 필수 입력값입니다.");$("#inUserSttus").focus();return false;
+// 	} else if($.trim($("#inZip").val()).length == 0){
+// 		alert("우편번호은(는) 필수 입력값입니다.");$("#inZip").focus();return false;
+// 	} else if($.trim($("#inAdres").val()).length == 0){
+// 		alert("주소은(는) 필수 입력값입니다.");$("#inAdres").focus();return false;
+// 	} else if($.trim($("#inUserSttus").val()).length == 0){
+// 		alert("사용자상태코드은(는) 필수 입력값입니다.");$("#inUserSttus").focus();return false;
 	}
 }
    //입력값 길이 체크
