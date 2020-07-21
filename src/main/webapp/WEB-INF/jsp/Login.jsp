@@ -10,49 +10,51 @@
 
 
 <script type="text/javaScript" language="javascript" defer="defer">
-/*********************************************************
- * 초기화
- ******************************************************** */
-function fn_egov_init(){
-	
-}
+	/*********************************************************
+	 * 초기화
+	 ******************************************************** */
+	$(document).ready(function(){
+		parent.parent.topFrame.document.all.infoImg.style.display = "none";
+		parent.parent.topFrame.document.all.lgnUserId.value= "";
+		parent.parent.topFrame.document.all.lgnMnt.value= "";
+	});
 
-/*********************************************************
- * 로그인
- ******************************************************** */
-function fn_login(){
-	var rtnData = new Object();
-	var userData = new Object();
+	/*********************************************************
+	 * 로그인
+	 ******************************************************** */
+	function fn_login(){
+		var rtnData = new Object();
+		var userData = new Object();
+		
+		userData.usrId				=	$("#userId").val();
+		userData.password		=	$("#password").val();
 	
-	userData.usrId				=	$("#userId").val();
-	userData.password		=	$("#password").val();
-
-	//API호출
-	rtnData = fn_calApi("POST", "/login/idpw", userData, false);
-	
-	if(rtnData.RESULTCD == 0){
-		parent.parent.topFrame.document.all.infoImg.style.display = "block";
-		parent.parent.topFrame.document.all.lgnUserId.value= rtnData.list.userId;
-		parent.parent.topFrame.document.all.lgnMnt.value= rtnData.list.userNm+" 님 환영합니다.";
-		alert(rtnData.list.userNm+" 님 환영합니다.");
-		fn_movelogin();
-	}else {
-		alert(rtnData.RESULTMSG);
-		return;
+		//API호출
+		rtnData = fn_calApi("POST", "/login/idpw", userData, false);
+		
+		if(rtnData.RESULTCD == 0){
+			parent.parent.topFrame.document.all.infoImg.style.display = "block";
+			parent.parent.topFrame.document.all.lgnUserId.value= rtnData.list.userId;
+			parent.parent.topFrame.document.all.lgnMnt.value= rtnData.list.userNm+" 님 환영합니다.";
+			alert(rtnData.list.userNm+" 님 환영합니다.");
+			fn_movelogin();
+		}else {
+			alert(rtnData.RESULTMSG);
+			return;
+		}
 	}
-}
-
-function fn_movelogin(){
-	location.href="/UserList";
-}
-
-function fn_arovRequest(){
-	location.href="/UserInfo?callType=c&userId=";
-}
-
-function fn_test(){
-	window.parent.parent.frames["topFrame"].changePw();
-}
+	
+	function fn_movelogin(){
+		location.href="/UserList";
+	}
+	
+	function fn_arovRequest(){
+		location.href="/UserInfo?callType=c&userId=";
+	}
+	
+	function fn_test(){
+		window.parent.parent.frames["topFrame"].changePw();
+	}
 
 </script>
 </head>
