@@ -4,6 +4,8 @@
 <head>
 <title>사용자 정보</title>
 <%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
+<script src="/js/egovframework/com/cmm/utl/EgovCmmUtl.js"></script>
+<script src="/js/egovframework/com/cmm/utl/InputCk.js"></script>
 
 <script type="text/javaScript" language="javascript" defer="defer">
 
@@ -119,12 +121,6 @@ function required() {
 		alert("비밀번호힌트은(는) 필수 입력값입니다.");$("#inPasswordHint").focus();return false;
 	} else if($.trim($("#inPasswordCnsr").val()).length == 0){
 		alert("비밀번호정답은(는) 필수 입력값입니다.");$("#inPasswordCnsr").focus();return false;
-// 	} else if($.trim($("#inZip").val()).length == 0){
-// 		alert("우편번호은(는) 필수 입력값입니다.");$("#inZip").focus();return false;
-// 	} else if($.trim($("#inAdres").val()).length == 0){
-// 		alert("주소은(는) 필수 입력값입니다.");$("#inAdres").focus();return false;
-// 	} else if($.trim($("#inUserSttus").val()).length == 0){
-// 		alert("사용자상태코드은(는) 필수 입력값입니다.");$("#inUserSttus").focus();return false;
 	}
 }
    //입력값 길이 체크
@@ -152,9 +148,9 @@ function maxlength() {
 	}
 }
 	
-// 	function password1 () { 
-// 		this.aa = new Array("password", "비밀번호은(는) 8~20자 내에서 입력해야 합니다.", new Function ("varName", " return this[varName];"));
-// 	} 
+	function password1 () { 
+		return chkPwd( $.trim($('#inPassword').val()));
+	} 
 // 	function password2 () { 
 // 		this.aa = new Array("password", "비밀번호은(는) 한글,특수문자,띄어쓰기는 허용되지 않습니다.", new Function ("varName", " return this[varName];"));
 // 	}
@@ -173,6 +169,11 @@ function maxlength() {
 // 		this.aa = new Array("inUserEmailAdres", "이메일주소은(는) 유효하지 않은 이메일 주소입니다.", new Function ("varName", "this.maxlength='50';  return this[varName];"));
 // 	} 
 
+function inputModify(){
+	if(chkPwd( $.trim($('#inPassword').val())) == false){
+		return;
+	}
+}
 
 /*********************************************************
  * 회원정보 삭제
@@ -200,6 +201,8 @@ function fn_Insert(){
 	if(confirm("등록하시겠습니까?")){
 		if(required()==false) return; //필수값 체크
 		if(maxlength()==false) return; //최대 길이 체크
+		if(password1()==false) return; //패스워드 체크
+		
 		
 		if($("#inPassword").val() != $("#inPassword2").val()){
             alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
@@ -414,7 +417,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 		<tr>
 			<th><label for="inPassword">비밀번호</label> <span class="pilsu">*</span></th>
 			<td class="left">
-				<input id="inPassword" name="inPassword" title="비밀번호 입력" type="password" value="" size="50" maxlength="20"/>
+				<input id="inPassword" name="inPassword" title="비밀번호 입력" onchange="inputModify()" type="password" value="" size="50" maxlength="20"/>
 			</td>
 		</tr>
 		

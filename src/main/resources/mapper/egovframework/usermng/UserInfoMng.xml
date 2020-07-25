@@ -50,7 +50,6 @@
 				, PASSWORD
 				, PASSWORD_HINT
 				, PASSWORD_CNSR
-				, IHIDNUM
 				, USR_NM
 				, ZIP
 				, ADRES
@@ -73,7 +72,6 @@
 				, #{PASSWORD}
 				, #{PASSWORD_HINT}
 				, #{PASSWORD_CNSR}
-				, #{IHIDNUM}
 				, #{USR_NM}
 				, #{ZIP}
 				, #{ADRES}
@@ -100,7 +98,6 @@
 			<if test='PASSWORD != null'> , PASSWORD          = '${PASSWORD}' </if>
 		    <if test='PASSWORD_HINT != null'> , PASSWORD_HINT     = '${PASSWORD_HINT}' </if>
 		    <if test='PASSWORD_CNSR != null'> , PASSWORD_CNSR     = '${PASSWORD_CNSR}' </if>
-		    <if test='IHIDNUM != null'> , IHIDNUM           = '${IHIDNUM}' </if>
 		    <if test='USR_NM != null'> , USR_NM           = '${USR_NM}' </if>
 		    <if test='ZIP != null'> , ZIP               = '${ZIP}' </if>
 		    <if test='ADRES != null'> , ADRES             = '${ADRES}' </if>
