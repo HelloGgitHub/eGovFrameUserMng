@@ -76,9 +76,14 @@ public class UserLoginController {
 				rtnMap.put("RESULTMSG", "패스워드가 올바르지 않습니다.");
 			}else if (pw.equals(rtnSqlMap.get("password"))) {
 				sqlRtn = userLoginService.selectUserDetail(sqlInpt);
-				rtnMap.put("list", sqlRtn);
-				rtnMap.put("RESULTCD", "0");
-				rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+				if("A".equals(sqlRtn.get("sttus"))) {
+					rtnMap.put("RESULTCD", "1");
+					rtnMap.put("RESULTMSG", "가입승인 이후 이용이 가능합니다.");
+				}else {
+					rtnMap.put("list", sqlRtn);
+					rtnMap.put("RESULTCD", "0");
+					rtnMap.put("RESULTMSG", "정상 처리 되었습니다.");
+				}
 			}else {
 				rtnMap.put("RESULTCD", "1");
 				rtnMap.put("RESULTMSG", "ID/PW가 올바르지 않습니다.");

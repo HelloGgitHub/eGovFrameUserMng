@@ -304,15 +304,18 @@ public class UserController {
        ,@ApiImplicitParam(name = "usrSttus", value = "사용자상태"	, required = true, dataType = "string", paramType = "query", defaultValue = "")
     })
 	@PutMapping(path = "/updateUsrState")
-	public String UserChangeState(
+	public String UserChangeState(@RequestBody UserModifyInfoVo param ) throws Exception {
+		/*
+		 * ,
 			@RequestParam(value = "userId") String usrId,
-			@RequestParam(value = "usrSttus") String usrSttus) throws Exception {
+			@RequestParam(value = "usrSttus") String usrSttus
+		 * */
 		String rtn = "";
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		
-		String pUserId 		= URLDecoder.decode(usrId		,"UTF-8");
-		String pUsrSttus 		= URLDecoder.decode(usrSttus	,"UTF-8");
+		String pUserId 		= URLDecoder.decode(param.getUsrId()		,"UTF-8");
+		String pUsrSttus 	= URLDecoder.decode(param.getUsrSttus()	,"UTF-8");
 		
 		//입력값 파라미터 정의
 		Map<Object, Object> sqlInpt = new HashMap<Object, Object>();

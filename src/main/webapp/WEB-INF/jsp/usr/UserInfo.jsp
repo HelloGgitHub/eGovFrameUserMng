@@ -138,7 +138,7 @@ function maxlength() {
 	} else if($.trim($("#inEndTelno").val()).length >= 5){
 		alert("집마지막전화번호은(는) 4자 이상 입력할수 없습니다.");$("#inEndTelno").focus();return false;
 	} else if($.trim($("#inUserFxnum").val()).length >= 15){
-		alert("팩스번호은(는) 15자 이상 입력할수 없습니다.");$("#inMoblphonNo").focus();return false;
+		alert("팩스번호은(는) 15자 이상 입력할수 없습니다.");$("#inUserFxnum").focus();return false;
 	} else if($.trim($("#inMoblphonNo").val()).length >= 15){
 		alert("핸드폰번호은(는) 15자 이상 입력할수 없습니다.");$("#inMoblphonNo").focus();return false;
 	} else if($.trim($("#inUserEmailAdres").val()).length >= 50){
@@ -524,7 +524,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 					<option value="" selected="selected">--선택하세요--</option>
 					<option value="A">신청</option>
 					<option value="P">승인</option>
-					<option value="D">삭제</option>
+<!-- 					<option value="D">삭제</option> -->
 				</select>
 			</td>
 	</tr>

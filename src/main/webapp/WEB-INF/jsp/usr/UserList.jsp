@@ -57,12 +57,10 @@ function fn_Select(){
     	 	var sttus = "-";
     	 	if(arr[i].sttus == "A"){
     	 		sttus = "가입신청";
-        	}else if(arr[i].sttus == "D"){
-        		sttus = "삭제";
         	}else if(arr[i].sttus == "P"){
         		sttus = "승인";
         	}
-    	 	ihtml = ihtml + '<td>'+sttus+'</td>';
+    	 	ihtml = ihtml + '<td><a onclick="fn_SelectUserSttus(\''+arr[i].userId+'\')">'+sttus+'</a></td>';
     	 	ihtml = ihtml + '</tr>';
 
     	 	cnt++;
@@ -86,6 +84,13 @@ function fn_Select(){
 function fn_SelectUser(userId){
 	location.href="/UserInfo?callType=r&userId="+userId;
 }
+
+function fn_SelectUserSttus(userId){
+	location.href="/UserModyStt?callType=r&userId="+userId;
+}
+
+
+
 
 
 function fn_Delete(){
