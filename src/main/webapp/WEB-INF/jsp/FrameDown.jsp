@@ -15,7 +15,7 @@
 		alert(parent.topFrame.document.all.usr.value);
 	}
 </script>
-<body style="overflow-y: hidden; margin: 0;">
+<body style="overflow-y: hidden; overflow-x: auto; margin: 0;">
 	<input type="hidden" id="lgnUserId" name="lgnUserId" value="hidden" />
 	<table width=100%>
 		<tr style="height:98vh">
@@ -23,7 +23,7 @@
 				<iframe id="left" name="left" style="height:100vh;width:100%" src="FrameLeft"></iframe>
 			</td>
 			<td style="vertical-align:top;width:80%">
-				<iframe id="body" name="body" style="height:100vh;width:100%;" src="Login"></iframe>
+				<iframe id="body" name="body" style="height:100vh; width:100%;" scrolling="yes" src="Login"></iframe>
 			</td>
 		</tr>
 	</table>

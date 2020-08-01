@@ -28,7 +28,7 @@
 		
 		userData.usrId				=	$("#userId").val();
 		userData.password		=	$("#password").val();
-	
+
 		//API호출
 		rtnData = fn_calApi("POST", "/login/idpw", userData, false);
 		
@@ -58,8 +58,7 @@
 
 </script>
 </head>
-<body style="/* display: table-row; *//* max-width: min-content; */inline-size: max-content;">
-
+<body style="/* display: table-row; *//* max-width: min-content; */inline-size: max-content;height: 600px;">
 <!-- javascript warning tag  -->
 <noscript class="noScriptTitle">자바스크립트를 지원하지 않는 브라우저에서는 일부 기능을 사용하실 수 없습니다.</noscript>
 
@@ -74,13 +73,13 @@
 				<!-- 아이디 -->
 				<li>
 					<label for="id">아이디</label>
-					<input type="text" name="userId" id="userId" maxlength="10" title="아이디 " placeholder="아이디 ">
+					<input type="text" name="userId" id="userId" maxlength="20" title="아이디 " placeholder="아이디 ">
 				</li>
 				
 				<!-- 비밀번호 -->
 				<li>
 					<label for="password">비밀번호</label>
-					<input type="password" name="password" id="password" maxlength="12" title="비밀번호 " placeholder="비밀번호 ">
+					<input type="password" name="password" id="password" maxlength="20" title="비밀번호 " placeholder="비밀번호 ">
 				</li>
 
 				<li>

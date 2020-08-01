@@ -192,7 +192,7 @@ function fn_Modify(){
 </script>
 </head>
 
-<body>
+<body style="height: 700px;">
 	<div class="wTableFrm">
 	<h2 >그룹 정보 </h2>
 	<table class="wTable" summary="그룹관리의 그룹정보를 출력합니다.">

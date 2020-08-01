@@ -106,7 +106,7 @@ function inputCellSet(type) {
 		$("#inZip").attr("readonly",true);
 		$("#inAdres").attr("readonly",true);
 		$("#inDetailAdres").attr("readonly",true);
-		$("#inUserSttus").attr("readonly",false);
+		$("#inUserSttus").attr("readonly",true);
 	}
 }
 //입력 필수값 체크
@@ -148,12 +148,16 @@ function maxlength() {
 	}
 }
 	
-	function password1 () { 
+	function password1() {
+		$("#inPassword").focus(); 
 		return chkPwd( $.trim($('#inPassword').val()));
 	} 
-// 	function password2 () { 
-// 		this.aa = new Array("password", "비밀번호은(는) 한글,특수문자,띄어쓰기는 허용되지 않습니다.", new Function ("varName", " return this[varName];"));
-// 	}
+
+	function ckEmail() { 
+		$("#inUserEmailAdres").focus();
+		return CheckEmail(  $.trim($('#inUserEmailAdres').val())  ); //   chkPwd( $.trim($('#inPassword').val()));
+	} 
+	
 // 	function password3 () { 
 // 		this.aa = new Array("password", "비밀번호은(는) 순차적인 숫자를 4개이상 연속해서 사용할수 없습니다.", new Function ("varName", " return this[varName];"));
 // 	} 
@@ -202,7 +206,7 @@ function fn_Insert(){
 		if(required()==false) return; //필수값 체크
 		if(maxlength()==false) return; //최대 길이 체크
 		if(password1()==false) return; //패스워드 체크
-		
+		if(ckEmail()==false) return; //이메일 체크
 		
 		if($("#inPassword").val() != $("#inPassword2").val()){
             alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
@@ -307,9 +311,12 @@ function fn_Update(){  //ok
 	if(confirm("저장하시겠습니까?")){
 		if(required()==false) return; //필수값 체크
 		if(maxlength()==false) return; //최대 길이 체크
+		if(password1()==false) return; //패스워드 체크
+		if(ckEmail()==false) return; //이메일 체크
 		
 		if($("#inPassword").val() != $("#inPassword2").val()){
             alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            $("#inPassword2").focus();
             return;
         }
 
@@ -385,7 +392,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 </script>
 </head>
 
-<body>
+<body style="height: 800px; width:500px;">
 	<div class="wTableFrm">
 	<!-- 타이틀 -->
 	<h2 >사용자 정보</h2>
@@ -522,7 +529,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			<td class="left">
 				<select id="inUserSttus" name="inUserSttus" title="회원가입상태">
 					<option value="" selected="selected">--선택하세요--</option>
-					<option value="A">신청</option>
+					<option value="A">가입신청</option>
 					<option value="P">승인</option>
 <!-- 					<option value="D">삭제</option> -->
 				</select>
@@ -532,7 +539,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	</table>
 	<br/>
 	<!-- 하단 버튼 -->
-<!-- 	<button title="뒤로가기" 		id="btn_movBak" onclick="fn_movebak();" >뒤로가기</button>  -->
 	<button title="등록" 		id="btn_Insert" 	onclick="fn_Insert();">등록</button>
 	<button title="수정" 		id="btn_Modify" 	onclick="fn_Modify();">수정</button>
 	<button title="저장" 		id="btn_Update" 	onclick="fn_Update();">저장</button>

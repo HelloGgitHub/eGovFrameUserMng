@@ -105,7 +105,7 @@ function fn_Update(){  //ok
 </script>
 </head>
 
-<body>
+<body style="height: 600px;">
 	<div class="wTableFrm">
 	<!-- 타이틀 -->
 	<h2 >사용자 정보</h2>

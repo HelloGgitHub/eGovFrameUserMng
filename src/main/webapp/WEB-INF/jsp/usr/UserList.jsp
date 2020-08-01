@@ -139,7 +139,7 @@ function fncCheckAll(){
 </script>
 </head>
 
-<body>
+<body style="height: 700px;">
 <!-- javascript warning tag  -->
 <noscript class="noScriptTitle">자바스크립트를 지원하지 않는 브라우저에서는 일부 기능을 사용하실 수 없습니다.</noscript>
 <div class="board">

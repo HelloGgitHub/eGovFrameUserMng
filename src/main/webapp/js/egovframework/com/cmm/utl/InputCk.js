@@ -11,7 +11,7 @@ function chkPwd(str){
 	}
 	
 	if(pw.search(/₩s/) != -1){
-		alert("비밀번호는 공백업이 입력해주세요.");
+		alert("비밀번호는 공백없이 입력해주세요.");
 		return false;
 	} 
 	
@@ -22,6 +22,18 @@ function chkPwd(str){
 	
 	return true;
 }
+
+
+function CheckEmail(str){                                                 
+     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+     if(!reg_email.test(str)) {                            
+    	 alert("올바른 이메일 주소가 아닙니다.");
+         return false;         
+     }else {                       
+          return true;         
+     }                            
+} 
+
 
 //if(!	chkPwd(    $.trim($('#mpassword').val())     )   ){
 //	$('#mpassword').val('');

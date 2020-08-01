@@ -230,6 +230,8 @@ public class UserController {
 			sqlInpt.put("LOCK_AT", param.getLockAt());
 			sqlInpt.put("LOCK_CNT", param.getLockCnt());
 			sqlInpt.put("LOCK_LAST_PNTTM", param.getLockLastPnttm());
+			sqlInpt.put("USR_STTUS", param.getUsrSttus());
+			
 			sqlInpt.put("CHANGE_DT", ComUtil.getTime("yyyyMMddHHmmss"));
 			
 			int inputCnt = userService.updateUserDetail(sqlInpt);

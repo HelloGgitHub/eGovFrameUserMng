@@ -218,7 +218,7 @@ function fn_movebak(){
 </script>
 </head>
 
-<body>
+<body style="height: 700px;">
 	<div class="wTableFrm">
 		<h2 >사용자</h2>
 		<table class="wTable" summary="사용자정보">

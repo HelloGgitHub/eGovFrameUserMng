@@ -246,7 +246,7 @@ function fn_selectSetUserId(row){
 </script>
 </head>
 
-<body>
+<body style="height: 700px;">
 	<div class="wTableFrm">
 		<h2 >그룹</h2>
 		<table class="wTable" summary="그룹정보">
