@@ -81,3 +81,33 @@ function checkDate(varCk1, varCk2, varCk3, msg) {
 	alert(msg + " 유효하지 않은 년,월,일(YYYYMMDD)입니다. 다시 확인해 주세요!");
 	return false;
 }
+
+
+function dtToStr(val){
+    var tmp = '';
+    if(val !== undefined){
+        var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+        tmp = String(val).replace(/(^\s*)|(\s*$)/gi, '').replace(regExp, ''); // 공백 및 특수문자 제거
+    }
+    return tmp;
+}
+
+
+function strToDt(val){
+    var retVal;
+    if(val !== undefined && String(val) !== ''){
+        var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+        var tmp = String(val).replace(/(^\s*)|(\s*$)/gi, '').replace(regExp, ''); // 공백 및 특수문자 제거
+        if(tmp.length <= 4){
+            retVal = tmp;
+        } else if(tmp.length > 4 && tmp.length <= 6){
+            retVal = tmp.substr(0, 4) + '-' + tmp.substr(4, 2);
+        } else if(tmp.length > 6 && tmp.length <= 8){
+            retVal = tmp.substr(0, 4) + '-' + tmp.substr(4, 2) + '-' + tmp.substr(6, 2);
+        } else {
+            alert('날짜 형식이 잘못되었습니다.\n입력된 데이터:'+tmp);
+            retVal = '';
+        }
+    }
+    return retVal;
+}

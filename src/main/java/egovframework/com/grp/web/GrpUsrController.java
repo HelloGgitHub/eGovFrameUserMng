@@ -218,7 +218,7 @@ public class GrpUsrController {
 				rtnMap.put("RESULTMSG", "삭제 되었습니다.");
 			}else if(inputCnt == 0) {
 				rtnMap.put("RESULTCD", "0");
-				rtnMap.put("RESULTMSG", "등록된 사용자가 아닙니다.");
+				rtnMap.put("RESULTMSG", "삭제 할 사용자 정보가 없습니다.");
 			}else {
 				rtnMap.put("RESULTCD", "1");
 				rtnMap.put("RESULTMSG", "처리에 실패 하였습니다.");

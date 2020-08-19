@@ -7,21 +7,21 @@
 
 <script type="text/javaScript" language="javascript" defer="defer">
 
-    var caltype 		= "<%=request.getParameter("callType") %>";
-    var groupId 		= "<%=request.getParameter("groupId") %>";
-	var grdRowCnt 	= 0;
+var caltype 		= "<%=request.getParameter("callType") %>";
+var groupId 		= "<%=request.getParameter("groupId") %>";
+var grdRowCnt 	= 0;
 	
-/*********************************************************
- * 초기화
- *********************************************************/
+/**************
+  * 초기화
+  **************/
 $(document).ready(function(){
-	
 	inputCellSet(caltype);
 	fn_Select();
-	
 });
 
-
+/**************
+ * 화면 기능 사용 정의
+ **************/
 function inputCellSet(type) {
 	//호출타입에 따라 입력환경 설정
 	if(type == "c"){ //insert
@@ -35,22 +35,20 @@ function inputCellSet(type) {
 	}
 
 	$("#inGroup").val(groupId);
-	
 }
 
-//입력 필수값 체크
+/**************
+ * 입력 필수값 체크
+ **************/
 function required() {
 	if($.trim($("#inGroup").val()).length == 0){
 		alert("그룹 아이디은(는) 필수 입력값입니다.");$("#inGroup").focus();return;
 	}
 }
 
-	
-
-
-/* input : groupId
+/**************
  * 그룹 정보 조회
- */
+ **************/
 function fn_DetailGroup(){
 	var pGroupId="";
 	if(groupId == null && groupId == ""){
@@ -67,20 +65,18 @@ function fn_DetailGroup(){
 	$("#inGroup").attr("disabled",true);
 	$("#inGroupNm").val(obj2.group_nm);
 	$("#inGroupNm").attr("disabled",true);
-	
 }
 
-/*************
+/**************
  * 뒤로가기
- *************/
+ **************/
 function fn_movebak(){
 	window.history.back();	
 }
 
-
-/********
+/**************
  * 그룹 목록 조회
- ********/
+ **************/
 function fn_Select(){
 	
 	$("#setGroup").empty();
@@ -93,14 +89,14 @@ function fn_Select(){
 
  	var ihtml = '';
  	ihtml = ihtml + '<table class="board_list" summary="그룹목록을 출력합니다.">';
- 	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 30%;"><col style="width: ;"><col style="width: 30%;"></colgroup>'; //
+ 	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 30%;"><col style="width: ;"><col style="width: 30%;"></colgroup>';
  	ihtml = ihtml + '<thead>';
  	ihtml = ihtml + '<tr>';
  	ihtml = ihtml + '<th>번호</th>';
  	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
  	ihtml = ihtml + '<th class="board_th_link">사용자ID</th>';
  	ihtml = ihtml + '<th>사용자명</th>';
- 	ihtml = ihtml + '<th>가입일자</th>';
+ 	ihtml = ihtml + '<th>가입일시</th>';
  	ihtml = ihtml + '</tr>';
  	ihtml = ihtml + '</thead>';
  	ihtml = ihtml + '<tbody class="ov">';
@@ -128,9 +124,9 @@ function fn_Select(){
 }
 
 
-/********
+/**************
  * 그룹 추가
- ********/
+ **************/
 function fn_RowAdd(){
 	grdRowCnt++;	
 	$("#setGroup").empty();
@@ -145,7 +141,6 @@ function fn_RowAdd(){
 		dopDonBox = dopDonBox + '<option value="'+arr[i].userId+'">'+arr[i].userNm+'</option>'; 
     }
 	
-	
 	ihtml = ihtml + '<table class="board_list" style="border-top: 1px solid #d2d2d2;" summary="사용자목록을 출력합니다.">';
 	ihtml = ihtml + '<tbody class="ov">';
 	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 30%;"><col style="width: ;"><col style="width: 30%;"></colgroup>'; //<col style="width: 15%;">
@@ -156,13 +151,11 @@ function fn_RowAdd(){
  	ihtml = ihtml + '<input id="id_'+grdRowCnt+'" name="id_'+grdRowCnt+'" type="hidden" value="'+''+'">';
  	ihtml = ihtml + '</td>';
  	ihtml = ihtml + '<td id="userId_'+grdRowCnt+'" name="userId_'+grdRowCnt+'">'+''+'</td>';
- 	
  	ihtml = ihtml + '<td>';
  	ihtml = ihtml + '<select id="userNm_'+grdRowCnt+'" name="userNm_'+grdRowCnt+'" title="사용자ID" onchange="fn_selectSetUserId('+grdRowCnt+')">';
  	ihtml = ihtml + '<option value="" selected="selected">--선택하세요--</option>';
  	ihtml = ihtml + dopDonBox
  	ihtml = ihtml + '</td>';
- 	
  	ihtml = ihtml + '<td id="addDt_'+grdRowCnt+'" name="addDt_'+grdRowCnt+'">'+''+'</td>';
  	ihtml = ihtml + '</tr>';
  	ihtml = ihtml + '</tbody>';
@@ -172,10 +165,11 @@ function fn_RowAdd(){
 	grd.insertAdjacentHTML('beforeend', ihtml);
 }
 
-/*****************
+/**************
  * 사용자 그룹 제거
- ******************/
+ **************/
 function fn_Delete(){
+	var inCnt = 0;
 	var ckId = new Array();
 	ckId = checkFieldck();
 	
@@ -191,14 +185,22 @@ function fn_Delete(){
 		paramData.groupId = $("#inGroup").val();
 		//API호출
 		rtnData = fn_calApi("DELETE", "/grp/usrSbt", paramData, false);
-		alert(rtnData.RESULTMSG);
+		if(rtnData.RESULTCD==0){
+			inCnt++;
+		}
+	}
+	
+	if(inCnt == 0){
+		alert("삭제 할 정보가 없습니다.");
+	}else {
+		alert("삭제 되었습니다.");
 	}
 	fn_Select();
 }
 
-/*****************
+/**************
  * 사용자 그룹 추가
- ******************/
+ **************/
 function fn_Insert(){
 	var ckId = new Array();
 	ckId = checkFieldck();
@@ -221,9 +223,9 @@ function fn_Insert(){
 	fn_Select();
 }
 
-/***************
+/**************
  * 체크박스 여부 확인
- ***************/
+ **************/
 function checkFieldck(){
 	var rowData = new Array();
 	var checkbox = $("input[name=checkField]:checked");
@@ -237,6 +239,9 @@ function checkFieldck(){
 	return rowData;
 }
 
+/**************
+ * 입력창 값 셋팅
+ **************/
 function fn_selectSetUserId(row){
 	var usrID = $("#userNm_"+row).val();
 	var usrNm = "";
@@ -261,7 +266,6 @@ function fn_selectSetUserId(row){
 						<input id="inGroup" name="inGroup" title="아이디" type="text" value="" size="20" maxlength="20" style="width:100%;"/>
 					</td>
 				</tr>
-				
 				<tr>
 					<th><label for="inGroupNm">그룹명</label></th>
 					<td class="left">
@@ -271,19 +275,16 @@ function fn_selectSetUserId(row){
 			</tbody>
 		</table>
 	</div>
-	<br/>
-	
+	<br>
 	<div class="wTableFrm">
 		<h2>사용자 목록</h2>
 		<div id="grdlist"></div>
 	</div>
-	
 	<br>
 	<!-- 하단 버튼 -->
 	<button title="추가" 		id="btn_RowAdd" 		onclick="fn_RowAdd();">추가</button>
 	<button title="저장" 		id="btn_Insert" 		onclick="fn_Insert();">저장</button>
 	<button title="삭제" 		id="btn_Delete" 		onclick="fn_Delete();">삭제</button>
 	<br>
-	
 </body>
 </html>

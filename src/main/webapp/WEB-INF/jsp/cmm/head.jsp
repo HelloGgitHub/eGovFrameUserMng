@@ -2,135 +2,134 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-	<style>
-       /* The Modal (background) */
-       .modal {
-           display: none; /* Hidden by default */
-           position: fixed; /* Stay in place */
-           z-index: 1; /* Sit on top */
-           left: 0;
-           top: 0;
-           width: 100%; /* Full width */
-           height: 100%; /* Full height */
-           overflow: auto; /* Enable scroll if needed */
-           background-color: rgb(0,0,0); /* Fallback color */
-           background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-       }
-   
-       /* Modal Content/Box */
-       .modal-content {
-           background-color: #fefefe;
-           margin: 15% auto; /* 15% from the top and centered */
-           padding: 10px;
-           border: 1px solid #888;
-           width: 30%; /* Could be more or less, depending on screen size */                          
-       }
+<head>
+<style>
+     /* The Modal (background) */
+     .modal {
+         display: none; /* Hidden by default */
+         position: fixed; /* Stay in place */
+         z-index: 1; /* Sit on top */
+         left: 0;
+         top: 0;
+         width: 100%; /* Full width */
+         height: 100%; /* Full height */
+         overflow: auto; /* Enable scroll if needed */
+         background-color: rgb(0,0,0); /* Fallback color */
+         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+     }
+ 
+     /* Modal Content/Box */
+     .modal-content {
+         background-color: #fefefe;
+         margin: 15% auto; /* 15% from the top and centered */
+         padding: 10px;
+         border: 1px solid #888;
+         width: 30%; /* Could be more or less, depending on screen size */                          
+     }
+</style>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="/css/egovframework/com/com.css">
+<script src="/js/egovframework/com/cmm/jquery-1.4.2.min.js"></script>
+<script src="/js/egovframework/com/cmm/jquery.js"></script>
+<script src="/js/egovframework/com/cmm/jquery-ui_1.12.1.js"></script>
+<script src="/js/egovframework/com/cmm/showModalDialog.js"></script>
+<script src="/js/egovframework/com/cmm/jquery-latest.js"></script>
 
-	</style>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<link type="text/css" rel="stylesheet" href="/css/egovframework/com/com.css">
-	<script src="/js/egovframework/com/cmm/jquery-1.4.2.min.js"></script>
-	<script src="/js/egovframework/com/cmm/jquery.js"></script>
-	<script src="/js/egovframework/com/cmm/jquery-ui_1.12.1.js"></script>
-	<script src="/js/egovframework/com/cmm/showModalDialog.js"></script>
-	<script src="/js/egovframework/com/cmm/jquery-latest.js"></script>
+<script type="text/javaScript" language="javascript" defer="defer">
+
+var baseUrl="<%=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()%>";
+var pageUrl= document.location.href;
+
+/*********************************************************
+ * Ajax 호출
+ ******************************************************** */
+function fn_calApi(cType, cPath, cParam, sync){
+	var reqType = cType;
+	var rval = new Object();
+	var userData = new Object();
+	var tUrl = "";
+
+	//호출 Type에 따라 파라미터 값 정의 
+	if((cType=="GET"||cType=="DELETE") && cParam != null){
+		var p = "";
+		$.each(cParam, function(key, value){
+		    p = p + key + "=" + value+"&";
+		});
+		tUrl = cPath+"?"+p.substring(0,(p.length-1));
+	}else if((cType=="GETpath") && cParam == null){
+		reqType = "GET";
+		tUrl = cPath;
+	}else{
+		tUrl = cPath;
+	}
+	console.log("reqType >>"+reqType+"\ntarget Url :: " + tUrl);
+	var jsonData = JSON.stringify(cParam);
+
+	//Ajax호출
+	$.ajax({
+		type: reqType,
+		url: tUrl,
+		contentType: 'application/json; charset=utf-8',
+			dataType:'text',
+		data:jsonData,
+		async: sync,
+		timeout:(1000*30),
+		success:function(data){
+			console.log("response Data : " + data);
+			const obj = JSON.parse(data);
+			rval = obj;
+			console.log(rval.RESULTMSG);
+		},
+		error:function(data){
+			alert(data);
+			return;
+		}
+	});
 	
-	<script type="text/javaScript" language="javascript" defer="defer">
+	return rval;
+}
 
-// 		var mnUserId = "";
-		var baseUrl="<%=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()%>";
-		var pageUrl= document.location.href;
-		/*********************************************************
-		 * Ajax 호출
-		 ******************************************************** */
-		function fn_calApi(cType, cPath, cParam, sync){
-			
-			console.log("Call Type::"+cType+"\nPath::"+cPath+"\nparam::"+cParam+"\nsync::"+sync);
-			var reqType = cType;
-			var rval = new Object();
-			var userData = new Object();
-			var tUrl = "";
-			if((cType=="GET"||cType=="DELETE") && cParam != null){
-				var p = "";
-				$.each(cParam, function(key, value){
-				    p = p + key + "=" + value+"&";
-				});
-				tUrl = cPath+"?"+p.substring(0,(p.length-1));
-			}else if((cType=="GETpath") && cParam == null){
-				reqType = "GET";
-				tUrl = cPath;
-			}else{
-				tUrl = cPath;
-			}
-			console.log("reqType >>"+reqType+"\ntarget Url :: " + tUrl);
-			var jsonData = JSON.stringify(cParam);
-			
-			$.ajax({
-				type: reqType,
-				url: tUrl,
-				contentType: 'application/json; charset=utf-8',
-	 			dataType:'text',
-				data:jsonData,
-				async: sync,
-				timeout:(1000*30),
-				success:function(data){
-					console.log("response Data : " + data);
-					const obj = JSON.parse(data);
-					rval = obj;
-					console.log(rval.RESULTMSG);
-				},
-				error:function(data){
-					alert(data);
-					return;
-				}
-			});
-			
-			return rval;
-		}
-
-		
-		/*
-			사용자 패스워드 변경 팝업 호출
-		*/
-		function fn_testhd (){
-			$('#myModal').show();
-		}
-
-		/*
-			사용자 패스워드 변경 팝업 닫기
-		*/
-		function close_pop(flag) {
-		    $('#myModal').hide();
-		}
-
-
-		
-		function fn_modifyPassword(){
-			$.ajax({
-				type: "PUT",
-				url: "/user/updateUsrPw?userId="+ $("#layUserId").val() + "&usrPw="+ $("#layTobePwd").val(),
-				contentType: 'application/json; charset=utf-8',
-	 			dataType:'text',
-				async: false,
-				timeout:(1000*30),
-				success:function(data){
-					console.log("response Data : " + data);
-					const obj = JSON.parse(data);
-					alert(rval.RESULTMSG);
-					close_pop("");
-				},
-				error:function(data){
-					alert(data);
-					return;
-				}
-			});
-		}
-	</script>
-	</head>
 	
+/**************
+ *	사용자 패스워드 변경 팝업 호출
+ **************/
+function fn_testhd (){
+	$('#myModal').show();
+}
+
+/**************
+ *	사용자 패스워드 변경 팝업 닫기
+ **************/
+function close_pop(flag) {
+    $('#myModal').hide();
+}
+
+
+/**************
+ *	패스워드 변경
+ **************/
+function fn_modifyPassword(){
+	$.ajax({
+		type: "PUT",
+		url: "/user/updateUsrPw?userId="+ $("#layUserId").val() + "&usrPw="+ $("#layTobePwd").val(),
+		contentType: 'application/json; charset=utf-8',
+			dataType:'text',
+		async: false,
+		timeout:(1000*30),
+		success:function(data){
+			const obj = JSON.parse(data);
+			alert(rval.RESULTMSG);
+			close_pop("");
+		},
+		error:function(data){
+			alert(data);
+			return;
+		}
+	});
+}
+</script>
+</head>
 	<body>
-
 		<div id="myModal" class="modal">
 			<div class="modal-content">
 				<table>
@@ -145,7 +144,6 @@
 						</td>
 					</tr>
 				</table>
-				
 				<table class="wTable" >
 					<colgroup><col style="width: 50%;"><col style="width: 50%;"></colgroup>
 					<tr>
@@ -180,8 +178,5 @@
 				</tr>
 			</div>
 		</div>
-
-
-
-</body>
+	</body>
 </html>

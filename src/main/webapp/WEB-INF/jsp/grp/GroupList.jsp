@@ -5,19 +5,20 @@
 <title>사용자 그룹 목록</title>
 <%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
 
-
 <script type="text/javaScript" language="javascript" defer="defer">
 
 var grdVal;
 
+/**************
+ * 초기화
+ **************/
 $(document).ready(function(){
 	fn_Select();
 });
 
-
-/********
+/**************
  * 그룹 목록 조회
- ********/
+ **************/
 function fn_Select(){
 	
 	$("#grd").empty();
@@ -35,7 +36,7 @@ function fn_Select(){
  	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" id="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
  	ihtml = ihtml + '<th class="board_th_link">그룹명</th>';
  	ihtml = ihtml + '<th>인원</th>';
- 	ihtml = ihtml + '<th>등록일</th>';
+ 	ihtml = ihtml + '<th>등록일시</th>';
  	ihtml = ihtml + '</tr>';
  	ihtml = ihtml + '</thead>';
  	ihtml = ihtml + '<tbody class="ov">';
@@ -68,18 +69,25 @@ function fn_Select(){
 	grd.innerHTML = ihtml;
 }
 
-
+/**************
+ * 그룹정보 조회 화면으로 이동
+ **************/
 function fn_SelectGrp(groupId){
 	var pageType= "r";
 	location.href="/GroupInfo?callType="+pageType+"&groupId="+groupId;
 }
 
+/**************
+ * 그룹별 사용자 목록 조회 화면 이동
+ **************/
 function fn_SelectUserCnt(groupId){
 	var pageType= "r";
 	location.href="/UserGroupSet?callType="+pageType+"&groupId="+groupId;
 }
 
-
+/**************
+ * 그룹 정보 삭제
+ **************/
 function fn_Delete(){
 	var ckId = new Array();
 	ckId = checkFieldck();
@@ -96,7 +104,9 @@ function fn_Delete(){
 	fn_Select();
 }
 
-
+/**************
+ * 체크 박스 체크 내용 확인
+ **************/
 function checkFieldck(){
 	var rowData = new Array();
 	var checkbox = $("input[name=checkField]:checked");
@@ -111,11 +121,16 @@ function checkFieldck(){
 	return rowData;
 }
 
-
+/**************
+ * 등록화면으로 이동
+ **************/
 function fn_Insert(){
 	location.href="/GroupInfo?callType=c&groupId=";
 }
 
+/**************
+ * 체크박스 전체 선택
+ **************/
 function fncCheckAll(){
 	if($("#checkAll").prop("checked")){
         $("input[name=checkField]").prop("checked",true);
@@ -135,15 +150,7 @@ function fncCheckAll(){
 	<!-- 검색영역 -->
 	<div class="search_box" title="이 레이아웃은 하단 정보를 대한 검색 정보로 구성되어 있습니다.">
 		<ul>
-<!-- 			<li>조건 -->
-<!--                 <select name="searchCondition" id="searchCondition" title="조회조건 선택"> -->
-<!--                     <option value="0"  >ID</option>ID  -->
-<!--                     <option value="1" selected="selected" >이름</option>Name -->
-<!--                 </select> -->
-<!-- 			</li> -->
-			<!-- 검색키워드 및 조회버튼 -->
 			<li>
-<!-- 				<input class="s_input" name="searchKeyword" type="text"  size="35" title="검색어 입력" value=''  maxlength="255" > -->
 				<input type="button" class="s_btn" onClick="fn_Select();" 	value="조회" title="조회 버튼" />
 				<input type="button" class="s_btn" onClick="fn_Delete();"	value="삭제" title="삭제 버튼" />
 				<input type="button" class="s_btn" onClick="fn_Insert();" 	value="등록" title="등록 버튼" />

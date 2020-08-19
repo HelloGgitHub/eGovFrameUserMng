@@ -102,10 +102,4 @@ public class UserPageController {
 	public String jusoPopup(Model model) {
 		return "cmm/jusoPopup"; 
 	}
-
-	@RequestMapping("/doroSample") 
-	public String doroSample(Model model) {
-		return "cmm/Sample"; 
-	}
-	
 }

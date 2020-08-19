@@ -7,18 +7,21 @@
 
 <script type="text/javaScript" language="javascript" defer="defer">
 
-    var caltype 	= "<%=request.getParameter("callType") %>";
-    var userId 		= "<%=request.getParameter("userId") %>";
-	var grdRowCnt = 0;
+var caltype 		= "<%=request.getParameter("callType") %>";
+var userId 			= "<%=request.getParameter("userId") %>";
+var grdRowCnt 	= 0;
 	
-/*********************************************************
- * 초기화
- *********************************************************/
+/**************
+  * 초기화
+  **************/
 $(document).ready(function(){
 	inputCellSet(caltype);
 	fn_Select();
 });
 
+/**************
+ * 화면 기능 사용 정의
+ **************/
 function inputCellSet(type) {
 	//호출타입에 따라 입력환경 설정
 	if(type == "c"){ //insert
@@ -33,7 +36,9 @@ function inputCellSet(type) {
 	$("#inUserId").val(userId);
 }
 
-//입력 필수값 체크
+/**************
+ * 입력 필수값 체크
+ **************/
 function required() {
 	if($.trim($("#inUserId").val()).length == 0){
 		alert("사용자아이디은(는) 필수 입력값입니다.");$("#inUserId").focus();return;
@@ -76,7 +81,7 @@ function fn_Select(){
 
  	var ihtml = '';
  	ihtml = ihtml + '<table class="board_list" summary="그룹목록을 출력합니다.">';
- 	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 30%;"><col style="width: ;"></colgroup>'; //<col style="width: 30%;">
+ 	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 30%;"><col style="width: ;"></colgroup>';
  	ihtml = ihtml + '<thead>';
  	ihtml = ihtml + '<tr>';
  	ihtml = ihtml + '<th>번호</th>';
@@ -128,7 +133,7 @@ function fn_RowAdd(){
 	var ihtml = '';
 	ihtml = ihtml + '<table class="board_list" style="border-top: 1px solid #d2d2d2;" summary="그룹목록을 출력합니다.">';
 	ihtml = ihtml + '<tbody class="ov">';
-	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 30%;"><col style="width: ;"></colgroup>'; //<col style="width: 15%;">
+	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 30%;"><col style="width: ;"></colgroup>';
  	ihtml = ihtml + '<tr>';
  	ihtml = ihtml + '<td>' + grdRowCnt + '</td>';
  	ihtml = ihtml + '<td>';
@@ -154,6 +159,7 @@ function fn_RowAdd(){
  * 사용자 그룹 제거
  ******************/
 function fn_Delete(){
+	var inCnt = 0;
 	var ckId = new Array();
 	ckId = checkFieldck();
 	
@@ -166,7 +172,15 @@ function fn_Delete(){
 
 		//API호출
 		rtnData = fn_calApi("DELETE", "/grp/usrSbt", paramData, false);
-		alert(rtnData.RESULTMSG);
+		if(rtnData.RESULTCD==0){
+			inCnt++;
+		}
+	}
+	
+	if(inCnt == 0){
+		alert("삭제 할 그룹 정보가 없습니다.");
+	}else {
+		alert("삭제 되었습니다.");
 	}
 	fn_Select();
 }
@@ -175,6 +189,7 @@ function fn_Delete(){
  * 사용자 그룹 추가
  ******************/
 function fn_Insert(){
+	var inCnt = 0;
 	var ckId = new Array();
 	ckId = checkFieldck();
 
@@ -187,7 +202,13 @@ function fn_Insert(){
 
 		//API호출
 		rtnData = fn_calApi("POST", "/grp/usrAdd", paramData, false);
-		alert(rtnData.RESULTMSG);
+		if(rtnData.RESULTCD==0){
+			inCnt++;
+		}
+	}
+	
+	if(inCnt > 0){
+		alert("등록 되었습니다.");
 	}
 	fn_Select();
 }

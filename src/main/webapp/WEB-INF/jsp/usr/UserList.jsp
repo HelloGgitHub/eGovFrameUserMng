@@ -2,9 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>일반회원관리 목록</title>
+<title>사용자 관리 목록</title>
 <%@ include file="/WEB-INF/jsp/cmm/head.jsp" %>
-
 
 <script type="text/javaScript" language="javascript" defer="defer">
 
@@ -24,17 +23,17 @@ function fn_Select(){
 	var arr = rtnData.list;
 	
  	var ihtml = '';
- 	ihtml = ihtml + '<table class="board_list" summary="일반회원관리의 내역에 대한 목록을 출력합니다.">';
- 	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 20%;"><col style="width: 13%;"><col style="width: 10%;"><col style="width: ;"></colgroup>';
+ 	ihtml = ihtml + '<table class="board_list" summary="사용자 목록을 출력합니다.">';
+ 	ihtml = ihtml + '<colgroup><col style="width: 5%;"><col style="width: 3%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 20%;"><col style="width: 13%;"><col style="width: 20%;"><col style="width: ;"></colgroup>';
  	ihtml = ihtml + '<thead>';
  	ihtml = ihtml + '<tr>';
  	ihtml = ihtml + '<th>번호</th>';
  	ihtml = ihtml + '<th><input type="checkbox" name="checkAll" id="checkAll" class="check2" onclick="javascript:fncCheckAll()" title="전체선택체크박스"></th>';
  	ihtml = ihtml + '<th class="board_th_link">아이디</th>';
- 	ihtml = ihtml + '<th>사용자이름</th>';
- 	ihtml = ihtml + '<th>사용자이메일</th>';
+ 	ihtml = ihtml + '<th>이름</th>';
+ 	ihtml = ihtml + '<th>이메일</th>';
  	ihtml = ihtml + '<th>전화번호</th>';
- 	ihtml = ihtml + '<th>등록일</th>';
+ 	ihtml = ihtml + '<th>등록일시</th>';
  	ihtml = ihtml + '<th>가입상태</th>';
  	ihtml = ihtml + '</tr>';
  	ihtml = ihtml + '</thead>';
@@ -80,7 +79,6 @@ function fn_Select(){
 	grd.innerHTML = ihtml;
 }
 
-
 function fn_SelectUser(userId){
 	location.href="/UserInfo?callType=r&userId="+userId;
 }
@@ -88,10 +86,6 @@ function fn_SelectUser(userId){
 function fn_SelectUserSttus(userId){
 	location.href="/UserModyStt?callType=r&userId="+userId;
 }
-
-
-
-
 
 function fn_Delete(){
 	var ckId = new Array();
@@ -155,15 +149,8 @@ function fncCheckAll(){
                     <option value="P"  >승인</option><!-- 승인 -->
                 </select>
 			</li>
-<!-- 			<li>조건 -->
-<!--                 <select name="searchCondition" id="searchCondition" title="조회조건 선택"> -->
-<!--                     <option value="0"  >ID</option>ID  -->
-<!--                     <option value="1" selected="selected" >이름</option>Name -->
-<!--                 </select> -->
-<!-- 			</li> -->
 			<!-- 검색키워드 및 조회버튼 -->
 			<li>
-<!-- 				<input class="s_input" name="searchKeyword" type="text"  size="35" title="검색어 입력" value=''  maxlength="255" > -->
 				<input type="button" class="s_btn" onClick="fn_Select();" 	value="조회" title="조회 버튼" />
 				<input type="button" class="s_btn" onClick="fn_Delete();" 	value="삭제" title="삭제 버튼" />
 				<input type="button" class="s_btn" onClick="fn_Insert();" 	value="등록" title="등록 버튼" />
