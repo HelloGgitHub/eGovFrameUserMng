@@ -3,8 +3,8 @@
 <mapper namespace="egovframework.com.user.dao.UserLoginDao">
 
     <select id="selectUserPwCk"  parameterType="Map" resultType="hashMap">
-			SELECT PASSWORD
-			     , USR_ID
+			SELECT PASSWORD as "password"
+			     , USR_ID as "usr_id"
 			  FROM COMTNUSERMNG
 			 WHERE USR_ID = '${USRID}'
 <!-- 			   AND PASSWORD  = '${USRPW}' -->
@@ -26,18 +26,5 @@
 		  FROM COMTNUSERMNG
 		 WHERE USR_ID = '${USRID}'
     </select>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 </mapper> 

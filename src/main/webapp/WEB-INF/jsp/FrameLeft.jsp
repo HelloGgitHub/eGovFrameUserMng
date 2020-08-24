@@ -8,10 +8,12 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<link type="text/css" rel="stylesheet" href="/css/egovframework/com/com.css">
 	<script src="/js/egovframework/com/cmm/jquery-1.4.2.min.js"></script>
+	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 </head>
 
 <script type="text/javascript">
 	function fn_leftMenu(cd){
+		var baseUrl="<%=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()%>";
 		var url="";
 		if(cd == 1){
 			url="Login";
@@ -31,6 +33,8 @@
 			url="/swagger-ui.html#/";
 		} else if(cd == 99){
 			url="/db-console";
+		} else if(cd == 00){
+			url="/download/eGovFrameUserMng.zip";
 		}
 		parent.body.location.href=url;
 	}
@@ -51,8 +55,9 @@
 	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(4);" title="그룹 목록" style="font-size: 15px;font-style: inherit;font-weight: bold;">그룹 목록</a></span>
 	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(7);" title="그룹 사용자지정" style="font-size: 15px;font-style: inherit;font-weight: bold;">그룹 사용자 지정</a></span>
 	<br><br>
-	<br><span class="btn_b" style="font-size: 15px;font-style: inherit;font-weight: bold;">- API명세 및 DB콘솔</span>
+	<br><span class="btn_b" style="font-size: 15px;font-style: inherit;font-weight: bold;">- 개발환경</span>
 	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(88);" title="로그인사용자관리 API명세" style="font-size: 15px;font-style: inherit;font-weight: bold;">API 명세</a></span>
-	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(99);" title="로그인사용자관리 DB콘솔" style="font-size: 15px;font-style: inherit;font-weight: bold;">DB 콘솔</a></span>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(99);" title="로그인사용자관리 DB스키마" style="font-size: 15px;font-style: inherit;font-weight: bold;">DB 스키마</a></span>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(00);" title="소스 다운로드" style="font-size: 15px;font-style: inherit;font-weight: bold;">소스 다운로드</a></span>
 </body>
 </html>

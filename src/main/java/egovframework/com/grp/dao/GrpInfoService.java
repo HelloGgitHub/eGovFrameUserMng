@@ -49,6 +49,7 @@ public class GrpInfoService {
 		for(int i = 0; sqlLst.size() > i; i++) {
 			HashMap<Object, Object> rtnMap= new HashMap<Object, Object>();
 			rtnMap = sqlLst.get(i);
+		System.out.println(rtnMap);
 			rtnMap.put("group_creat_de", ComUtil.dbDatetoDataFrm(rtnMap.get("group_creat_de").toString()));
 			rtnLst.add(rtnMap);
 		}

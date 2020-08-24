@@ -102,4 +102,10 @@ public class UserPageController {
 	public String jusoPopup(Model model) {
 		return "cmm/jusoPopup"; 
 	}
+	
+//	@RequestMapping("/dblogin") 
+//	public String dblogin(Model model) {
+//		return "/dblogin"; 
+//	}
+
 }
