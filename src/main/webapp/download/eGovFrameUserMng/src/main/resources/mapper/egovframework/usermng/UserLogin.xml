@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.com.user.dao.UserLoginDao">
+
+    <select id="selectUserPwCk"  parameterType="Map" resultType="hashMap">
+			SELECT PASSWORD as "password"
+			     , USR_ID as "usr_id"
+			  FROM COMTNUSERMNG
+			 WHERE USR_ID = '${USRID}'
+<!-- 			   AND PASSWORD  = '${USRPW}' -->
+    </select>
+    <select id="selectUserDetail"  parameterType="Map" resultType="hashMap">
+		SELECT 
+		        ESNTL_ID               as "uniqId",
+		        'USR01'               as "userTy",
+		        USR_ID               as "userId",
+		        USR_NM               as "userNm",
+		        USR_EMAIL_ADRES      as "emailAdres",
+		        AREA_NO               as "areaNo",
+		        MIDDLE_TELNO          as "middleTelno",
+		        END_TELNO             as "endTelno",
+		        MBTLNUM           as "moblphonNo",
+		       -- GROUP_ID              as "groupId",
+		        USR_STTUS            as "sttus",
+		        SBSCRB_DE             as "sbscrbDe"
+		  FROM COMTNUSERMNG
+		 WHERE USR_ID = '${USRID}'
+    </select>
+    
+</mapper> 

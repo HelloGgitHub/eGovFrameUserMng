@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.com.grp.dao.GrpInfoDao">
+
+    <select id="selectGrpList"  parameterType="Map" resultType="hashMap">
+			SELECT A.GROUP_ID as "group_id"
+			     , A.GROUP_NM as "group_nm"
+			     , A.GROUP_CREAT_DE as "group_creat_de"
+			     , A.GROUP_DC as "group_dc"
+			     , IFNULL( B.CNT , 0 ) as "usrcnt"
+			  FROM COMTNGROUPINFO A
+			     left outer join
+			       (SELECT GROUP_ID
+			             , COUNT(*) CNT 
+			          FROM COMTNGROUPUSR 
+			         GROUP BY GROUP_ID) B
+			  on A.GROUP_ID = B.GROUP_ID
+    </select>
+    
+    <select id="selectGrpDetail"  parameterType="Map" resultType="hashMap">
+			SELECT GROUP_ID as "group_id"
+			     , GROUP_NM as "group_nm"
+			     , GROUP_CREAT_DE as "group_create_de"
+			     , GROUP_DC as "group_dc"
+			  FROM COMTNGROUPINFO
+			 WHERE GROUP_ID = '${GRPID}'
+    </select>
+
+    <insert id="insertGrpInfo" parameterType="hashMap">
+			INSERT INTO COMTNGROUPINFO (
+			  GROUP_ID
+			, GROUP_NM
+			, GROUP_CREAT_DE
+			, GROUP_DC
+			, CHANGE_DT
+			) VALUES (
+			  #{GROUP_ID}
+			, #{GROUP_NM}
+			, #{DT}
+			, #{GROUP_DC}
+			, #{DT}
+			)
+    </insert>
+    
+    <update id="updateGrpInfo" parameterType="hashMap">
+			UPDATE COMTNGROUPINFO
+			   SET CHANGE_DT = '${DT}'
+			    <if test='GROUP_NM != null'> 	, GROUP_NM	= '${GROUP_NM}' 	</if>
+			    <if test='GROUP_DC != null'> 	, GROUP_DC	= '${GROUP_DC}' 	</if>
+			 WHERE GROUP_ID           = '${GROUP_ID}'
+    </update>
+    
+    <delete id="deleteGrpInfo" parameterType="hashMap">
+			DELETE FROM COMTNGROUPINFO
+			 WHERE GROUP_ID           = '${GROUP_ID}'
+    </delete>
+    
+    
+    <select id="selectGrpUsrList" parameterType="Map" resultType="hashMap">
+			SELECT A.GROUP_ID as "group_id"
+			     , A.USR_ID as "usr_id"
+			     , A.ADD_DT as "add_dt"
+			     , B.USR_NM as "usr_nm"
+			  FROM COMTNGROUPUSR A
+			  LEFT OUTER JOIN COMTNUSERMNG B
+			    ON (A.USR_ID = B.USR_ID)
+			 WHERE A.GROUP_ID = '${GRP_ID}'
+    </select>
+    
+    <select id="selectUsrGrpList" parameterType="Map" resultType="hashMap">
+			SELECT a.GROUP_ID as "group_id"
+			     , a.USR_ID as "usr_id"
+			     , a.ADD_DT as "add_dt"
+			     , b.GROUP_NM  as "group_nm"
+			     , b.GROUP_DC  as "group_dc"
+			  FROM COMTNGROUPUSR A
+			  left outer join 
+			       COMTNGROUPINFO B
+			    on A.GROUP_ID  = B.GROUP_ID 
+			 WHERE USR_ID = '${USR_ID}'
+    </select>
+
+    <insert id="insertGrpUsr" parameterType="hashMap">
+			INSERT INTO COMTNGROUPUSR (
+					  GROUP_ID
+					, USR_ID
+					, ADD_DT
+					) 
+					SELECT a.GROUP_ID 
+					     , b.USR_ID 
+					     , '${DT}'
+					  FROM COMTNGROUPINFO a
+					     , COMTNUSERMNG b
+					 where a.GROUP_ID = '${GRP_ID}'
+					   and b.USR_ID = '${USR_ID}'
+    </insert>
+     <select id="selectGrpUsrCk" parameterType="Map" resultType="int">
+			SELECT COUNT(*) as cnt
+			  FROM COMTNGROUPUSR
+			 WHERE GROUP_ID = '${GRP_ID}'
+			   AND USR_ID = '${USR_ID}'
+    </select>
+    <select id="selectUsrCk" parameterType="Map" resultType="int">
+			SELECT COUNT(*) as cnt
+			  FROM COMTNUSERMNG
+			 WHERE USR_ID = '${USR_ID}'
+    </select>
+    
+    <delete id="deleteGrpUsr" parameterType="hashMap">
+			DELETE FROM COMTNGROUPUSR
+			 WHERE GROUP_ID           = '${GRP_ID}'
+			   AND USR_ID           = '${USR_ID}'
+    </delete>
+    
+</mapper> 

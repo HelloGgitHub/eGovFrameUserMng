@@ -4,7 +4,7 @@
 <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 <head>
 <meta charset="UTF-8">
-<title>eGovCP 로그인 사용자관리</title>
+<title>Egov Framework</title>
 <!-- <frameset rows="80,*" frameborder="0" noresize> -->
 <!-- 	<frame src="FrameTop" style="background-color: mintcream;" name="topFrame" scrolling="no"/> -->
 <!-- 	<frame src="FrameDown" name="downFrame" /> -->

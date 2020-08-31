@@ -35,10 +35,6 @@
 			url="/db-console";
 		} else if(cd == 00){
 			url="/download/eGovFrameUserMng.zip";
-		} else if(cd == 55){
-			url="https://auditplcy001.svc.k8s.dev.egovp.kr/LoginPolicyList";
-		} else if(cd == 66){
-			url="https://auditplcy001.svc.k8s.dev.egovp.kr/lgDpIp/list";
 		}
 		parent.body.location.href=url;
 	}
@@ -58,9 +54,6 @@
 	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(5);" title="그룹 등록" style="font-size: 15px;font-style: inherit;font-weight: bold;">그룹 등록</a></span>
 	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(4);" title="그룹 목록" style="font-size: 15px;font-style: inherit;font-weight: bold;">그룹 목록</a></span>
 	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(7);" title="그룹 사용자지정" style="font-size: 15px;font-style: inherit;font-weight: bold;">그룹 사용자 지정</a></span>
-	<br><br>
-	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(55);" title="그룹 사용자지정" style="font-size: 15px;font-style: inherit;font-weight: bold;">권한관리페이지</a></span>
-	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(66);" title="그룹 사용자지정" style="font-size: 15px;font-style: inherit;font-weight: bold;">사용자 그룹 API</a></span>
 	<br><br>
 	<br><span class="btn_b" style="font-size: 15px;font-style: inherit;font-weight: bold;">- 개발환경</span>
 	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn_b"><a href="" onClick="fn_leftMenu(88);" title="로그인사용자관리 API명세" style="font-size: 15px;font-style: inherit;font-weight: bold;">API 명세</a></span>
