@@ -37,7 +37,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo(String title, String version) {
         return new ApiInfo(
                 title,
-                "로그인 사용자관리 API 목록",
+                "Base URL + API path 결합이 API서비스 호출 경로입니다. ex) Base URL(localhost:8080) + API path(/grp/list)",
                 version,
                 null,
                 null,
